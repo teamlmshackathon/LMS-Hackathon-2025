@@ -21,7 +21,7 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "get users",
 					"id": "230a2348-3819-4251-81fe-8d08406e3d47",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -34,6 +34,18 @@
 				}
 			],
 			"id": "8282d638-4ae2-4217-9e4e-c69358018c67"
+		},
+		{
+			"name": "New Request",
+			"id": "e466c735-d2b2-422f-bf1a-e27156110bd2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		}
 	]
 }
