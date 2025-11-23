@@ -1,0 +1,28 @@
+{
+	"info": {
+		"_postman_id": "cb4823d5-bf37-4d11-bb4e-1899d6eccb9f",
+		"name": "LMS-Hackathon-2025",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "UserController",
+			"item": [
+				{
+					"name": "New Request",
+					"id": "cc1de64f-6187-4afe-9c91-57a4badc5798",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": ""
+					},
+					"response": []
+				}
+			],
+			"id": "2d7594e4-41b6-4f1a-b135-fe488be297fa"
+		}
+	]
+}
