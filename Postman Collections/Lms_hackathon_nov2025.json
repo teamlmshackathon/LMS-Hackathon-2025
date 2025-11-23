@@ -7,7 +7,20 @@
 	"item": [
 		{
 			"name": "program Batch controller",
-			"item": [],
+			"item": [
+				{
+					"name": "New Request",
+					"id": "d431d4ea-9968-43f4-ad20-3d96bba25576",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			],
 			"id": "8282d638-4ae2-4217-9e4e-c69358018c67"
 		}
 	]
