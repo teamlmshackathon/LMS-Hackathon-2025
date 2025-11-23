@@ -7,8 +7,40 @@
 	"item": [
 		{
 			"name": "UserController",
-			"item": [],
+			"item": [
+				{
+					"name": "New Request",
+					"id": "901b3833-2c01-4310-a86a-ebcf9a2ed2b5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": ""
+					},
+					"response": []
+				}
+			],
 			"id": "7267c003-ea5b-4364-acf0-e45a52c14079"
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "{{token}}"
+		}
+	},
+	"variable": [
+		{
+			"id": "64a826cb-86e7-42e1-8a37-358e4f60e387",
+			"key": "token",
+			"value": ""
+		},
+		{
+			"id": "fd1d5c4c-eb11-499b-8b3d-9ade2d403746",
+			"key": "baseUrl",
+			"value": ""
 		}
 	]
 }
