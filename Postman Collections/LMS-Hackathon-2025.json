@@ -79,8 +79,20 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "fhjg",
 					"id": "dfc49700-ae89-40bd-9ff3-7ff18f7a16aa",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"id": "348a5186-693c-49ff-864e-8a5562dcc11b",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
