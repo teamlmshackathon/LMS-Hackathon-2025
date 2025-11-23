@@ -25,7 +25,20 @@
 		},
 		{
 			"name": "UserController",
-			"item": [],
+			"item": [
+				{
+					"name": "New Request",
+					"id": "ccc767fe-2afc-404e-8c70-fcbae3355bc9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			],
 			"id": "3d94503d-a850-439a-af07-cb6c8c2b18aa"
 		},
 		{
