@@ -82,6 +82,18 @@
 				"header": []
 			},
 			"response": []
+		},
+		{
+			"name": "get Batches with  no authorization",
+			"id": "62f8c86b-89e2-43b3-90b2-4cba720ed1b1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		}
 	],
 	"event": [
