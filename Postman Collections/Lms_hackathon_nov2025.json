@@ -36,7 +36,7 @@
 			"id": "8282d638-4ae2-4217-9e4e-c69358018c67"
 		},
 		{
-			"name": "New Request",
+			"name": "get Batches",
 			"id": "e466c735-d2b2-422f-bf1a-e27156110bd2",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
