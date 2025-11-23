@@ -59,5 +59,38 @@
 			},
 			"response": []
 		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "f9c8ea67-f7a5-4fc7-b156-976d12ee376d",
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "86f2621e-498f-4cab-9baf-639052022afe",
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "https://lms-hackathon-nov-2025-8dd40899c026.h\nerokuapp.com/lms",
+			"value": "",
+			"type": "default"
+		}
 	]
 }
