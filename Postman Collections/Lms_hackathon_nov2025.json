@@ -1,0 +1,14 @@
+{
+	"info": {
+		"_postman_id": "1c2ba5dc-f4d3-4778-acc3-925959fd4875",
+		"name": "LMS hackathon nov2025",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "program Batch controller",
+			"item": [],
+			"id": "8282d638-4ae2-4217-9e4e-c69358018c67"
+		}
+	]
+}
