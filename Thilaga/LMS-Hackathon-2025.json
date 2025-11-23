@@ -1,0 +1,117 @@
+{
+	"info": {
+		"_postman_id": "cb4823d5-bf37-4d11-bb4e-1899d6eccb9f",
+		"name": "LMS-Hackathon-2025",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "UserLogin",
+			"item": [
+				{
+					"name": "New Request",
+					"id": "9332837b-af37-4498-803c-c467b1f94967",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": ""
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"id": "62b5b89b-51fd-43dc-8fb7-bec0f14a8f77",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": ""
+					},
+					"response": []
+				}
+			],
+			"id": "e734ec73-8c81-4ba5-8af7-d5a19d5bdcbe"
+		},
+		{
+			"name": "UserController",
+			"item": [
+				{
+					"name": "New Request",
+					"id": "cc1de64f-6187-4afe-9c91-57a4badc5798",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": ""
+					},
+					"response": []
+				}
+			],
+			"id": "2d7594e4-41b6-4f1a-b135-fe488be297fa"
+		},
+		{
+			"name": "ProgramController",
+			"item": [
+				{
+					"name": "New Request",
+					"id": "3fad722c-6f8c-4a4d-bc96-59ed3281af3f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": ""
+					},
+					"response": []
+				}
+			],
+			"id": "f5dc69cb-44ed-4d56-a671-9c2715c25104"
+		},
+		{
+			"name": "Program Batch",
+			"item": [
+				{
+					"name": "New Request",
+					"id": "216c7f25-8de9-43ef-8e68-421f30526e8c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": ""
+					},
+					"response": []
+				}
+			],
+			"id": "6b088b0c-4ba1-4638-b025-476d1651156d"
+		},
+		{
+			"name": "SkillMaster",
+			"item": [
+				{
+					"name": "New Request",
+					"id": "5810d170-5e73-43e5-b170-65c9938b594d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": ""
+					},
+					"response": []
+				}
+			],
+			"id": "964de7a3-a108-4293-b5ec-75510f773fad"
+		}
+	]
+}
