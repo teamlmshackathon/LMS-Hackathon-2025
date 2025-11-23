@@ -58,13 +58,25 @@
 				"header": []
 			},
 			"response": []
+		},
+		{
+			"name": "get Batches with invalid request",
+			"id": "96af800a-f579-402f-9b94-ab3f06c6d4f5",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		}
 	],
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "f9c8ea67-f7a5-4fc7-b156-976d12ee376d",
+				"id": "b641cd0a-80ed-4a6d-8355-602b07e6ef56",
 				"type": "text/javascript",
 				"packages": {},
 				"requests": {},
@@ -76,7 +88,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "86f2621e-498f-4cab-9baf-639052022afe",
+				"id": "61e08af1-768f-4c37-b415-dbce8234fb12",
 				"type": "text/javascript",
 				"packages": {},
 				"requests": {},
@@ -88,7 +100,7 @@
 	],
 	"variable": [
 		{
-			"key": "https://lms-hackathon-nov-2025-8dd40899c026.h\nerokuapp.com/lms",
+			"key": "baseurl",
 			"value": "",
 			"type": "default"
 		}
