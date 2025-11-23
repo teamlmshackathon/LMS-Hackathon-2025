@@ -104,6 +104,18 @@
 						"url": ""
 					},
 					"response": []
+				},
+				{
+					"name": "New Request",
+					"id": "2fb16fd7-5dca-4e31-8cea-e6edc8f2501b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": []
+					},
+					"response": []
 				}
 			],
 			"id": "ebe394ef-ca6d-433b-bc44-f693fd94ff5a"
