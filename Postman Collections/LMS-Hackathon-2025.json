@@ -79,7 +79,21 @@
 		},
 		{
 			"name": "SkillMaster",
-			"item": [],
+			"item": [
+				{
+					"name": "New Request",
+					"id": "b6c14b12-0783-46d7-b647-d85c4d50a364",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": ""
+					},
+					"response": []
+				}
+			],
 			"id": "ebe394ef-ca6d-433b-bc44-f693fd94ff5a"
 		}
 	]
