@@ -70,6 +70,18 @@
 				"header": []
 			},
 			"response": []
+		},
+		{
+			"name": "get Batches with invalid API",
+			"id": "1f47879f-0f8e-4f76-96d5-75a080f51e64",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		}
 	],
 	"event": [
