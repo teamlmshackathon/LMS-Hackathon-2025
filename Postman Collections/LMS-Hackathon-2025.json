@@ -77,6 +77,18 @@
 						"url": ""
 					},
 					"response": []
+				},
+				{
+					"name": "New Request",
+					"id": "dfc49700-ae89-40bd-9ff3-7ff18f7a16aa",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			],
 			"id": "737af7c6-be44-4ad8-9a43-fce75c2f4753"
