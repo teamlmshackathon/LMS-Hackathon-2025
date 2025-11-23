@@ -9,8 +9,20 @@
 			"name": "program Batch controller",
 			"item": [
 				{
-					"name": "New Request",
+					"name": "login credential",
 					"id": "d431d4ea-9968-43f4-ad20-3d96bba25576",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"id": "230a2348-3819-4251-81fe-8d08406e3d47",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
