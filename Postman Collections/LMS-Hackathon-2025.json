@@ -7,127 +7,12 @@
 	"item": [
 		{
 			"name": "UserLogin",
-			"item": [
-				{
-					"name": "New Request",
-					"id": "e4ab6a44-e6ad-434b-a98b-523a187f673a",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": ""
-					},
-					"response": []
-				}
-			],
+			"item": [],
 			"id": "ad36a2df-7bac-47f7-86db-59d3b84e2cc0"
 		},
 		{
-			"name": "UserController",
-			"item": [
-				{
-					"name": "New Request",
-					"id": "ee6d94b7-8a5e-4bbb-b4e0-7075a555b4ca",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {
-								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZWFtNUBnbWFpbC5jb20iLCJpYXQiOjE3NjM4NzE1MjcsImV4cCI6MTc2MzkwMDMyN30.PzB16JWvrc_6w5xytuz_IyBlp_jcpURjmGdvfWoHQxkuysos-7t_hlG35clgyC15QMuPBzMJNUB1GdYcla-Auw"
-							}
-						},
-						"method": "GET",
-						"header": [],
-						"url": ""
-					},
-					"response": []
-				}
-			],
-			"id": "e9d57a32-09d0-4463-813d-6fc70681bce9"
-		},
-		{
-			"name": "ProgramController",
-			"item": [
-				{
-					"name": "New Request",
-					"id": "05a5d9ca-e9c3-4e1c-8e60-f9f47443fc7d",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": ""
-					},
-					"response": []
-				}
-			],
-			"id": "ebf004e3-1a64-4084-a036-c69ff95c1bf6"
-		},
-		{
-			"name": "Program Batch",
-			"item": [
-				{
-					"name": "New Request",
-					"id": "2b559519-a4c1-4e86-80a9-8244321b61f9",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": ""
-					},
-					"response": []
-				},
-				{
-					"name": "fhjg",
-					"id": "dfc49700-ae89-40bd-9ff3-7ff18f7a16aa",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": []
-				},
-				{
-					"name": "New Request",
-					"id": "348a5186-693c-49ff-864e-8a5562dcc11b",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "POST",
-						"header": []
-					},
-					"response": []
-				}
-			],
-			"id": "737af7c6-be44-4ad8-9a43-fce75c2f4753"
-		},
-		{
 			"name": "SkillMaster",
-			"item": [
-				{
-					"name": "New Request",
-					"id": "26a5a125-9e33-4986-a374-15566f0ed0b9",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": ""
-					},
-					"response": []
-				}
-			],
+			"item": [],
 			"id": "f4412e30-a2ba-49f5-b05a-2edafd7d7325"
 		}
 	]
