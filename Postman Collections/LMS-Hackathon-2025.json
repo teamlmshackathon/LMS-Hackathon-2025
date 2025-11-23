@@ -61,7 +61,20 @@
 		},
 		{
 			"name": "Program Batch",
-			"item": [],
+			"item": [
+				{
+					"name": "New Request",
+					"id": "b777583b-94b7-4f98-aa0a-9e9eff02a9c7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			],
 			"id": "e2f63e33-c89b-4a26-b6fd-525455ece6bf"
 		},
 		{
