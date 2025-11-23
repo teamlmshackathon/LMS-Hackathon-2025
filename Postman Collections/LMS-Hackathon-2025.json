@@ -107,12 +107,12 @@
 				},
 				{
 					"name": "New Request",
-					"id": "2fb16fd7-5dca-4e31-8cea-e6edc8f2501b",
+					"id": "2e4d5eef-aac9-4243-8b12-8b167d1e329e",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
-						"method": "PATCH",
+						"method": "PUT",
 						"header": []
 					},
 					"response": []
