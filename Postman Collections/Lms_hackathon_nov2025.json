@@ -94,6 +94,18 @@
 				"header": []
 			},
 			"response": []
+		},
+		{
+			"name": "get Batches with  no authorization Copy",
+			"id": "a61ee7a5-3f67-441e-8fe2-e3646d5c6efa",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		}
 	],
 	"event": [
