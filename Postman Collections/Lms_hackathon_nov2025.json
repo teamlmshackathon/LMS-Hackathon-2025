@@ -46,6 +46,18 @@
 				"header": []
 			},
 			"response": []
+		},
+		{
+			"name": "get Batches Copy",
+			"id": "5d4a289d-0bde-46a2-a2f4-8b99b2c6a121",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		}
 	]
 }
