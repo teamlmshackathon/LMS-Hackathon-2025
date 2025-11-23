@@ -33,6 +33,19 @@
 						"url": ""
 					},
 					"response": []
+				},
+				{
+					"name": "GetUserByID",
+					"id": "faafb388-39c7-4a48-8d53-1c290a898d49",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": ""
+					},
+					"response": []
 				}
 			],
 			"id": "e734ec73-8c81-4ba5-8af7-d5a19d5bdcbe"
