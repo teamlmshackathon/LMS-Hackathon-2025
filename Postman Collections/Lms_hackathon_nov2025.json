@@ -18,8 +18,24 @@
 								"disableBodyPruning": true
 							},
 							"request": {
-								"method": "GET",
-								"header": []
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZWFtNUBnbWFpbC5jb20iLCJpYXQiOjE3NjQxNjg0NDEsImV4cCI6MTc2NDE5NzI0MX0.o3YuSEWwALX8HGdTapNNL3s1AxBBeute0fbGynQAZ2ISVdZtaTiYJV_OWXYkRDC6F1Zu7xfDckGqxEQgK8C3Qg"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"batchDescription\":\r\n\"Data Analyst track\",\r\n\"batchName\": \"DA1\",\r\n\"batchNoOfClasses\": 10,\r\n\"batchStatus\": \"Active\",\r\n\"programId\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseurl}}/batches"
 							},
 							"response": []
 						},
@@ -30,8 +46,24 @@
 								"disableBodyPruning": true
 							},
 							"request": {
-								"method": "GET",
-								"header": []
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZWFtNUBnbWFpbC5jb20iLCJpYXQiOjE3NjQxNjg0NDEsImV4cCI6MTc2NDE5NzI0MX0.o3YuSEWwALX8HGdTapNNL3s1AxBBeute0fbGynQAZ2ISVdZtaTiYJV_OWXYkRDC6F1Zu7xfDckGqxEQgK8C3Qg"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"batchDescription\":\r\n\"Data Analyst Track\",\r\n\"batchNoOfClasses\": 10,\r\n\"batchStatus\": \"Active\",\r\n\"programId\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseurl}}/batches"
 							},
 							"response": []
 						},
@@ -42,14 +74,49 @@
 								"disableBodyPruning": true
 							},
 							"request": {
-								"method": "GET",
-								"header": []
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZWFtNUBnbWFpbC5jb20iLCJpYXQiOjE3NjQxNjg0NDEsImV4cCI6MTc2NDE5NzI0MX0.o3YuSEWwALX8HGdTapNNL3s1AxBBeute0fbGynQAZ2ISVdZtaTiYJV_OWXYkRDC6F1Zu7xfDckGqxEQgK8C3Qg"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"url": "{{baseurl}}/batches"
 							},
 							"response": []
 						},
 						{
-							"name": "with no body Copy",
+							"name": "with no ProgramID",
 							"id": "31fff331-69d8-44ec-80a9-f85b64b43f78",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZWFtNUBnbWFpbC5jb20iLCJpYXQiOjE3NjQxNjg0NDEsImV4cCI6MTc2NDE5NzI0MX0.o3YuSEWwALX8HGdTapNNL3s1AxBBeute0fbGynQAZ2ISVdZtaTiYJV_OWXYkRDC6F1Zu7xfDckGqxEQgK8C3Qg"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"batchDescription\":\r\n\"Data Analyst track\",\r\n\"batchName\": \"DA1\",\r\n\"batchNoOfClasses\": 10,\r\n\"batchStatus\": \"Active\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseurl}}/batches"
+							},
+							"response": []
+						},
+						{
+							"name": "with no batch status",
+							"id": "81696bf5-06fb-4d68-a982-6c864897c905",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
