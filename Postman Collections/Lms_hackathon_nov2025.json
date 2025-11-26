@@ -9,6 +9,24 @@
 			"name": "program Batch controller",
 			"item": [
 				{
+					"name": "Create New Batch(POST)",
+					"item": [
+						{
+							"name": "Create New Batch with ValidAPI and request body",
+							"id": "03713447-011c-4e6e-8d68-be110763d056",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					],
+					"id": "a159a5ab-4711-4534-86d8-84614b1121ef"
+				},
+				{
 					"name": "login credential",
 					"id": "d431d4ea-9968-43f4-ad20-3d96bba25576",
 					"protocolProfileBehavior": {
