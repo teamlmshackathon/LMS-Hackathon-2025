@@ -34,6 +34,18 @@
 								"header": []
 							},
 							"response": []
+						},
+						{
+							"name": "with no body",
+							"id": "d5df285d-c515-4402-b9f4-ba58ff78870a",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
 						}
 					],
 					"id": "a159a5ab-4711-4534-86d8-84614b1121ef"
