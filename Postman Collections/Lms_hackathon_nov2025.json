@@ -21,18 +21,6 @@
 					"response": []
 				},
 				{
-					"name": "get users",
-					"id": "230a2348-3819-4251-81fe-8d08406e3d47",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": []
-				},
-				{
 					"name": "Create New Batch with ValidAPI and request body",
 					"id": "03713447-011c-4e6e-8d68-be110763d056",
 					"protocolProfileBehavior": {
