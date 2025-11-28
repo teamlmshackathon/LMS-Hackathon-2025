@@ -9,7 +9,418 @@
 			"name": "UserController",
 			"item": [
 				{
-					"name": "New Request",
+					"name": "Create User Login with Role",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f854d671-a716-4003-b6ec-59ed04a2ec18",
+								"exec": [
+									"// Run only when status = 201\r",
+									"if (pm.response.code === 201) {\r",
+									"\r",
+									"    console.log(\"User Created Successfully\");\r",
+									"\r",
+									"    let res = pm.response.json();\r",
+									"    console.log(res);\r",
+									"\r",
+									"    // ----- Save userId -----\r",
+									"    if (res.user && res.user.userId) {\r",
+									"        pm.collectionVariables.set(\"userId\", res.user.userId);\r",
+									"        console.log(\"Saved userId:\", res.user.userId);\r",
+									"    } else {\r",
+									"        console.log(\"userId not found in response\");\r",
+									"    }\r",
+									"\r",
+									"    // ----- Save roleId (roles is an array) -----\r",
+									"    if (res.roles && Array.isArray(res.roles) && res.roles.length > 0) {\r",
+									"        pm.collectionVariables.set(\"roleId\", res.roles[0].roleId);\r",
+									"        console.log(\"Saved roleId:\", res.roles[0].roleId);\r",
+									"    } else {\r",
+									"        console.log(\"roleId not found in response\");\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9cfb4b0e-5ac8-45a1-93be-b9460201032e",
+								"exec": [
+									"//1. Get the nested objects from the Data File\r",
+									"var loginData = pm.iterationData.get(\"userLogin\");\r",
+									"var roleMaps = pm.iterationData.get(\"userRoleMaps\");\r",
+									"\r",
+									"\r",
+									"// 2. Map 'userLogin' fields to variables\r",
+									"if (loginData) {\r",
+									"   // pm.variables.set(\"userLoginEmail\", loginData.userLoginEmail);\r",
+									"    pm.variables.set(\"loginStatus\", loginData.loginStatus);\r",
+									"    pm.variables.set(\"status\", loginData.status);\r",
+									"}\r",
+									"\r",
+									"// 3. Map 'userRoleMaps' fields (taking the first item in the array)\r",
+									"if (roleMaps && roleMaps.length > 0) {\r",
+									"    pm.variables.set(\"roleId\", roleMaps[0].roleId);\r",
+									"    pm.variables.set(\"userRoleStatus\", roleMaps[0].userRoleStatus);\r",
+									"}\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "2e7e7ec1-d451-49eb-b4fb-1dba6ebd2097",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{Payload}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users/roleStatus"
+					},
+					"response": []
+				},
+				{
+					"name": "User information by Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2d276953-309c-463c-8775-d3437b4d92c7",
+								"exec": [
+									"\r",
+									"let expected = parseInt(pm.iterationData.get(\"Expected Status\"));\r",
+									"\r",
+									"pm.test(\"Validate dynamic status\", function () {\r",
+									"    pm.expect(pm.response.code).to.eql(expected);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "4897b500-be54-46c1-abf9-09b52c05f7de",
+								"exec": [
+									"// let getPayload = pm.iterationData.get(\"getByIdPayload\");\r",
+									"// let payloadJSON = JSON.parse(getPayload);\r",
+									"\r",
+									"// // Inject the dynamic userId\r",
+									"// payloadJSON.userId = pm.variables.get(\"createdUserId\");\r",
+									"\r",
+									"// pm.variables.set(\"GetByIdPayload\", JSON.stringify(payloadJSON));\r",
+									"\r",
+									"// var baseUrl = pm.collectionVariables.get(\"baseUrl\");\r",
+									"// var apiEndpoint = pm.iterationData.get(\"apiEndpoint\");\r",
+									"// var actualUrl = pm.variables.replaceIn(pm.request.url).toString();\r",
+									"\r",
+									"// var actualMethod=pm.request.method.toUpperCase();\r",
+									"// var expectedMethod=pm.iterationData.get(\"requestMethod\").toUpperCase();\r",
+									"// console.log();\r",
+									"\r",
+									"// var constructedUrl=baseUrl+apiEndpoint;\r",
+									"\r",
+									"// if(constructedUrl !== actualUrl || expectedMethod !== actualMethod)\r",
+									"// {\r",
+									"//     pm.execution.skipRequest();\r",
+									"// }\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "99bef5eb-8828-4787-b8c2-0781ae958f4c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}/users/{{userId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "95a6a4f9-a7f1-4eef-83fe-7a5d924eb9ed",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c10c2c09-b2dd-4a39-911b-b4f02e85fe22",
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "f2e14d2c-2b59-44ef-8b9c-74bec8cf78d2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users/{{userId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update UserLogin status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cf12a508-3816-44dd-b2e7-d6109a08d998",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "493821f7-73b1-4f74-92f4-5628586fa18b",
+								"exec": [
+									"\r",
+									"// var csvPayload = pm.iterationData.get(\"Payload\");\r",
+									"// if (csvPayload) {\r",
+									"//     if (typeof csvPayload === 'object') {\r",
+									"//         // It's a JSON object (from JSON file) -> Stringify it for the Body\r",
+									"//         pm.collectionVariables.set(\"Payload\", JSON.stringify(csvPayload));\r",
+									"//     } else {\r",
+									"//         // It's a String (from CSV) -> Try to parse/clean it\r",
+									"//         try {\r",
+									"//             var obj = JSON.parse(csvPayload);\r",
+									"//             pm.collectionVariables.set(\"Payload\", JSON.stringify(obj));\r",
+									"//         } catch (e) {\r",
+									"//             pm.collectionVariables.set(\"Payload\", csvPayload);\r",
+									"//         }\r",
+									"//     }\r",
+									"// }\r",
+									"// var baseUrl = pm.collectionVariables.get(\"baseUrl\");\r",
+									"// var apiEndpoint = pm.iterationData.get(\"apiEndpoint\");\r",
+									"// var actualUrl = pm.variables.replaceIn(pm.request.url).toString();\r",
+									"\r",
+									"// var actualMethod=pm.request.method.toUpperCase();\r",
+									"// var expectedMethod=pm.iterationData.get(\"requestMethod\").toUpperCase();\r",
+									"// console.log();\r",
+									"\r",
+									"// var constructedUrl=baseUrl+apiEndpoint;\r",
+									"\r",
+									"// if(constructedUrl !== actualUrl || expectedMethod !== actualMethod)\r",
+									"// {\r",
+									"//     pm.execution.skipRequest();\r",
+									"// }\r",
+									"\r",
+									"\r",
+									"// // Get previous POST response userId\r",
+									"// let userId = pm.variables.get(\"userId\");\r",
+									"\r",
+									"// // Get current CSV payload\r",
+									"// let payloadStr = pm.iterationData.get(\"PutLoginStatusPayload\");\r",
+									"// let payloadJSON = JSON.parse(payloadStr);\r",
+									"\r",
+									"// // Inject dynamic userId into payload\r",
+									"// payloadJSON.userLogin.userId = userId;\r",
+									"\r",
+									"// // Save final JSON for PUT\r",
+									"// pm.variables.set(\"PutLoginStatusPayloadJSON\", JSON.stringify(payloadJSON));"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "592b43aa-c503-4516-88c1-f161f1c6ce0c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{Payload}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users/userLogin/{{userId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a0b184da-8cc1-4964-99ac-c9ded7973bc3",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "4bc213c9-ddaa-4834-a413-5f6488ebb219",
+								"exec": [
+									"// // // 1. Get the userId stored from POST response\r",
+									"// let userId = pm.collectionVariables.get(\"userId\");\r",
+									"\r",
+									"// // 2. Get the PUT payload from CSV (string → JSON)\r",
+									"// let csvPayload = pm.iterationData.get(\"payload\");\r",
+									"// let payloadObj = {};\r",
+									"\r",
+									"// try {\r",
+									"//     payloadObj = JSON.parse(csvPayload);\r",
+									"// } catch (e) {\r",
+									"//     console.error(\"PUT CSV payload is not valid JSON\");\r",
+									"// }\r",
+									"\r",
+									"// // 3. Inject the userId into the PUT payload\r",
+									"// payloadObj.userId = userId;\r",
+									"\r",
+									"// // 4. Remove ONLY the unwanted field: userRoleMaps\r",
+									"// delete payloadObj.userRoleMaps;    // You don't want this in PUT\r",
+									"\r",
+									"// // ❗ DO NOT remove userLoginEmail  \r",
+									"// // Because you need this field & your CSV provides it\r",
+									"\r",
+									"// // 5. Set the final PUT payload\r",
+									"// pm.request.body.raw = JSON.stringify(payloadObj, null, 2);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "e818299c-22c8-467f-b744-55af07ce3ec3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{Payload}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users/{{userId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "all users",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "49ee3aad-bde7-4152-8a37-593fc9b57cfb",
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "84d2429c-606c-4155-9cb5-4475b7920338",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
 					"id": "901b3833-2c01-4310-a86a-ebcf9a2ed2b5",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -17,12 +428,189 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": ""
+						"url": "{{baseUrl}}/users"
+					},
+					"response": []
+				},
+				{
+					"name": "all users with facets",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "95c4576b-f2e4-4aa4-9053-480d6f2c6e25",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "6b655970-237c-4373-94d9-6ebe351516b8",
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "12c3ecc1-9791-4688-a3ef-59af54d1c061",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/v2/users"
+					},
+					"response": []
+				},
+				{
+					"name": "update userRole program batch status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dcc398b6-1060-4c24-b551-6a475e7411c6",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "3508c5ab-a64e-44da-b513-08e732959615",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{Payload}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users/roleProgramBatchStatus/{{userId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User role Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "71eb1de8-9331-4a22-b087-0a6d6ad26d8b",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "9ff01ad7-0db8-4e27-84b4-44a8d39832fc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{Payload}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users/roleId/{{userId}}"
 					},
 					"response": []
 				}
 			],
-			"id": "7267c003-ea5b-4364-acf0-e45a52c14079"
+			"id": "7267c003-ea5b-4364-acf0-e45a52c14079",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5d72e635-af55-437c-8c00-00ba2b803771",
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							"// ----------------------------------------------------------------\r",
+							"// 1. SKIP LOGIC (Traffic Cop)\r",
+							"// ----------------------------------------------------------------\r",
+							"var targetRequest = pm.iterationData.get(\"RequestName\");\r",
+							"var currentRequest = pm.info.requestName;\r",
+							"// If RequestName is defined in CSV, only run that specific request\r",
+							"if (targetRequest && targetRequest !== currentRequest) {\r",
+							"    pm.execution.skipRequest();\r",
+							"    return; // Stop executing the rest of the script\r",
+							"}\r",
+							"\r",
+							"var csvPayload = pm.iterationData.get(\"Payload\");\r",
+							"if (csvPayload) {\r",
+							"    if (typeof csvPayload === 'object') {\r",
+							"        // It's a JSON object (from JSON file) -> Stringify it for the Body\r",
+							"        pm.collectionVariables.set(\"Payload\", JSON.stringify(csvPayload));\r",
+							"    } else {\r",
+							"        // It's a String (from CSV) -> Try to parse/clean it\r",
+							"        try {\r",
+							"            var obj = JSON.parse(csvPayload);\r",
+							"            pm.collectionVariables.set(\"Payload\", JSON.stringify(obj));\r",
+							"        } catch (e) {\r",
+							"            pm.collectionVariables.set(\"Payload\", csvPayload);\r",
+							"        }\r",
+							"    }\r",
+							"}"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "7d4036bb-b7fd-409e-a052-01e1f59637a3",
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
 		}
 	],
 	"auth": {
@@ -33,13 +621,28 @@
 	},
 	"variable": [
 		{
-			"id": "64a826cb-86e7-42e1-8a37-358e4f60e387",
+			"id": "b6cd5a13-4f0d-438b-b384-ccc0cdb1d097",
 			"key": "token",
 			"value": ""
 		},
 		{
-			"id": "fd1d5c4c-eb11-499b-8b3d-9ade2d403746",
+			"id": "ea1dc346-27e1-400d-912b-a28b25a96ec7",
 			"key": "baseUrl",
+			"value": ""
+		},
+		{
+			"id": "4a6ee812-18c5-44dc-833d-ced75d6e5f33",
+			"key": "Payload",
+			"value": ""
+		},
+		{
+			"id": "636ba664-f617-420d-a007-88a9acf3dd8d",
+			"key": "userId",
+			"value": ""
+		},
+		{
+			"id": "8cacaa0f-e3a0-4950-92d7-c605b6ec493b",
+			"key": "roleId",
 			"value": ""
 		}
 	]
