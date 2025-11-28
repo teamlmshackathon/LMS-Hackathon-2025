@@ -94,7 +94,7 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -263,7 +263,7 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"method": "GET",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -432,7 +432,7 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"method": "GET",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -582,148 +582,7 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "{{baseURL}}/lms/deletebyprogid/{{programId}}"
-					},
-					"response": []
-				},
-				{
-					"name": "GetProgramUpdtByName",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "c394b25c-100b-4dae-bd98-feb14d4266da",
-								"exec": [
-									"let response = pm.response.json();\r",
-									"\r",
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.expect(pm.response.code).to.equal(200);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Validate Response Keys\", function () {\r",
-									"    pm.expect(response).to.have.property(\"programId\");\r",
-									"    pm.expect(response).to.have.property(\"programName\");\r",
-									"    pm.expect(response).to.have.property(\"programDescription\");\r",
-									"    });\r",
-									"\r",
-									"pm.test(\"Validate Response Values\", function () {\r",
-									"    pm.expect(response.programId).to.equal(pm.collectionVariables.get(\"programIdUpdtNme\"));\r",
-									"    pm.expect(response.programName).to.not.be.empty;\r",
-									"    pm.expect(response.programName).to.equal(pm.collectionVariables.get(\"programNameUpdtNme\"));\r",
-									"    pm.expect(response.programDescription).to.not.be.empty;\r",
-									"    pm.expect(response.programDescription).to.equal(pm.collectionVariables.get(\"programDescriptionUpdtNme\"));\r",
-									"    pm.expect(response.programStatus).to.equal(\"Active\");\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "ac8183cb-3a06-4b4a-8d26-0e4733c1ac9e",
-								"exec": [
-									"const executed = pm.collectionVariables.get(\"updateProgramByNameExecuted\");\r",
-									"const executeRspCd = pm.collectionVariables.get(\"updateProgramByNameRespCd\");\r",
-									"\r",
-									"if (executed === true && executeRspCd == true) {\r",
-									"    console.log(\"GetProgramUpdtByName: Endpoint matched. Executing request.\");\r",
-									"    pm.collectionVariables.set(\"updateProgramByNameExecuted\", false);\r",
-									"    pm.collectionVariables.set(\"updateProgramByNameRespCd\", false);\r",
-									"} else {\r",
-									"    console.log(\"GetProgramUpdtByName: Endpoint not matched. Skipping request.\");\r",
-									"    pm.execution.skipRequest();\r",
-									"}"
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"id": "a04643d2-5758-44b9-aef1-6f0a20a610a1",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "{{baseURL}}/lms/programs/{{programIdUpdtID}}"
-					},
-					"response": []
-				},
-				{
-					"name": "DeleteProgramById",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "b95b68ba-85ae-4bb0-b699-2dfe74885587",
-								"exec": [
-									"\r",
-									"let response = pm.response.json();\r",
-									"let expected = pm.iterationData.get(\"ExpectedResponseKeys\");\r",
-									"expected = pm.variables.replaceIn(expected);\r",
-									"expected = JSON.parse(expected);\r",
-									"\r",
-									"if (pm.response.code === 200) {\r",
-									"\r",
-									"    pm.test(\"Status code is 200\", function () {\r",
-									"        pm.expect(pm.response.code).to.equal(200);\r",
-									"        pm.collectionVariables.set(\"DeleteByPgmIdRespCd\", true);\r",
-									"    });\r",
-									"\r",
-									"    pm.test(\"Validate full response\", function () {\r",
-									"        pm.expect(response).to.eql(expected);\r",
-									"    });\r",
-									"}\r",
-									"\r",
-									"if (pm.response.code !== 200) {\r",
-									"\r",
-									"    pm.test(\"Validate message and success fields\", function () {\r",
-									"        pm.expect(response.message).to.eql(expected.message);\r",
-									"        pm.expect(response.success).to.eql(expected.success);\r",
-									"    });\r",
-									"}\r",
-									"\r",
-									"pm.collectionVariables.set(\"DeleteByPgmIdExecuted\", true);\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "4f317d21-4a00-4673-afb2-841c5957eb89",
-								"exec": [
-									"const urlFromFile = pm.iterationData.get(\"URL\");\r",
-									"\r",
-									"if (urlFromFile && urlFromFile.includes(\"deletebyprogid/\")) {\r",
-									"    console.log(\"DeleteProgramById: Endpoint matched. Executing request.\");\r",
-									"} else {\r",
-									"    console.log(\"DeleteProgramById: Endpoint not matched. Skipping request.\");\r",
-									"    pm.execution.skipRequest();\r",
-									"}"
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"id": "79f3d35d-2c2a-46b9-8c92-5d8baf74c377",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": [],
 						"url": "{{baseURL}}/lms/deletebyprogid/{{programId}}"
 					},
@@ -797,7 +656,7 @@
 					"response": []
 				},
 				{
-					"name": "DeeleteProgramByName",
+					"name": "DeleteProgramByName",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -857,7 +716,7 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": [],
 						"url": "{{baseURL}}/lms/deletebyprogname/{{programName}}"
 					},
@@ -1026,10 +885,41 @@
 			"id": "90a96216-4701-4586-a147-05482fd91928"
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZWFtNUBnbWFpbC5jb20iLCJpYXQiOjE3NjQyOTQ1MzQsImV4cCI6MTc2NDMyMzMzNH0.m5fAljQJxiZUO8lDdWl_jP3Ftvs4nMKG5nyDpoJaTg8Rt327Pgmeo2CenaYAaOk1nFWTRsAzsyXLTLNwC-mclw"
+		}
+	},
 	"variable": [
 		{
-			"id": "c6d052fd-998c-4b1f-a4dd-29e143fbb391",
+			"id": "06913861-aa1d-44fe-9961-ab14f029a286",
 			"key": "baseURL",
+			"value": ""
+		},
+		{
+			"id": "8a84b047-3cb7-4e46-ad71-38bbef258ce3",
+			"key": "createProgramExecuted",
+			"value": ""
+		},
+		{
+			"id": "98eb2789-d022-440b-85fe-77bef2ce0284",
+			"key": "updateProgramByIdExecuted",
+			"value": ""
+		},
+		{
+			"id": "c6964e41-7578-4e45-ba72-49d2f9a0e6d3",
+			"key": "updateProgramByNameExecuted",
+			"value": ""
+		},
+		{
+			"id": "e09957d9-6e8c-463d-acb1-d6a156e49ed7",
+			"key": "DeleteByPgmIdExecuted",
+			"value": ""
+		},
+		{
+			"id": "1c61ef0e-8cec-4f6e-b780-fe7e20b86ba2",
+			"key": "DeleteByPgmNmeExecuted",
 			"value": ""
 		}
 	]
