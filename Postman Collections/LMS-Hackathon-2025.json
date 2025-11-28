@@ -6,14 +6,237 @@
 	},
 	"item": [
 		{
-			"name": "UserLogin",
-			"item": [],
-			"id": "ad36a2df-7bac-47f7-86db-59d3b84e2cc0"
+			"name": "SkillMaster",
+			"item": [
+				{
+					"name": "Get All Skill Master",
+					"id": "38403150-3cb7-4bb2-9fc2-70b826a31f74",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{baseURL}}/allSkillMaster"
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Skill",
+					"id": "9f12dc87-8051-4f0e-9374-2e0725d59acf",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{Payload}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/SaveSkillMaster"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Skill By Skill Name",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "36421b3d-7ec9-40d0-a106-f604433716e8",
+								"exec": [
+									"// Wait for 2 seconds before sending the request\r",
+									"setTimeout(function(){}, 2000);\r",
+									"console.log(\"⏸️ Paused for 2 seconds to allow DB update...\");\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "9b7e7efb-5b03-425d-ba66-aa26c86775e5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{baseURL}}/skills/{{skillMasterName}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Skill By Skill Id",
+					"id": "4dbbffe7-cdd7-4ac2-8cac-2d0da0c6cdac",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{Payload}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/updateSkills/{{skillId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Skill By Skill Id",
+					"id": "65cc4a6f-e2eb-4b68-b581-f5dc92e220e4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "{{baseURL}}/deletebySkillId/{{skillId}}"
+					},
+					"response": []
+				}
+			],
+			"id": "bf765cab-23d8-40d7-b305-18d819dc8be0",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "65f02ebe-ba9a-43a3-945b-e852d4c86948",
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							"// 1. TRAFFIC COP\r",
+							"var targetRequest = pm.iterationData.get(\"RequestName\");\r",
+							"var currentRequest = pm.info.requestName;\r",
+							"if (targetRequest && targetRequest !== currentRequest) {\r",
+							"    pm.execution.skipRequest();\r",
+							"    return;\r",
+							"}\r",
+							"\r",
+							"// 2. PREEMPTIVE VARIABLE UPDATE\r",
+							"var csvPayload = pm.iterationData.get(\"Payload\");\r",
+							"if (csvPayload) {\r",
+							"    try {\r",
+							"        var obj = JSON.parse(csvPayload);\r",
+							"        \r",
+							"        // If payload has a name, set {{skillMasterName}} IMMEDIATELY\r",
+							"        if (obj.skillName) {\r",
+							"            pm.collectionVariables.set(\"skillMasterName\", obj.skillName);\r",
+							"            console.log(\"✅ Pre-request: skillMasterName updated to \" + obj.skillName);\r",
+							"        }\r",
+							"    } catch(e) { /* ignore */ }\r",
+							"}\r",
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "d80f36dc-95a6-4cdb-a673-8d24bfe3edbd",
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							"// 1. SKIP SAFETY\r",
+							"if (!pm.response.code) return;\r",
+							"\r",
+							"// 2. STATUS CHECK\r",
+							"var expectedStatus = parseInt(pm.iterationData.get(\"Expected Status\"));\r",
+							"if (expectedStatus) {\r",
+							"    pm.test(\"Status code is \" + expectedStatus, function () {\r",
+							"        pm.response.to.have.status(expectedStatus);\r",
+							"    });\r",
+							"}\r",
+							"\r",
+							"// 3. UNIVERSAL CAPTURE\r",
+							"if (pm.response.code >= 200 && pm.response.code < 300) {\r",
+							"    try {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        \r",
+							"        // Save ID\r",
+							"        if (jsonData.skillId) {\r",
+							"            pm.collectionVariables.set(\"skillId\", jsonData.skillId);\r",
+							"            console.log(\"💾 Saved skillId: \" + jsonData.skillId);\r",
+							"        }\r",
+							"        \r",
+							"        // Save Name (Backup safety)\r",
+							"        if (jsonData.skillName) {\r",
+							"            pm.collectionVariables.set(\"skillMasterName\", jsonData.skillName);\r",
+							"        }\r",
+							"    } catch (e) { /* ignore */ }\r",
+							"}\r",
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"id": "08c259bf-d3e8-4eb1-ba7d-7c9eb6f4eb79",
+			"key": "token",
+			"value": ""
 		},
 		{
-			"name": "SkillMaster",
-			"item": [],
-			"id": "f4412e30-a2ba-49f5-b05a-2edafd7d7325"
+			"id": "df7012e7-f609-4ad1-b5ba-f92b41809885",
+			"key": "baseURL",
+			"value": ""
+		},
+		{
+			"id": "73466890-58bd-4883-83cd-eb43011855ee",
+			"key": "skillMasterName",
+			"value": ""
+		},
+		{
+			"id": "ca3d46cc-54f6-4eba-a0c1-b6c3e16ca540",
+			"key": "skillId",
+			"value": ""
 		}
 	]
 }
