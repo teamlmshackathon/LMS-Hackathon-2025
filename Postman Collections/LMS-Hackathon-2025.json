@@ -357,62 +357,6 @@
 					"response": []
 				},
 				{
-					"name": "UpdateProgramStatustoActive",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "eda0168a-f9bd-4127-9bcc-348c0df0510f",
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "aab6f10e-2f24-4def-a18f-a2254c28b5c3",
-								"exec": [
-									"const executed = pm.collectionVariables.get(\"GetProgramDlteByIdExecuted\");\r",
-									"\r",
-									"if (executed === true) {\r",
-									"   pm.collectionVariables.set(\"GetProgramDlteByIdExecuted\", false);\r",
-									"\r",
-									"} else {\r",
-									"    console.log(\"UpdateProgram: Endpoint not matched. Skipping request.\");\r",
-									"    pm.execution.skipRequest();\r",
-									"}"
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"id": "a6052e6c-298f-4a97-9f34-7befe83449a8",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n\"programDescription\": \"{{programDescription}}\",\r\n\"programName\": \"{{programName}}\",\r\n\"programStatus\": \"Active\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "{{baseURL}}/lms/putprogram/{{programId}}"
-					},
-					"response": []
-				},
-				{
 					"name": "DeleteProgramById",
 					"event": [
 						{
@@ -493,112 +437,7 @@
 					"response": []
 				},
 				{
-					"name": "GetProgramById",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "ad130fde-6d18-495f-8831-1620c2be31c0",
-								"exec": [
-									"let response = pm.response.json();\r",
-									"let expected = pm.iterationData.get(\"ExpectedResponseKeys\");\r",
-									"expected = pm.variables.replaceIn(expected);\r",
-									"expected = JSON.parse(expected);\r",
-									"const respCd = pm.iterationData.get(\"ExpectedStatus\");\r",
-									"\r",
-									"if (pm.response.code === 200) {\r",
-									"    pm.test(\"Status code is 201\", function () {\r",
-									"        pm.expect(pm.response.code).to.equal(Number(respCd));\r",
-									"    });\r",
-									"\r",
-									"    pm.test(\"Validate Response Keys\", function () {\r",
-									"        pm.expect(response).to.have.property('programId').that.is.a('number');\r",
-									"        pm.expect(response).to.have.property(\"programName\").that.is.a('string');\r",
-									"        pm.expect(response).to.have.property(\"programDescription\").that.is.a('string');\r",
-									"        pm.expect(response).to.have.property(\"programStatus\").that.is.a('string');\r",
-									"        pm.expect(response).to.have.property(\"creationTime\").that.is.a('string');\r",
-									"        pm.expect(new Date(response.creationTime).toString()).to.not.equal('Invalid Date');\r",
-									"        pm.expect(response).to.have.property(\"lastModTime\").that.is.a('string');\r",
-									"        pm.expect(new Date(response.lastModTime).toString()).to.not.equal('Invalid Date');\r",
-									"    });\r",
-									"\r",
-									"    // pm.test(\"Program status is valid\", function () {\r",
-									"    //     const jsonData = pm.response.json();\r",
-									"    //     pm.expect(jsonData.programStatus).to.equal('Active');\r",
-									"    // });\r",
-									"\r",
-									"    // pm.collectionVariables.set(\"programId\", response.programId);\r",
-									"    // pm.collectionVariables.set(\"programName\", response.programName);\r",
-									"\r",
-									"    pm.test(\"Program name is not empty\", function () {\r",
-									"        pm.expect(response.programName).to.be.a('string').and.not.empty;\r",
-									"    });\r",
-									"\r",
-									"    pm.test(\"Verify Program Response\", function () {\r",
-									"        pm.expect(response.programName).to.eql(expected.programName);\r",
-									"        pm.expect(response.programDescription).to.eql(expected.programDescription);\r",
-									"        pm.expect(response.programStatus).to.eql(expected.programStatus);\r",
-									"    });\r",
-									"} else {\r",
-									"    pm.test(\"Status code is 400\", function () {\r",
-									"        pm.expect(pm.response.code).to.equal(Number(respCd));\r",
-									"    });\r",
-									"    pm.test(\"Validate message and success fields\", function () {\r",
-									"        pm.expect(response.message).to.eql(expected.message);\r",
-									"        pm.expect(response.success).to.eql(expected.success);\r",
-									"    });\r",
-									"}\r",
-									"pm.test(\"Response has valid structure\", function () {\r",
-									"    pm.expect(response).to.be.an('object');\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "c85f0291-6aed-4d1f-bcda-3c0cb7f83861",
-								"exec": [
-									"const urlFromFile = pm.iterationData.get(\"Endpoint\");\r",
-									"const expectedStatus = pm.iterationData.get(\"ExpectedStatus\");\r",
-									"const invalidInput = pm.iterationData.get(\"InvalidInput\");\r",
-									"\r",
-									"if (urlFromFile && urlFromFile.includes(\"programs/\") && !urlFromFile.includes(\"allProgramsWithUsers\")) {\r",
-									"    console.log(\"CreateProgram: Endpoint matched. Executing request.\");\r",
-									"    const collectProgramId = pm.collectionVariables.get(\"programId\");\r",
-									"    if (Number(expectedStatus) === 404) {\r",
-									"        pm.variables.set(\"programId\", invalidInput);\r",
-									"    }\r",
-									"    else {\r",
-									"        pm.variables.set(\"programId\", collectProgramId);\r",
-									"    }\r",
-									"} else {\r",
-									"    console.log(\"CreateProgram: Endpoint not matched. Skipping request.\");\r",
-									"    pm.execution.skipRequest();\r",
-									"}"
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"id": "30c7dede-ca28-471a-b22c-98191d34dcfb",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "{{baseURL}}/lms/programs/{{programId}}"
-					},
-					"response": []
-				},
-				{
-					"name": "VerifyDeleteById",
+					"name": "VerifyDeleteProgramById",
 					"event": [
 						{
 							"listen": "test",
@@ -670,6 +509,62 @@
 						"method": "GET",
 						"header": [],
 						"url": "{{baseURL}}/lms/programs/{{programId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateProgramStatustoActive",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "eda0168a-f9bd-4127-9bcc-348c0df0510f",
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "aab6f10e-2f24-4def-a18f-a2254c28b5c3",
+								"exec": [
+									"const executed = pm.collectionVariables.get(\"GetProgramDlteByIdExecuted\");\r",
+									"\r",
+									"if (executed === true) {\r",
+									"   pm.collectionVariables.set(\"GetProgramDlteByIdExecuted\", false);\r",
+									"\r",
+									"} else {\r",
+									"    console.log(\"UpdateProgram: Endpoint not matched. Skipping request.\");\r",
+									"    pm.execution.skipRequest();\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "a6052e6c-298f-4a97-9f34-7befe83449a8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"programDescription\": \"{{programDescription}}\",\r\n\"programName\": \"{{programName}}\",\r\n\"programStatus\": \"Active\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/lms/putprogram/{{programId}}"
 					},
 					"response": []
 				},
@@ -820,6 +715,111 @@
 						}
 					],
 					"id": "91a37360-6d19-4ddb-8086-790b965f179f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseURL}}/lms/programs/{{programId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "GetProgramById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ad130fde-6d18-495f-8831-1620c2be31c0",
+								"exec": [
+									"let response = pm.response.json();\r",
+									"let expected = pm.iterationData.get(\"ExpectedResponseKeys\");\r",
+									"expected = pm.variables.replaceIn(expected);\r",
+									"expected = JSON.parse(expected);\r",
+									"const respCd = pm.iterationData.get(\"ExpectedStatus\");\r",
+									"\r",
+									"if (pm.response.code === 200) {\r",
+									"    pm.test(\"Status code is 201\", function () {\r",
+									"        pm.expect(pm.response.code).to.equal(Number(respCd));\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Validate Response Keys\", function () {\r",
+									"        pm.expect(response).to.have.property('programId').that.is.a('number');\r",
+									"        pm.expect(response).to.have.property(\"programName\").that.is.a('string');\r",
+									"        pm.expect(response).to.have.property(\"programDescription\").that.is.a('string');\r",
+									"        pm.expect(response).to.have.property(\"programStatus\").that.is.a('string');\r",
+									"        pm.expect(response).to.have.property(\"creationTime\").that.is.a('string');\r",
+									"        pm.expect(new Date(response.creationTime).toString()).to.not.equal('Invalid Date');\r",
+									"        pm.expect(response).to.have.property(\"lastModTime\").that.is.a('string');\r",
+									"        pm.expect(new Date(response.lastModTime).toString()).to.not.equal('Invalid Date');\r",
+									"    });\r",
+									"\r",
+									"    // pm.test(\"Program status is valid\", function () {\r",
+									"    //     const jsonData = pm.response.json();\r",
+									"    //     pm.expect(jsonData.programStatus).to.equal('Active');\r",
+									"    // });\r",
+									"\r",
+									"    // pm.collectionVariables.set(\"programId\", response.programId);\r",
+									"    // pm.collectionVariables.set(\"programName\", response.programName);\r",
+									"\r",
+									"    pm.test(\"Program name is not empty\", function () {\r",
+									"        pm.expect(response.programName).to.be.a('string').and.not.empty;\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Verify Program Response\", function () {\r",
+									"        pm.expect(response.programName).to.eql(expected.programName);\r",
+									"        pm.expect(response.programDescription).to.eql(expected.programDescription);\r",
+									"        pm.expect(response.programStatus).to.eql(expected.programStatus);\r",
+									"    });\r",
+									"} else {\r",
+									"    pm.test(\"Status code is 400\", function () {\r",
+									"        pm.expect(pm.response.code).to.equal(Number(respCd));\r",
+									"    });\r",
+									"    pm.test(\"Validate message and success fields\", function () {\r",
+									"        pm.expect(response.message).to.eql(expected.message);\r",
+									"        pm.expect(response.success).to.eql(expected.success);\r",
+									"    });\r",
+									"}\r",
+									"pm.test(\"Response has valid structure\", function () {\r",
+									"    pm.expect(response).to.be.an('object');\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c85f0291-6aed-4d1f-bcda-3c0cb7f83861",
+								"exec": [
+									"const urlFromFile = pm.iterationData.get(\"Endpoint\");\r",
+									"const expectedStatus = pm.iterationData.get(\"ExpectedStatus\");\r",
+									"const invalidInput = pm.iterationData.get(\"InvalidInput\");\r",
+									"\r",
+									"if (urlFromFile && urlFromFile.includes(\"programs/\") && !urlFromFile.includes(\"allProgramsWithUsers\")) {\r",
+									"    console.log(\"CreateProgram: Endpoint matched. Executing request.\");\r",
+									"    const collectProgramId = pm.collectionVariables.get(\"programId\");\r",
+									"    if (Number(expectedStatus) === 404) {\r",
+									"        pm.variables.set(\"programId\", invalidInput);\r",
+									"    }\r",
+									"    else {\r",
+									"        pm.variables.set(\"programId\", collectProgramId);\r",
+									"    }\r",
+									"} else {\r",
+									"    console.log(\"CreateProgram: Endpoint not matched. Skipping request.\");\r",
+									"    pm.execution.skipRequest();\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "30c7dede-ca28-471a-b22c-98191d34dcfb",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
