@@ -333,7 +333,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "147a5ba0-3540-4d18-8216-8b0b42cc24f8",
+						"id": "a2ec894e-960b-499b-94e1-f7c4c1145aac",
 						"type": "text/javascript",
 						"packages": {},
 						"requests": {},
@@ -393,7 +393,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "975cc6f7-ca74-4b4c-bc28-aecb98d7da19",
+						"id": "74379988-4e15-497f-b608-63934ace4474",
 						"type": "text/javascript",
 						"packages": {},
 						"requests": {},
@@ -451,12 +451,12 @@
 							"            if (Array.isArray(jsonData) && jsonData.length > 0) {\r",
 							"                if (jsonData[0].skillId) {\r",
 							"                    pm.collectionVariables.set(\"skillId\", jsonData[0].skillId);\r",
-							"                    console.log(\"💾 Saved skillId from List: \" + jsonData[0].skillId);\r",
+							"                    console.log(\"Saved skillId from List: \" + jsonData[0].skillId);\r",
 							"                }\r",
 							"            } else {\r",
 							"                if (jsonData.skillId) {\r",
 							"                    pm.collectionVariables.set(\"skillId\", jsonData.skillId);\r",
-							"                    console.log(\"💾 Saved skillId: \" + jsonData.skillId);\r",
+							"                    console.log(\"Saved skillId: \" + jsonData.skillId);\r",
 							"                }\r",
 							"                if (jsonData.skillName) {\r",
 							"                    pm.collectionVariables.set(\"skillMasterName\", jsonData.skillName);\r",
