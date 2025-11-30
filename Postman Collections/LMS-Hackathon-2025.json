@@ -58,10 +58,10 @@
 									"    var valid = ajv.validate(requestSchema, jsonPayload);\r",
 									"\r",
 									"    if (!valid) {\r",
-									"        console.log(\"⚠️ Request Schema Mismatch for \" + pm.iterationData.get(\"RequestName\"));\r",
+									"        console.log(\"Request Schema Mismatch for \" + pm.iterationData.get(\"RequestName\"));\r",
 									"        console.log(ajv.errors);\r",
 									"    } else {\r",
-									"        console.log(\"✅ Request Schema Valid\");\r",
+									"        console.log(\"Request Schema Valid\");\r",
 									"    }\r",
 									"}\r",
 									""
@@ -120,7 +120,7 @@
 								"exec": [
 									"// Wait for 2 seconds before sending the request\r",
 									"setTimeout(function(){}, 2000);\r",
-									"console.log(\"⏸️ Paused for 2 seconds to allow DB update...\");\r",
+									"console.log(\"Paused for 2 seconds to allow DB update...\");\r",
 									"\r",
 									"// 1. Get the endpoint value from the CSV row\r",
 									"let csvEndpoint = pm.iterationData.get(\"Endpoint\");\r",
@@ -222,10 +222,10 @@
 									"    var valid = ajv.validate(requestSchema, jsonPayload);\r",
 									"\r",
 									"    if (!valid) {\r",
-									"        console.log(\"⚠️ Request Schema Mismatch for \" + pm.iterationData.get(\"RequestName\"));\r",
+									"        console.log(\"Request Schema Mismatch for \" + pm.iterationData.get(\"RequestName\"));\r",
 									"        console.log(ajv.errors);\r",
 									"    } else {\r",
-									"        console.log(\"✅ Request Schema Valid\");\r",
+									"        console.log(\"Request Schema Valid\");\r",
 									"    }\r",
 									"}\r",
 									""
@@ -333,7 +333,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "a2ec894e-960b-499b-94e1-f7c4c1145aac",
+						"id": "47d2315b-9041-4b70-8f4d-073244810d75",
 						"type": "text/javascript",
 						"packages": {},
 						"requests": {},
@@ -355,7 +355,7 @@
 							"\r",
 							"if (methodOverride) {\r",
 							"    pm.request.method = methodOverride;\r",
-							"    console.log(\"⚠️ Overriding Method to: \" + methodOverride);\r",
+							"    console.log(\"Overriding Method to: \" + methodOverride);\r",
 							"}\r",
 							"\r",
 							"\r",
@@ -375,7 +375,7 @@
 							"    }\r",
 							"}\r",
 							"\r",
-							"var overrideStatus = pm.iterationData.get(\"TokenOverride\");\r",
+							"var overrideStatus = pm.iterationData.get(\"Token Override\");\r",
 							"\r",
 							"if (overrideStatus === \"invalid\") {\r",
 							"    // Use 'pm.request.auth.bearer' to directly modify the Auth Helper\r",
@@ -384,7 +384,7 @@
 							"        token: \"INVALID_TOKEN_12345\"\r",
 							"    });\r",
 							"    \r",
-							"    console.log(\"⚠️ Updated Auth Tab directly with INVALID token\");\r",
+							"    console.log(\"Updated Auth Tab directly with INVALID token\");\r",
 							"}\r",
 							""
 						]
@@ -393,7 +393,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "74379988-4e15-497f-b608-63934ace4474",
+						"id": "c3690a90-bd03-44bc-84eb-c3becf771c30",
 						"type": "text/javascript",
 						"packages": {},
 						"requests": {},
@@ -598,6 +598,10 @@
 		},
 		{
 			"key": "baseURL",
+			"value": ""
+		},
+		{
+			"key": "skillId",
 			"value": ""
 		}
 	]
