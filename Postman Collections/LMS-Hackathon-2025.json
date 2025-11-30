@@ -565,14 +565,38 @@
 			]
 		}
 	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "c70a5a22-cd31-4196-b7e5-edb165c58962",
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "3c9cea1d-d79a-4b57-a1e8-7feee86f5127",
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
 	"variable": [
 		{
-			"id": "2497f63c-bb81-43c9-9449-3d52f39944c7",
 			"key": "token",
 			"value": ""
 		},
 		{
-			"id": "744aea20-c02a-43cb-a143-22fe4ae9e283",
 			"key": "baseURL",
 			"value": ""
 		}
