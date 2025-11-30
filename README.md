@@ -32,15 +32,15 @@ The test suite is designed to validate:
 
 ### Prerequisites
 1. **Node.js** installed on your machine.
-2. **Newman** installed globally:  npm install -g newman
-3. **Newman HTML Reporter** (for generating the report):  npm install -g newman-reporter-htmlextra
+2. **Newman** installed globally:  **npm install -g newman**
+3. **Newman HTML Reporter** (for generating the report):  **npm install -g newman-reporter-htmlextra**
 
 
 ### Running the Tests
-To execute the test suite locally, navigate to the project folder and run the following command:  newman run LMS-Hackathon-2025.postman_collection.json
+To execute the test suite locally, navigate to the project folder and run the following command:  **newman run LMS-Hackathon-2025.postman_collection.json
 -d Test_Data_Skill_Master_Controller.csv
 -r htmlextra
---reporter-htmlextra-export "Newman-Report-Skill-Master-Controller.html"
+--reporter-htmlextra-export "Newman-Report-Skill-Master-Controller.html"**
 
 
 *Note: You may need to update the `token` and `baseURL` variables in the Collection JSON file or pass them via an Environment file.*
@@ -85,8 +85,3 @@ The execution generates a detailed **HTML Report** (`Newman-Report-Skill-Master-
 
 **Author:** Tanuja Narravula
 **Hackathon:** LMS Hackathon 2025
-
-
-
-
-
