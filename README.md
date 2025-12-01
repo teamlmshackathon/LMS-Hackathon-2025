@@ -2,10 +2,6 @@
 
 # LMS API Automation Testing Project (Hackathon 2025)
 
-# LMS-Hackathon-2025
-
-# LMS API Automation Testing Project (Hackathon 2025)
-
 ## 📌 Project Overview
 This repository contains the automated API testing suite for the **Skill Master Controller** module of the Learning Management System (LMS). The project utilizes **Postman** for request creation and **Newman** for command-line execution and reporting.
 
