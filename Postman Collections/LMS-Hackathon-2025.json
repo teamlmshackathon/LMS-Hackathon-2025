@@ -308,7 +308,26 @@
 									"        pm.expect(response.programStatus).to.be.a('string').and.not.empty;",
 									"    });",
 									"",
-									"    pm.test(\"Verify Program ...(truncated)",
+									"    pm.test(\"Verify Program Response\", function () {",
+									"        pm.expect(response.programName).to.eql(expected.programName);",
+									"        pm.expect(response.programDescription).to.eql(expected.programDescription);",
+									"        pm.expect(response.programStatus).to.eql(expected.programStatus);",
+									"    });",
+									"} else if (pm.response.code === 400) {",
+									"    pm.test(\"Status code is 400\", function () {",
+									"        pm.expect(pm.response.code).to.equal(Number(respCd));",
+									"    });",
+									"",
+									"    pm.test(\"Validate message and success fields\", function () {",
+									"        pm.expect(response.message).to.eql(expected.message);",
+									"        pm.expect(response.success).to.eql(expected.success);",
+									"    });",
+									"}",
+									"else if (pm.response.code === 404) {",
+									"    pm.test(\"Validatte invalid Program Id\", function () {",
+									"        pm.expect(response.message).to.eql(expected.message);",
+									"        pm.expect(response.success).to.eql(expected.success);",
+									"    });",
 									"}"
 								],
 								"type": "text/javascript",
@@ -1066,25 +1085,12 @@
 				}
 			],
 			"id": "90a96216-4701-4586-a147-05482fd91928"
-		},
-		{
-			"name": "New Request",
-			"id": "5b68a981-da2d-4e57-b072-3ee41ddc8532",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": ""
-			},
-			"response": []
 		}
 	],
 	"auth": {
 		"type": "bearer",
 		"bearer": {
-			"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZWFtNkBnbWFpbC5jb20iLCJpYXQiOjE3NjQ1OTgxNDEsImV4cCI6MTc2NDYyNjk0MX0.5ytnrkziuxycSxBVuUYp4srj5dH4QQa-um2eJHLSdjgv-VVXe3U01zGZ-Qy86vAJVpvZAbVNfijwCftIxTdfJw"
+			"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZWFtNUBnbWFpbC5jb20iLCJpYXQiOjE3NjQ2MjU3MzIsImV4cCI6MTc2NDY1NDUzMn0.n03dWrYxoQYXCJ_K9qw41xJQQB2dPGJzYMC1VjHr0UZbA90Eea5EcBdkday4z8_S1BfV8ONQYslO4dKB3zZLHA"
 		}
 	},
 	"variable": [
