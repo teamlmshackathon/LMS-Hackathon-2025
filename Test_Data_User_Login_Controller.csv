@@ -1,0 +1,398 @@
+﻿Scenario Id,Request Name,Endpoint,Request Method,Payload,Expected Status,Expected Response Body ,TokenOverride,
+UL_SC_01,User Sign In,/login,POST,"{
+    ""userLoginEmailId"": ""team5@gmail.com"",
+    ""password"": ""ApiHackathon@5""
+}
+",200,"{
+  ""token"": ""string"",
+  ""type"": ""string"",
+  ""userId"": ""string"",
+  ""email"": ""string"",
+  ""roles"": [
+    ""string""
+  ],
+  ""status"": ""string"",
+  ""passwordExpired"": true
+}",,
+UL_SC_18,User Sign In,/login,POST,"{
+    ""userLoginEmailId"": ""TEAM5@gmail.com"",
+    ""password"": ""ApiHackathon@5""
+}
+",200,"{
+  ""token"": ""string"",
+  ""type"": ""string"",
+  ""userId"": ""string"",
+  ""email"": ""string"",
+  ""roles"": [
+    ""string""
+  ],
+  ""status"": ""string"",
+  ""passwordExpired"": true
+}",,
+UL_SC_20,User Logout,/logoutlms,GET,,200,Logout successful,,
+UL_SC_23,User Logout,/logoutlms,GET,,401,"{
+    ""message"": ""Session already terminated"",
+    ""success"": false
+}",,
+UL_SC_26,Forgot Password Confirm Email,/login/forgotpassword/confirmEmail,POST,"{
+    ""userLoginEmailId"": ""Ivy@gmail.com""
+}
+",200,"{
+  ""token"": ""string"",
+  ""type"": ""string"",
+  ""userId"": ""string"",
+  ""email"": ""string"",
+  ""roles"": [
+    ""string""
+  ],
+  ""status"": ""string"",
+  ""passwordExpired"": true
+}",,
+UL_SC_33,Reset Password,/resetPassword,POST,"{
+    ""userLoginEmailId"": ""team5@gmail.com"",
+    ""password"": ""NApiHackathon@5""
+}
+",200,"{
+  ""token"": ""string"",
+  ""type"": ""string"",
+  ""userId"": ""string"",
+  ""email"": ""string"",
+  ""roles"": [
+    ""string""
+  ],
+  ""status"": ""string"",
+  ""passwordExpired"": true
+}",,
+UL_SC_02,User Sign In,/login,POST,"{
+    ""userLoginEmailId"": ""team5@gmail.com"",
+    ""password"": ""ApiHa@123s""
+}",400,"{
+    ""message"": ""Bad credentials"",
+    ""success"": false
+}",,
+UL_SC_03,User Sign In,/login,POST,"{
+    ""userLoginEmailId"": ""unregisteredemail@gmail.com"",
+    ""password"": ""ApiHackadsxdsn@5""
+}
+",400,"{
+    ""message"": ""Active User with given email Id Not Found"",
+    ""success"": false
+}",,
+UL_SC_04,User Sign In,/login,POST,"{
+    ""password"": ""Apihsdackathon@5""
+}
+",400,"{
+    ""message"": ""EmailId is mandatory"",
+    ""success"": false
+}",,
+UL_SC_05,User Sign In,/login,POST,"{
+    ""userLoginEmailId"": ""team5@gmail.com""
+}
+",400,"{
+    ""message"": ""Password is mandatory"",
+    ""success"": false
+}",,
+UL_SC_06,User Sign In,/login,POST,"{
+    ""userLoginEmailId"": null,
+    ""password"": ""ApiHackathon@5""
+}
+",400,"{
+    ""message"": ""EmailId is mandatory"",
+    ""success"": false
+}",,
+UL_SC_07,User Sign In,/login,POST,"{
+    ""userLoginEmailId"": ""team5@gmail.com"",
+    ""password"": null
+}
+",400,"{
+    ""message"": ""Password is mandatory"",
+    ""success"": false
+}",,
+UL_SC_08,User Sign In,/login,POST,"{
+    ""userLoginEmailId"": """",
+    ""password"": ""ApiHackathon@5""
+}
+",400,"{
+    ""message"": ""EmailId is mandatory"",
+    ""success"": false
+}",,
+UL_SC_09,User Sign In,/login,POST,"{
+    ""userLoginEmailId"": ""team5@gmail.com"",
+    ""password"": """"
+}
+",400,"{
+    ""message"": ""Password should be between 8 and 32 character and should include one capital letter, one special character, one number and no space"",
+    ""success"": false
+}",,
+UL_SC_10,User Sign In,/login,POST,"{
+    ""userLoginEmailId"": ""team5-ty@gmail.com"",
+    ""password"": ""ApiHackathon@5""
+}
+",400,"{
+    ""message"": ""Invalid email format"",
+    ""success"": false
+}",,
+UL_SC_11,User Sign In,/login,POST,"{
+    ""userLoginEmailId"": ""team5@@@@@gmail.com"",
+    ""password"": ""ApiHackathon@5""
+}
+",400,"{
+    ""message"": ""Invalid email format"",
+    ""success"": false
+}",,
+UL_SC_12,User Sign In,/login,POST,"{
+    ""userLoginEmailId"": ""kumarzaxCopy@gmail.com"",
+    ""password"": ""ApiHackathon@5""
+}
+",400,"{
+    ""message"": ""Active User with given email Id Not Found"",
+    ""success"": false
+}",,
+UL_SC_13,User Sign In,/login,POST,"{
+    ""userLoginEmailId"": ""averylongemailaddressfortestingshouldbefailingandnotrunning@gmail.com"",
+    ""password"": ""ApiHackathon@5""
+}
+",400,"{
+    ""message"": ""Email exceeds maximum length"",
+    ""success"": false
+}",,
+UL_SC_14,User Sign In,/login,POST,"{
+    ""userLoginEmailId"": ""team5@gmail.com"",
+    ""password"": ""averylongpasswordshoul@34dnotbeacceptedandrejected""
+}
+",400,"{
+    ""message"": ""Password should be between 8 and 32 character and should include one capital letter, one special character, one number and no space"",
+    ""success"": false
+}",,
+UL_SC_14,User Sign In,/login,POST,"{
+    ""userLoginEmailId"": ""team5@gmail.com"",
+    ""password"": ""weak""
+}
+",400,"{
+    ""message"": ""Password should be between 8 and 32 character and should include one capital letter, one special character, one number and no space"",
+    ""success"": false
+}",,
+UL_SC_15,User Sign In,/login,POST,"{
+    ""userLoginEmailId"": ""' OR '1'='1'"",
+    ""password"": ""ApiHackathon@5""
+}
+",400,"{
+    ""message"": ""Bad credentials"",
+    ""success"": false
+}",,
+UL_SC_16,User Sign In,/login,POST,"{
+    ""userLoginEmailId"": ""<user>test</user>"",
+    ""password"": ""ApiHackathon@5""
+}
+",400,"{
+    ""message"": ""Bad credentials"",
+    ""success"": false
+}",,
+UL_SC_02,User Sign In,/login,POST,"{
+    ""userLoginEmailId"": ""team5@gmail.com"",
+    ""password"": ""ApiHa@123s""
+}",400,"{
+    ""message"": ""Bad credentials"",
+    ""success"": false
+}",,
+UL_SC_02,User Sign In,/login,POST,"{
+    ""userLoginEmailId"": ""team5@gmail.com"",
+    ""password"": ""ApiHa@123s""
+}",400,"{
+    ""message"": ""Bad credentials"",
+    ""success"": false
+}",,
+UL_SC_02,User Sign In,/login,POST,"{
+    ""userLoginEmailId"": ""team5@gmail.com"",
+    ""password"": ""ApiHa@123s""
+}",400,"{
+    ""message"": ""Bad credentials"",
+    ""success"": false
+}",,
+UL_SC_02,User Sign In,/login,POST,"{
+    ""userLoginEmailId"": ""team5@gmail.com"",
+    ""password"": ""ApiHa@123s""
+}",400,"{
+    ""message"": ""Bad credentials"",
+    ""success"": false
+}",,
+UL_SC_02,User Sign In,/login,POST,"{
+    ""userLoginEmailId"": ""team5@gmail.com"",
+    ""password"": ""ApiHa@123s""
+}",400,"{
+    ""message"": ""Bad credentials"",
+    ""success"": false
+}",,
+UL_SC_02,User Sign In,/login,POST,"{
+    ""userLoginEmailId"": ""team5@gmail.com"",
+    ""password"": ""ApiHa@123s""
+}",400,"{
+    ""message"": ""Bad credentials"",
+    ""success"": false
+}",,
+UL_SC_17,User Sign In,/login,POST,"{
+    ""userLoginEmailId"": ""team5@gmail.com"",
+    ""password"": ""ApiHa@123s""
+}
+",429,"{
+    ""message"": ""Too many requests"",
+    ""success"": false
+}",,
+UL_SC_19,User Sign In,/login,GET,,405,"{
+    ""message"": ""Request Method is not supported"",
+    ""success"": false
+}",,
+UL_SC_21,User Logout,/logoutlms,GET,,401,"{
+    ""message"": ""Authentication token required"",
+    ""success"": false
+}",remove,
+UL_SC_22,User Logout,/logoutlms,GET,,401,"{
+    ""message"": ""Token expired"",
+    ""success"": false
+}",expired_token,
+UL_SC_24,User Logout,/logoutlms,GET,,401,"{
+    ""message"": ""Bad credentials"",
+    ""success"": false
+}",invalid,
+UL_SC_25,User Logout,/logoutlms,POST,,405,"{
+    ""message"": ""Request Method is not supported"",
+    ""success"": false
+}",,
+UL_SC_27,Forgot Password Confirm Email,/login/forgotpassword/confirmEmail,POST,"{
+    ""userLoginEmailId"": ""unregistered123@gmail.com""
+}
+",400,"{
+    ""message"": ""User Not Found"",
+    ""success"": false
+}",,
+UL_SC_28,Forgot Password Confirm Email,/login/forgotpassword/confirmEmail,POST,"{}
+",400,"{
+    ""message"":""EmailId is mandatory"",
+    ""success"": false
+}",,
+UL_SC_29,Forgot Password Confirm Email,/login/forgotpassword/confirmEmail,POST,"{
+    ""userLoginEmailId"": null
+}
+",400,"{
+    ""message"": ""EmailId is mandatory"",
+    ""success"": false
+}",,
+UL_SC_30,Forgot Password Confirm Email,/login/forgotpassword/confirmEmail,POST,"{
+    ""userLoginEmailId"": """"
+}
+",400,"{
+    ""message"": ""EmailId is mandatory"",
+    ""success"": false
+}",,
+UL_SC_31,Forgot Password Confirm Email,/login/forgotpassword/confirmEmail,POST,"{
+    ""userLoginEmailId"": ""invalid-email""
+}
+",400,"{
+    ""message"": ""Invalid email format"",
+    ""success"": false
+}",,
+UL_SC_32,Forgot Password Confirm Email,/login/forgotpassword/confirmEmail,PUT,"{
+    ""userLoginEmailId"": ""team5@gmail.com""
+}
+",405,"{
+    ""message"": ""Request Method not supported"",
+    ""success"": false
+}",,
+UL_SC_34,Reset Password,/resetPassword,POST,"{
+    ""userLoginEmailId"": ""unregistered@gmail.com"",
+    ""password"": ""ApiHackathon@5""
+}
+",400,"{
+    ""message"": ""User not found"",
+    ""success"": false
+}",,
+UL_SC_35,Reset Password,/resetPassword,POST,"{
+    ""password"": ""ApiHackathon@87""
+}
+",400,"{
+    ""message"": ""EmailId is mandatory"",
+    ""success"": false
+}",,
+UL_SC_36,Reset Password,/resetPassword,POST,"{
+    ""userLoginEmailId"": ""team5@gmail.com""
+}
+",400,"{
+    ""message"": ""Password is mandatory"",
+    ""success"": false
+}",,
+UL_SC_37,Reset Password,/resetPassword,POST,"{
+    ""userLoginEmailId"": null,
+    ""password"": ""ApiHackathon@5""
+}
+",400,"{
+    ""message"": ""EmailId is mandatory"",
+    ""success"": false
+}",,
+UL_SC_38,Reset Password,/resetPassword,POST,"{
+    ""userLoginEmailId"": ""team5@gmail.com"",
+    ""password"": null
+}
+",400,"{
+    ""message"": ""Password is mandatory"",
+    ""success"": false
+}",,
+UL_SC_39,Reset Password,/resetPassword,POST,"{
+    ""userLoginEmailId"": ""team5@gmail.com"",
+    ""password"": """"
+}
+",400,"{
+    ""message"": ""Password should be between 8 and 32 character and should include one capital letter, one special character, one number and no space"",
+    ""success"": false
+}",,
+UL_SC_40,Reset Password,/resetPassword,POST,"{
+    ""userLoginEmailId"": ""team5@gmail.com"",
+    ""password"": ""averylongpasswordwhichshouldnotbeaccepted#42""
+}
+",400,"{
+    ""message"": ""Password should be between 8 and 32 character and should include one capital letter, one special character, one number and no space"",
+    ""success"": false
+}",,
+UL_SC_41,Reset Password,/resetPassword,POST,"{
+    ""userLoginEmailId"": ""team5@gmail.com"",
+    ""password"": ""ApiHackathon@5""
+}
+",400,"{
+    ""message"": ""New Password cannot be same as old password"",
+    ""success"": false
+}",,
+UL_SC_42,Reset Password,/resetPassword,POST,"{
+    ""userLoginEmailId"": ""team5@gmail.com"",
+    ""password"": ""weak""
+}
+",400,"{
+    ""message"": ""Password should be between 8 and 32 character and should include one capital letter, one special character, one number and no space"",
+    ""success"": false
+}",,
+UL_SC_43,Reset Password,/resetPassword,POST,"{
+    ""userLoginEmailId"": ""team5@gmail.com"",
+    ""password"": ""NewApiHackathon@5""
+}
+",401,"{
+    ""message"": ""Unauthorized"",
+    ""success"": false
+}",invalid,
+UL_SC_44,Reset Password,/resetPassword,GET,"
+",405,"{
+    ""message"": ""Method Not Allowed"",
+    ""success"": false
+}",,
+UL_SC_33,Reset Password,/resetPassword,POST,"{
+    ""userLoginEmailId"": ""team5@gmail.com"",
+    ""password"": ""ApiHackathon@5""
+}
+",200,"{
+  ""token"": ""string"",
+  ""type"": ""string"",
+  ""userId"": ""string"",
+  ""email"": ""string"",
+  ""roles"": [
+    ""string""
+  ],
+  ""status"": ""string"",
+  ""passwordExpired"": true
+}",,

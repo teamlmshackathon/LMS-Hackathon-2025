@@ -1,0 +1,170 @@
+﻿Scenario Id,Request Name,Endpoint,Request Method,Payload,Expected Status,Expected Response Body ,Token Override
+SM_SC_32,Get All Skill Master,/allSkillMaster,GET,,200 OK,,
+SM_SC_01,Create New Skill,/SaveSkillMaster,POST,"{
+    ""skillName"": ""PHP"",
+    ""creationTime"": ""2025-11-27T06:31:04.579+00:00"",
+    ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""
+}",200 OK,"{
+""skillId"": 0,
+""skillName"": ""string"",
+""creationTime"":
+""string"",
+""lastModTime"":
+""string""
+}",
+SM_SC_06,Create New Skill,/SaveSkillMaster,POST,"{""skillName"":""T"",""creationTime"": ""2025-11-27T06:31:04.579+00:00"",
+    ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",200 OK,"{
+""skillId"": 0,
+""skillName"": ""string"",
+""creationTime"":
+""string"",
+""lastModTime"":
+""string""
+}",
+SM_SC_08,Create New Skill,/SaveSkillMaster,POST,"{""skillName"":""C#"",""creationTime"": ""2025-11-27T06:31:04.579+00:00"",
+    ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",200 OK,"{
+""skillId"": 0,
+""skillName"": ""string"",
+""creationTime"":
+""string"",
+""lastModTime"":
+""string""
+}",
+SM_SC_38,Get Skill By Skill Name,/skills/{{skillMasterName}},GET,,200 OK ,,
+SM_SC_09,Create New Skill,/SaveSkillMaster,POST,"{""skillName"":""HL7"",""creationTime"": ""2025-11-27T06:31:04.579+00:00"",
+    ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",200 OK,"{
+""skillId"": 0,
+""skillName"": ""string"",
+""creationTime"":
+""string"",
+""lastModTime"":
+""string""
+}",
+SM_SC_10,Create New Skill,/SaveSkillMaster,POST,"{""skillName"":""Github Actions"", ""creationTime"": ""2025-11-27T06:31:04.579+00:00"",
+    ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",200 OK,"{
+""skillId"": 0,
+""skillName"": ""string"",
+""creationTime"":
+""string"",
+""lastModTime"":
+""string""
+}",
+SM_SC_32,Get All Skill Master,/allSkillMaster,GET,,200 OK,,
+SM_SC_38,Get Skill By Skill Name,/skills/{{skillMasterName}},GET,,200 OK,,
+SM_SC_19,Update Skill By Skill Id,/updateSkills/{{skillId}},PUT,"{""skillName"":""MuleSoft"",""creationTime"": ""2025-11-27T06:31:04.579+00:00"",""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",200 OK,"{
+""skillId"": 0,
+""skillName"": ""string"",
+""creationTime"":
+""string"",
+""lastModTime"":
+""string""
+}",
+SM_SC_26,Update Skill By Skill Id,/updateSkills/{{skillId}},PUT,"{""skillName"":""MuleSoft"",""creationTime"": ""2025-11-27T06:31:04.579+00:00"",""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",200 OK,"{
+""skillId"": 0,
+""skillName"": ""string"",
+""creationTime"":
+""string"",
+""lastModTime"":
+""string""
+}",
+SM_SC_35,Get Skill By Skill Name,/skills/{{skillMasterName}},GET,,200 OK,,
+SM_SC_46,Delete Skill By Skill Id,/deletebySkillId/{{skillId}},DELETE,,200 OK,"{""message"":""Skill id deleted"",""success"":true}",
+SM_SC_35,Get Skill By Skill Name,/skills/{{skillMasterName}},GET,,404 Not Found,"{""message"":""Skill name not found"", 
+    ""success"": false}",
+SM_SC_52,Update Skill By Skill Id,/updateSkills/{{skillId}},PUT,"{""skillName"": ""Terraform"", ""creationTime"": ""2025-11-27T06:31:04.579+00:00"", ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",404 Not Found,"{""message"":""skill id not found"",
+    ""success"": false}",
+SM_SC_32,Get All Skill Master,/allSkillMaster,GET,,200 OK,,
+SM_SC_01,Create New Skill,/SaveSkillMaster,POST,"{""skillName"": ""AgroCD"", ""creationTime"": ""2025-11-27T06:31:04.579+00:00"",
+        ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",200 OK,"{
+""skillId"": 0,
+""skillName"": ""string"",
+""creationTime"":
+""string"",
+""lastModTime"":
+""string""
+}",
+SM_SC_02,Create New Skill,/SaveSkillMaster,POST,"{""skillName"": ""AgroCD"", ""creationTime"": ""2025-11-27T06:31:04.579+00:00"",
+        ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",400,"{""message"":""Skill name already exists"",
+    ""success"": false}",
+SM_SC_03,Create New Skill,/SaveSkillMaster,POST,"{""skillName"":null, ""creationTime"": ""2025-11-27T06:31:04.579+00:00"",
+        ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",400,"{""message"":""Skill name should not be null"",
+    ""success"": false}",
+SM_SC_04,Create New Skill,/SaveSkillMaster,POST,"{""skillName"":"""", ""creationTime"": ""2025-11-27T06:31:04.579+00:00"",
+        ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",400,"{""message"":""Skill name should not be empty"",
+    ""success"": false}",
+SM_SC_05,Create New Skill,/SaveSkillMaster,POST,"{""skillName"":""        "", ""creationTime"": ""2025-11-27T06:31:04.579+00:00"",
+        ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",400,"{""message"":""Skill name should not have spaces"",
+    ""success"": false}",
+SM_SC_07,Create New Skill,/SaveSkillMaster,POST,"{""skillName"":""AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWWWWWWWWWWWWWWWWWWWWWWWWSWWWWWWWWWWWWWWWWWWWWWWWWWWWEEeeeeeeeeeeewwwwwwwwwwwwwwwwwwwwwwwwwerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"", ""creationTime"": ""2025-11-27T06:31:04.579+00:00"",
+        ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",400,"{""message"":""Skill name should not be lengthy"",
+    ""success"": false }",
+SM_SC_11,Create New Skill,/SaveSkillMaster,POST,"{""skillName"":""     Docker123           "", ""creationTime"": ""2025-11-27T06:31:04.579+00:00"",
+        ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",400,"{""message"":""Skill name should not have leading and trailing spaces"",
+    ""success"": false}",
+SM_SC_12,Create New Skill,/SaveSkillMaster,POST,"{ ""skillName"": ""' OR '1'='1"", ""creationTime"": ""2025-11-27T06:31:04.579+00:00"",
+        ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",400,"{""message"":""Skill name should not perform SQL injection"",
+    ""success"": false}",
+SM_SC_13,Create New Skill,/SaveSkillMaster,POST,"{ ""skillName"": ""<script>console.log('SafeTest')</script>"",""creationTime"": ""2025-11-27T06:31:04.579+00:00"",
+        ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",400,"{""message"":""Skill name should not perform HTML injection"",
+    ""success"": false}",
+SM_SC_15,Create New Skill,/SaveSkillMaster,POST,"{""skillName"":""AgroCD"", ""creationTime"": ""2025-11-27T06:31:04.579+00:00"",
+        ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",401,"{""message"":""Invalid token"",
+    ""success"": false}",invalid
+SM_SC_17,Create New Skill,/SaveSkillMaster,POST,{},400,"{""message"":""Empty JSON body is invalid"",
+    ""success"": false}",
+SM_SC_16,Create New Skill,/SaveSkillMaster,POST,"{""skillName"":564757, ""creationTime"": ""2025-11-27T06:31:04.579+00:00"",
+        ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",400,"{""message"":""Skill name should not be numbers"",
+    ""success"": false}",
+SM_SC_18,Create New Skill,/SaveSkillMaster,PUT,"{""skillName"":123456, ""creationTime"": ""2025-11-27T06:31:04.579+00:00"",
+        ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",405,"{""message"":""Request method not supported"",
+    ""success"": false}",
+SM_SC_20,Update Skill By Skill Id,/updateSkills/9999999,PUT,"{""skillName"": ""Kubernetes"", ""creationTime"": ""2025-11-27T06:31:04.579+00:00"", ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",404,"{""message"":""Skill not found"",
+    ""success"": false}",
+SM_SC_21,Update Skill By Skill Id,/updateSkills/{{skillId}},PUT,"{""creationTime"": ""2025-11-27T06:31:04.579+00:00"", ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",400,"{""message"":""Skill name is required"",
+    ""success"": false}",
+SM_SC_22,Update Skill By Skill Id,/updateSkills/{{skillId}},PUT,"{""skillId"": null, ""skillName"": ""Hive"", ""creationTime"": ""2025-11-27T06:31:04.579+00:00"", ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",400,"{""message"":""Skill Id cannot be null"",
+    ""success"": false}",
+SM_SC_23,Update Skill By Skill Id,/updateSkills/{{skillId}},PUT,"{""skillName"": null, ""creationTime"": ""2025-11-27T06:31:04.579+00:00"", ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",400,"{""message"":""Skill name cannot be null"",
+    ""success"": false}",
+SM_SC_24,Update Skill By Skill Id,/updateSkills/{{skillId}},PUT,"{""skillName"": """", ""creationTime"": ""2025-11-27T06:31:04.579+00:00"", ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",400,"{""message"":""Skill name cannot be empty"",
+    ""success"": false}",
+SM_SC_25,Update Skill By Skill Id,/updateSkills/{{skillId}},PUT,"{""skillName"": ""PHP"", ""creationTime"": ""2025-11-27T06:31:04.579+00:00"", ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",400,"{""message"":""Skill name already exists"",
+    ""success"": false}",
+SM_SC_27,Update Skill By Skill Id,/updateSkills/-1,PUT,"{""skillName"": ""Negative ID"", ""creationTime"": ""2025-11-27T06:31:04.579+00:00"", ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",400,"{""message"":""Invalid Skill Id"",
+    ""success"": false}",
+SM_SC_31,Update Skill By Skill Id,/updateSkills/{{skillId}},GET,"{""skillName"": null, ""creationTime"": ""2025-11-27T06:31:04.579+00:00"", ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",405,"{""message"":""Request method not supported"",
+    ""success"": false}",
+SM_SC_28,Update Skill By Skill Id,/updateSkills/0,PUT,"{""skillName"": ""Zero ID"", ""creationTime"": ""2025-11-27T06:31:04.579+00:00"", ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",400,"{""message"":""Invalid Skill Id"",
+    ""success"": false}",
+SM_SC_30,Update Skill By Skill Id,/updateSkills/{{skillId}},PUT,{},400,"{""message"":""Invalid JSON body"",
+    ""success"": false}",
+SM_SC_29,Update Skill By Skill Id,/updateSkills/{{skillId}},PUT,"{""skillName"":""Telugu"", ""creationTime"": ""2025-11-27T06:31:04.579+00:00"",
+        ""lastModTime"": ""2025-11-27T06:31:04.579+00:00""}",401,"{""message"":""Invalid token"",
+    ""success"": false}",invalid
+SM_SC_36,Get All Skill Master,/allSkillMaster,GET,,401,"{""message"":""Invalid token"",
+    ""success"": false}",invalid
+SM_SC_37,Get All Skill Master,/allSkillMaster,POST,,405,"{""message"":""Request method not supported"",
+    ""success"": false}",
+SM_SC_39,Get Skill By Skill Name,/skills/NonExistentSkill123,GET,,404,"{""message"":""Skill name not found"",
+    ""success"": false}",
+SM_SC_40,Get Skill By Skill Name,/skills/pYtHoN12573,GET,,404,"{""message"":""Case sensitive"",
+    ""success"": false}",
+SM_SC_41 & SM_SC_43,Get Skill By Skill Name,/skills/%20Python12573%20,GET,,404,"{""message"":""Skill name not found"",
+    ""success"": false}",
+SM_SC_45,Get Skill By Skill Name,/skills/NonExistentSkill123,DELETE,,405,"{""message"":""Request method not supported"",
+    ""success"": false}",
+SM_SC_44,Get Skill By Skill Name,/skills/Python12573,GET,,401,"{""message"":""Invalid token""}",invalid
+SM_SC_46,Delete Skill By Skill Id,/deletebySkillId/{{skillId}},DELETE,,200,"{""message"":""Skill id deleted"",
+    ""success"": true}",
+SM_SC_47,Delete Skill By Skill Id,/deletebySkillId/9999999,DELETE,,404,"{""message"":""skill id not found"",
+    ""success"": false}",
+SM_SC_48,Delete Skill By Skill Id,/deletebySkillId/-1,DELETE,,400,"{""message"":""Invalid skill id"",
+    ""success"": false}",
+SM_SC_49,Delete Skill By Skill Id,/deletebySkillId/0,DELETE,,400,"{""message"":""Invalid skill id"",
+    ""success"": false}",
+SM_SC_54,Delete Skill By Skill Id,/deletebySkillId/{{skillId}},POST,,405,"{""message"":""Request method not supported"",
+    ""success"": false}",
+SM_SC_51,Delete Skill By Skill Id,/deletebySkillId/{{skillId}},DELETE,,404,"{""message"":""no record found with skillId"",
+    ""success"": false}",
+SM_SC_53,Delete Skill By Skill Id,/deletebySkillId/{{skillId}},DELETE,,401,"{""message"":""Invalid token"",
+    ""success"": false}",invalid
