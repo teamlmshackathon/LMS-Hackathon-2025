@@ -6,6 +6,486 @@
 	},
 	"item": [
 		{
+			"name": "UserLogin",
+			"item": [
+				{
+					"name": "User Sign In",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6f879d95-70e9-4779-a25b-5c9ba24c1de2",
+								"exec": [
+									"pm.test(\"Validate Login Schema\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    // Schema for Success (200)\r",
+									"    var successSchema = {\r",
+									"        \"type\": \"object\",\r",
+									"        \"required\": [\"token\", \"userId\", \"email\", \"roles\"],\r",
+									"        \"properties\": {\r",
+									"            \"token\": { \"type\": \"string\" },\r",
+									"            \"type\": { \"type\": \"string\" },\r",
+									"            \"userId\": { \"type\": \"string\" },\r",
+									"            \"email\": { \"type\": \"string\" },\r",
+									"            \"roles\": { \"type\": \"array\" },\r",
+									"            \"status\": { \"type\": [\"string\", \"null\"] },\r",
+									"            \"passwordExpired\": { \"type\": \"boolean\" }\r",
+									"        }\r",
+									"    };\r",
+									"\r",
+									"    // Schema for Error (400, 401, 404, 429)\r",
+									"    var errorSchema = {\r",
+									"        \"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"message\": { \"type\": \"string\" },\r",
+									"            \"success\": { \"type\": \"boolean\" }\r",
+									"        }\r",
+									"    };\r",
+									"\r",
+									"    if (pm.response.code === 200) {\r",
+									"        pm.response.to.have.jsonSchema(successSchema);\r",
+									"    } else {\r",
+									"        pm.response.to.have.jsonSchema(errorSchema);\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "91bb5fd0-ffb2-4200-93bb-c469a35a751d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{Payload}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password Confirm Email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "34bb6756-cbb9-4a0c-9464-79cc2be65c5a",
+								"exec": [
+									"pm.test(\"Validate Confirm Email Schema\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    var successSchema = {\r",
+									"        \"type\": \"object\",\r",
+									"        \"required\": [\"token\", \"userId\", \"email\"], // Adjusted based on your snippet\r",
+									"        \"properties\": {\r",
+									"            \"token\": { \"type\": \"string\" },\r",
+									"            \"type\": { \"type\": \"string\" },\r",
+									"            \"userId\": { \"type\": \"string\" },\r",
+									"            \"email\": { \"type\": \"string\" },\r",
+									"            \"roles\": { \"type\": \"array\" },\r",
+									"            \"status\": { \"type\": [\"string\", \"null\"] },\r",
+									"            \"passwordExpired\": { \"type\": \"boolean\" }\r",
+									"        }\r",
+									"    };\r",
+									"\r",
+									"    var errorSchema = {\r",
+									"        \"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"message\": { \"type\": \"string\" },\r",
+									"            \"success\": { \"type\": \"boolean\" }\r",
+									"        }\r",
+									"    };\r",
+									"\r",
+									"    if (pm.response.code === 200) {\r",
+									"        pm.response.to.have.jsonSchema(successSchema);\r",
+									"    } else {\r",
+									"        pm.response.to.have.jsonSchema(errorSchema);\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "8c1b1f85-b49f-41b0-ab85-d987e366cbae",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{Payload}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/login/forgotpassword/confirmEmail"
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "814c8554-e10c-42ad-9f05-c4979a76ab10",
+								"exec": [
+									"pm.test(\"Validate Reset Password Schema\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    // We enforce the 'Success Schema' (Token/User Object)\r",
+									"    // If the API returns {\"message\": \"saved\"}, this schema check will FAIL.\r",
+									"    var successSchema = {\r",
+									"        \"type\": \"object\",\r",
+									"        \"required\": [\"token\", \"userId\", \"email\"], \r",
+									"        \"properties\": {\r",
+									"            \"token\": { \"type\": \"string\" },\r",
+									"            \"type\": { \"type\": \"string\" },\r",
+									"            \"userId\": { \"type\": \"string\" },\r",
+									"            \"email\": { \"type\": \"string\" },\r",
+									"            \"roles\": { \"type\": \"array\" },\r",
+									"            \"status\": { \"type\": [\"string\", \"null\"] },\r",
+									"            \"passwordExpired\": { \"type\": \"boolean\" }\r",
+									"        }\r",
+									"    };\r",
+									"\r",
+									"    var errorSchema = {\r",
+									"        \"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"message\": { \"type\": \"string\" },\r",
+									"            \"success\": { \"type\": \"boolean\" }\r",
+									"        }\r",
+									"    };\r",
+									"\r",
+									"    if (pm.response.code === 200) {\r",
+									"        pm.response.to.have.jsonSchema(successSchema);\r",
+									"    } else {\r",
+									"        pm.response.to.have.jsonSchema(errorSchema);\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "f9036694-5148-4e7f-bcf4-62f0e0502d1e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{Payload}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/resetPassword"
+					},
+					"response": []
+				},
+				{
+					"name": "User Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "79555535-3544-4ab9-9683-76f89e18c159",
+								"exec": [
+									"pm.test(\"Validate Content-Type\", function () {\r",
+									"    var ct = pm.response.headers.get(\"Content-Type\");\r",
+									"    \r",
+									"    if (pm.response.code === 200) {\r",
+									"        // Success Case: Expect Plain Text\r",
+									"        pm.expect(ct).to.include(\"text\"); \r",
+									"    } else {\r",
+									"        // Failure Case: Expect JSON\r",
+									"        pm.expect(ct).to.include(\"application/json\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate Logout Schema\", function () {\r",
+									"    // 1. Success Case (Plain Text)\r",
+									"    if (pm.response.code === 200) {\r",
+									"         pm.expect(pm.response.text()).to.include(\"Logout successful\");\r",
+									"    } \r",
+									"    // 2. Failure Case (JSON Error)\r",
+									"    else {\r",
+									"         var errorSchema = {\r",
+									"            \"type\": \"object\",\r",
+									"            \"properties\": {\r",
+									"                \"message\": { \"type\": \"string\" },\r",
+									"                \"success\": { \"type\": \"boolean\" }\r",
+									"            }\r",
+									"        };\r",
+									"        pm.response.to.have.jsonSchema(errorSchema);\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "aeb97dcc-5966-4946-ad47-a18de0b9ba35",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{baseURL}}/logoutlms"
+					},
+					"response": []
+				}
+			],
+			"id": "3dde43ed-9804-482e-adbe-d15571fc1051",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c19e9d43-acc9-48ed-80f7-5102a24399d8",
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							"// 1. TRAFFIC COP\r",
+							"var targetRequest = pm.iterationData.get(\"Request Name\");\r",
+							"var currentRequest = pm.info.requestName;\r",
+							"if (targetRequest && targetRequest !== currentRequest) {\r",
+							"    pm.execution.skipRequest();\r",
+							"    return;\r",
+							"}\r",
+							"\r",
+							"// ==================================================\r",
+							"// 2. METHOD OVERRIDE\r",
+							"// ==================================================\r",
+							"// This checks if the CSV has a \"Request Method\" value for this row.\r",
+							"// If yes, it forces the request to use that method (e.g., forcing GET to be POST).\r",
+							"var methodOverride = pm.iterationData.get(\"Request Method\");\r",
+							"\r",
+							"if (methodOverride) {\r",
+							"    pm.request.method = methodOverride;\r",
+							"    console.log(\"Overriding Method to: \" + methodOverride);\r",
+							"}\r",
+							"\r",
+							"\r",
+							"var csvPayload = pm.iterationData.get(\"Payload\");\r",
+							"if (csvPayload) {\r",
+							"    if (typeof csvPayload === 'object') {\r",
+							"        // It's a JSON object (from JSON file) -> Stringify it for the Body\r",
+							"        pm.collectionVariables.set(\"Payload\", JSON.stringify(csvPayload));\r",
+							"    } else {\r",
+							"        // It's a String (from CSV) -> Try to parse/clean it\r",
+							"        try {\r",
+							"            var obj = JSON.parse(csvPayload);\r",
+							"            pm.collectionVariables.set(\"Payload\", JSON.stringify(obj));\r",
+							"        } catch (e) {\r",
+							"            pm.collectionVariables.set(\"Payload\", csvPayload);\r",
+							"        }\r",
+							"    }\r",
+							"}\r",
+							"\r",
+							"// ==================================================\r",
+							"// TOKEN OVERRIDE LOGIC\r",
+							"// ==================================================\r",
+							"var tokenAction = pm.iterationData.get(\"TokenOverride\");\r",
+							"\r",
+							"if (tokenAction === \"remove\") {\r",
+							"    pm.request.auth.type = \"noauth\"; \r",
+							"    \r",
+							"    // 2. Double check to remove any manual headers if they exist\r",
+							"    pm.request.headers.remove(\"Authorization\");\r",
+							"    \r",
+							"    console.log(\"Token REMOVED for this request (Scenario: \" + pm.iterationData.get(\"Scenario Id\") + \")\");\r",
+							"} \r",
+							"else if (tokenAction === \"invalid\") {\r",
+							"    pm.request.auth.use(\"bearer\", {\r",
+							"        token: \"INVALID_GARBAGE_TOKEN_123\"\r",
+							"    });\r",
+							"    console.log(\"Injected INVALID Token\");\r",
+							"}\r",
+							"else if (tokenAction === \"expired_token\") {\r",
+							"     pm.request.auth.use(\"bearer\", {\r",
+							"        token: \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZWFtNUBnbWFpbC5jb20iLCJpYXQiOjE3NjQ1NTI4NDcsImV4cCI6MTc2NDU4MTY0N30.W7Hywl19--Vce0vfuqvpgoEVQCQRUnexmyAejUM04unnWZNyJ8ucz1RzOtSKJ6WZ1AV1BogIPnKGzLuPa4VrsQ\"\r",
+							"    });\r",
+							"}\r",
+							"\r",
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "5cecfb98-6d67-45da-b9a4-e5c18e90b7d2",
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							"// ==================================================\r",
+							"// 1. SKIP SAFETY (Exit if no response)\r",
+							"// ==================================================\r",
+							"if (!pm.response.code) return;\r",
+							"\r",
+							"\r",
+							"\r",
+							"// ==================================================\r",
+							"// 2. STATUS CHECK & METHOD NOT ALLOWED\r",
+							"// ==================================================\r",
+							"var expectedStatus = parseInt(pm.iterationData.get(\"Expected Status\"));\r",
+							"\r",
+							"\r",
+							"if (expectedStatus) {\r",
+							"    pm.test(\"Status code is \" + expectedStatus, function () {\r",
+							"        pm.response.to.have.status(expectedStatus);\r",
+							"    });\r",
+							"\r",
+							"\r",
+							"    // SPECIAL CHECK: Method Not Allowed (405)\r",
+							"    if (expectedStatus === 405) {\r",
+							"        pm.test(\"Verify Method Not Allowed Error\", function () {\r",
+							"            if (pm.response.text()) {\r",
+							"                var jsonData = pm.response.json();\r",
+							"                var msg = jsonData.message || jsonData.error || \"\"; \r",
+							"                pm.expect(msg).to.include(\"not supported\");\r",
+							"            } else {\r",
+							"                console.warn(\"405 returned with empty body\");\r",
+							"            }\r",
+							"        });\r",
+							"    }\r",
+							"}\r",
+							"\r",
+							"\r",
+							"\r",
+							"// ==================================================\r",
+							"// 3. CONTENT-TYPE CHECK\r",
+							"// ==================================================\r",
+							"// Only run this if it is NOT the Logout request\r",
+							"if (!pm.info.requestName.includes(\"User Logout\")) {\r",
+							"    pm.test(\"Content-Type is application/json\", function () {\r",
+							"        if (pm.response.code !== 204) {\r",
+							"            var ct = pm.response.headers.get(\"Content-Type\");\r",
+							"            pm.expect(ct, \"Content-Type Header is MISSING\").to.exist; \r",
+							"            pm.expect(ct).to.include(\"application/json\");\r",
+							"        }\r",
+							"    });\r",
+							"}\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"// ==================================================\r",
+							"// 4. UNIVERSAL CAPTURE (Save Token Only)\r",
+							"// ==================================================\r",
+							"if (pm.response.code === 200) {\r",
+							"    try {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        \r",
+							"        // CAPTURE TOKEN (Critical for other requests)\r",
+							"        if (jsonData.token) {\r",
+							"            pm.collectionVariables.set(\"token\", jsonData.token);\r",
+							"            console.log(\"Refreshed Bearer Token from Login\");\r",
+							"        }\r",
+							"\r",
+							"\r",
+							"    } catch (e) { console.warn(\"Failed to parse capture data\"); }\r",
+							"}\r",
+							"\r",
+							"\r",
+							"\r",
+							"// ==================================================\r",
+							"// 5. RESPONSE MESSAGE VALIDATION\r",
+							"// ==================================================\r",
+							"pm.test(\"Response body message matches contract\", function () {\r",
+							"    var expectedBodyString = pm.iterationData.get(\"Expected Response Body\");\r",
+							"    \r",
+							"    if (expectedBodyString) {\r",
+							"        // 1. FAIL if we expected a body but got EMPTY\r",
+							"        if (!pm.response.text()) {\r",
+							"            pm.expect.fail(\"Expected JSON body '\" + expectedBodyString + \"' but got EMPTY response.\");\r",
+							"            return;\r",
+							"        }\r",
+							"\r",
+							"\r",
+							"        try {\r",
+							"            // FIX: Remove newlines/tabs that might break JSON parsing\r",
+							"            var cleanString = expectedBodyString.replace(/(\\r\\n|\\n|\\r)/gm, \" \").trim();\r",
+							"            \r",
+							"            var expectedJson = JSON.parse(cleanString);\r",
+							"            var actualJson = pm.response.json();\r",
+							"            \r",
+							"            // If the expected data has a 'message', verify it matches the actual response\r",
+							"            if (expectedJson.message) {\r",
+							"                pm.expect(actualJson.message, \"Error Message Mismatch\").to.eql(expectedJson.message); \r",
+							"            }\r",
+							"        } catch (e) {\r",
+							"            console.log(\"JSON Parse Error: \" + e.message);\r",
+							"            pm.expect.fail(\"Test Failed: CSV 'Expected Response Body' is not valid JSON. Data: \" + expectedBodyString);\r",
+							"        }\r",
+							"    }\r",
+							"});"
+						]
+					}
+				}
+			]
+		},
+		{
 			"name": "SkillMaster",
 			"item": [
 				{
@@ -333,13 +813,13 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "47d2315b-9041-4b70-8f4d-073244810d75",
+						"id": "bc2b226c-1b69-47a4-95dc-6471376ee581",
 						"type": "text/javascript",
 						"packages": {},
 						"requests": {},
 						"exec": [
 							"// 1. TRAFFIC COP\r",
-							"var targetRequest = pm.iterationData.get(\"RequestName\");\r",
+							"var targetRequest = pm.iterationData.get(\"Request Name\");\r",
 							"var currentRequest = pm.info.requestName;\r",
 							"if (targetRequest && targetRequest !== currentRequest) {\r",
 							"    pm.execution.skipRequest();\r",
@@ -393,7 +873,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "c3690a90-bd03-44bc-84eb-c3becf771c30",
+						"id": "e8a2ddb0-bdb1-4fbe-809d-3ff88587f752",
 						"type": "text/javascript",
 						"packages": {},
 						"requests": {},
