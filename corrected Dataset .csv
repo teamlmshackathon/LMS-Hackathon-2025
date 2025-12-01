@@ -1,0 +1,277 @@
+﻿Scenario Id,RequestName,Endpoint,Request Method,Payload,Expected Status,Expected Response Body,,,
+SC_PBC_01,Create New Batch,/batches,POST,"{
+""batchDescription"": ""Data Analyst track"",
+""batchName"": ""DA209"",
+""batchNoOfClasses"": 10,
+""batchStatus"": ""Active"",
+""programId"": 2
+}",201,"{
+""batchId"": ""number"",
+    ""batchName"": ""DA209"",
+    ""batchDescription"": ""Data Analyst track"",
+    ""batchStatus"": ""Active"",
+    ""batchNoOfClasses"": 10,
+    ""programId"": 2,
+    ""programName"": ""DataScience""
+}",,,
+SC_PBC_02,Get Batch from BatchId,/batches/batchId/{{batchId}},GET,,200,"{
+""batchId"": ""number"",
+    ""batchName"": ""DA209"",
+    ""batchDescription"": ""Data Analyst track"",
+    ""batchStatus"": ""Active"",
+    ""batchNoOfClasses"": 10,
+    ""programId"": 2,
+    ""programName"": ""DataScience""
+}",,,
+SC_PBC_03,Update Batch,/batches/{{batchId}},PUT,"{
+""batchDescription"": ""Data Analyst track"",
+""batchName"": ""DA209"",
+""batchNoOfClasses"": 12,
+""batchStatus"": ""Active"",
+""programId"": 2
+}",200,"{
+""batchId"": ""number"",
+    ""batchName"": ""DA209"",
+    ""batchDescription"": ""Data Analyst track"",
+    ""batchStatus"": ""Active"",
+    ""batchNoOfClasses"": 12,
+    ""programId"": 2,
+    ""programName"": ""DataScience""
+}",,,
+SC_PBC_04,Get Batch from BatchId,/batches/batchId/{{batchId}},GET,,200,"{
+""batchId"": ""number"",
+    ""batchName"": ""DA201"",
+    ""batchDescription"": ""Data Analyst track"",
+    ""batchStatus"": ""Active"",
+    ""batchNoOfClasses"": 12,
+    ""programId"": 2,
+    ""programName"": ""DataScience""
+}",,,
+SC_PBC_05,Get Batch from ProgramId,/batches/program/{{programId}},GET,,200,"{
+""batchId"": ""number"",
+    ""batchName"": ""DA209"",
+    ""batchDescription"": ""Data Analyst track"",
+    ""batchStatus"": ""Active"",
+    ""batchNoOfClasses"": 12,
+    ""programId"": 2,
+    ""programName"": ""DataScience""
+}",,,
+SC_PBC_06,Get Batch from BatchName,/batches/batchName/{{batchName}},GET,,200,"{
+""batchId"": ""number"",
+    ""batchName"": ""DA209"",
+    ""batchDescription"": ""Data Analyst track"",
+    ""batchStatus"": ""Active"",
+    ""batchNoOfClasses"": 12,
+    ""programId"": 2,
+    ""programName"": ""DataScience""
+}",,,
+SC_PBC_07,Delete Batch by BatchId,/batches/{{batchId}},DELETE,,200,"batch id-""number"" is delected successfully",,,
+SC_PBC_08,Get All Batches,/batches,GET,,200,"""{
+""""batchId"""": """"number"""",
+    """"batchName"""": """"DA66"""",
+    """"batchDescription"""": """"Data Analyst track"""",
+    """"batchStatus"""": """"Active"""",
+    """"batchNoOfClasses"""": 10,
+    """"programId"""": 2,
+    """"programName"""": """"DataScience""""
+}""
+
+""{
+""""batchId"""": """"number"""",
+    """"batchName"""": """"DA67"""",
+    """"batchDescription"""": """"Data Analyst track"""",
+    """"batchStatus"""": """"Active"""",
+    """"batchNoOfClasses"""": 12,
+    """"programId"""": 2,
+    """"programName"""": """"DataScience""""
+}""",,,
+SC_PBC_09,Create New Batch,/batches,POST,"{
+""batchDescription"": ""Data Analyst track"",
+""batchName"": ""DA210a"",
+""batchNoOfClasses"": 10,
+""batchStatus"": ""Active"",
+""programId"": 2
+}",201,"{
+""batchId"": ""number"",
+    ""batchName"": ""DA210a"",
+    ""batchDescription"": ""Data Analyst track"",
+    ""batchStatus"": ""Active"",
+    ""batchNoOfClasses"": 10,
+    ""programId"": 2,
+    ""programName"": ""DataScience""
+}",validate if the batchname has string after the number,,
+SC_PBC_10,Get Batch from BatchName,/batches/batchName/{{batchName}},GET,,,"{
+""batchId"": ""number"",
+    ""batchName"": ""DA202a"",
+    ""batchDescription"": ""Data Analyst track"",
+    ""batchStatus"": ""Active"",
+    ""batchNoOfClasses"": 10,
+    ""programId"": 2,
+    ""programName"": ""DataScience""
+}",,,
+SC_PBC_11,Create New Batch,/batches,POST,"{
+""batchDescription"": ""Data Analyst track"",
+""batchName"": ""DA 211"",
+""batchNoOfClasses"": 10,
+""batchStatus"": ""Active"",
+""programId"": 2
+}",400,Invalid content type,validate the batchname has space between string and integer,,
+SC_PBC_12,Get Batch from BatchName,/batches/batchName/{{batchName}},GET,,,"{
+""batchId"": ""number"",
+    ""batchName"": ""DA202a"",
+    ""batchDescription"": ""Data Analyst track"",
+    ""batchStatus"": ""Active"",
+    ""batchNoOfClasses"": 10,
+    ""programId"": 2,
+    ""programName"": ""DataScience""
+}",,,
+SC_PBC_13,Create New Batch,/batches,POST,"{
+""batchDescription"": ""Data Analyst track -1"",
+""batchName"": ""DA211
+""batchNoOfClasses"": 10,
+""batchStatus"": ""Active"",
+""programId"": 2
+}",201,"{
+""batchId"": ""number"",
+    ""batchName"": ""DA211"",
+    ""batchDescription"": ""Data Analyst track -1"",
+    ""batchStatus"": ""Active"",
+    ""batchNoOfClasses"": 10,
+    ""programId"": 2,
+    ""programName"": ""DataScience""
+}",validate the batch description has extra character,,
+SC_PBC_14,Get Batch from BatchId,/batches/batchId/{{batchId}},GET,,,"{
+""batchId"": ""number"",
+    ""batchName"": ""DA203"",
+    ""batchDescription"": ""Data Analyst track -1"",
+    ""batchStatus"": ""Active"",
+    ""batchNoOfClasses"": 10,
+    ""programId"": 2,
+    ""programName"": ""DataScience""
+}",,,
+SC_PBC_15,Update Batch,/batches/{{batchId}},PUT,"{
+""batchDescription"": ""Data Analyst track"",
+""batchName"": ""DA211"",
+""batchNoOfClasses"": -12,
+""batchStatus"": ""Active"",
+""programId"": 2
+}",400,Bad request invalid batchNoOfClasses,validating the negative value for batchNoOfClasses,,
+SC_PBC_16,Create New Batch,/batches,POST,"{
+""batchDescription"": ""Data Analyst track"",
+""batchName"": ""DA212"",
+""batchNoOfClasses"": 12,
+""batchStatus"": ""Active"",
+""programId"": 2
+}",200,"{
+""batchId"": ""number"",
+    ""batchName"": ""DA204"",
+    ""batchDescription"": ""Data Analyst track"",
+    ""batchStatus"": ""Active"",
+    ""batchNoOfClasses"": 12,
+    ""programId"": 2,
+    ""programName"": ""DataScience""
+}",,postive,
+SC_PBC_17,Create New Batch,/batches,POST,"{
+""batchDescription"": ""Data Analyst track"",
+""batchNoOfClasses"": 12,
+""batchStatus"": ""Active"",
+""programId"": 2
+}",400,invalid Endpoint,Bad request,Negative,
+SC_PBC_18,Create New Batch,/batches,POST,,415,Content Type not supported,bad request,Negative,
+SC_PBC_19,Create New Batch,/batches,POST,"{
+""batchDescription"": ""Data Analyst track"",
+""batchName"": ""DA213"",
+""batchNoOfClasses"": 12,
+""batchStatus"": ""Active""
+}",400,programId field is needed ,Bad request,Negative,
+SC_PBC_20,Create New Batch,/batches,POST,"{
+""batchDescription"": ""Data Analyst track"",
+""batchName"": ""DA214"",
+""batchNoOfClasses"": 12,
+""programId"": 2
+}",400,Batch status is needed,Bad request,Negative,
+SC_PBC_21,Create New Batch,/batches,POST,"{
+""batchDescription"": ""Data Analyst track"",
+""batchName"": ""DA187"",
+""batchStatus"": ""Active"",
+""programId"": 2
+}",400,No of classes is needed,Bad request,Negative,
+SC_PBC_22,Create New Batch,/batches,POST,"{
+""batchDescription"": ""Data Analyst track"",
+""batchName"": ""DA733"",
+""batchNoOfClasses"": 12,
+""batchStatus"": ""Active"",
+""programId"": 2
+}",400,Invalid batchName,Badrequest,Negative,
+SC_PBC_23,Create New Batch,/batches,POST,"{
+""batchName"": ""DA215"",
+""batchNoOfClasses"": 12,
+""batchStatus"": ""Active"",
+""programId"": 2
+}",201,"{
+""batchId"": ""number"",
+    ""batchName"": ""DA205"",
+   ""batchDescription"": null
+    ""batchStatus"": ""Active"",
+    ""batchNoOfClasses"": 12,
+    ""programId"": 2,
+    ""programName"": ""DataScience""
+}",Success,Positive,
+SC_PBC_24,Create New Batch,/batches,POST,"{
+""batchDescription"": ""DA"",
+""batchName"": ""DA216"",
+""batchNoOfClasses"": 12,
+""batchStatus"": ""Active"",
+""programId"": 2
+}",400,invalid batchDescription,,Negative,
+SC_PBC_25,Create New Batch,/batches,POST,"{
+""batchDescription"": ""DAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"",
+""batchName"": ""DA217"",
+""batchNoOfClasses"": 12,
+""batchStatus"": ""Active"",
+""programId"": 2
+}",400,invalid batchDescription,,Negative,
+SC_PBC_26,Get All Batches,/batch,GET,,400,invalid Endpoint,Bad request,Negative,
+SC_PBC_27,Get Batch from BatchId,/batches/batchId/,GET,,400,invalid Endpoint,Bad request,Negative,
+SC_PBC_28,Update Batch,/batches/batchId/,PUT,"{
+""batchDescription"": ""Data Analyst Track"",
+""batchName"": ""DA218"",
+""batchNoOfClasses"": 12,
+""batchStatus"": ""Active"",
+""programId"": 2
+}",400,invalid Endpoint,Bad request,Negative,
+SC_PBC_29,Get Batch from ProgramId,/batches/programId/1,GET,,200,"{
+    ""batchId"": 98,
+    ""batchName"": ""DA4"",
+    ""batchDescription"": ""Data Analyst track"",
+    ""batchStatus"": ""Active"",
+    ""batchNoOfClasses"": 10,
+    ""programId"": 1,
+    ""programName"": ""LMSHAHackthonone""
+}
+
+{
+batchId=112
+""batchDescription"":
+""Data Analyst track"",
+""batchName"": ""DA33"",
+""batchNoOfClasses"": 13"",
+""batchStatus"": ""Active"",
+""programId"": 1
+}
+",success,Positive,
+SC_PBC_30,Get Batch from BatchName,/batches/batchName/{{batchName}},GET,,,"{
+""batchId"": ""number"",
+    ""batchName"": ""DA74"",
+   ""batchDescription"": null
+    ""batchStatus"": ""Active"",
+    ""batchNoOfClasses"": 12,
+    ""programId"": 2,
+    ""programName"": ""DataScience""
+}",,,
+SC_PBC_31,Get Batch from BatchName,/batches/batchName/,GET,,400,Incomplete batchName,Bad request,Negative,
+SC_PBC_32,Get Batch from BatchName,/batches/batchName/xxx59,GET,,404,batchName is not found,Bad request,Negative,
+SC_PBC_33,Get Batch from BatchName,/batches/batchName/DA60!,GET,,400,invalid BatchName,Bad request,Negative,
+SC_PBC_34,Delete Batch by BatchId,/batches/{{batchId}},DELETE,,200,BatchId is successfully deleted,success,Positive,
+SC_PBC_35,Delete Batch by BatchId,/batches/batchName/{{batchName}},DELETE,,405,Invalid Request Method,Bad request,Negative,
+SC_PBC_36,Delete Batch by BatchId,/batches/batchName/183,DELETE,,400,Id is already deleted,Bad request,Negative,
