@@ -6,17 +6,24 @@
 	},
 	"item": [
 		{
-			"name": "UserLogin",
+			"name": "SkillMaster",
 			"item": [
 				{
-					"name": "New Request",
-					"id": "05b2bad2-7378-4585-991b-30958f76973d",
+					"name": "Get All Skill Master",
+					"id": "38403150-3cb7-4bb2-9fc2-70b826a31f74",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": "{{baseURL}}/allSkillMaster"
 					},
 					"response": []
 				},
@@ -1165,51 +1172,219 @@
 			"name": "ProgramController",
 			"item": [
 				{
-					"name": "New Request",
-					"id": "8edf9bfe-8ce5-417a-bb47-5986818a06fd",
+					"name": "Get Skill By Skill Name",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "36421b3d-7ec9-40d0-a106-f604433716e8",
+								"exec": [
+									"// Wait for 2 seconds before sending the request\r",
+									"setTimeout(function(){}, 2000);\r",
+									"console.log(\"Paused for 2 seconds to allow DB update...\");\r",
+									"\r",
+									"// 1. Get the endpoint value from the CSV row\r",
+									"let csvEndpoint = pm.iterationData.get(\"Endpoint\");\r",
+									"\r",
+									"// 2. If the CSV has a value, override the URL\r",
+									"if (csvEndpoint) {\r",
+									"    \r",
+									"    // 3. Handle the dynamic variable replacement\r",
+									"    // If the CSV says \"/skills/{{skillMasterName}}\", we need to fill in the real name.\r",
+									"    let currentSkillName = pm.collectionVariables.get(\"skillMasterName\");\r",
+									"    \r",
+									"    if(currentSkillName) {\r",
+									"        // Replaces only if {{skillMasterName}} is actually in the string\r",
+									"        csvEndpoint = csvEndpoint.replace(\"{{skillMasterName}}\", currentSkillName);\r",
+									"    }\r",
+									"\r",
+									"    // 4. Construct the full URL\r",
+									"    // Make sure your collection variable is exactly \"baseURL\" (case sensitive!)\r",
+									"    let newUrl = pm.collectionVariables.get(\"baseURL\") + csvEndpoint;\r",
+									"    \r",
+									"    // 5. Apply the update\r",
+									"    pm.request.url.update(newUrl);\r",
+									"    console.log(\"GET Request URL updated to: \" + newUrl); \r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "9b7e7efb-5b03-425d-ba66-aa26c86775e5",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": []
-				}
-			],
-			"id": "2a5308c4-0fd6-4047-b3ad-a7ab5e383e38"
-		},
-		{
-			"name": "Program Batch",
-			"item": [
-				{
-					"name": "New Request",
-					"id": "b777583b-94b7-4f98-aa0a-9e9eff02a9c7",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": []
-				}
-			],
-			"id": "e2f63e33-c89b-4a26-b6fd-525455ece6bf"
-		},
-		{
-			"name": "SkillMaster",
-			"item": [
-				{
-					"name": "New Request",
-					"id": "b6c14b12-0783-46d7-b647-d85c4d50a364",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "GET",
 						"header": [],
-						"url": ""
+						"url": "{{baseURL}}/skills/{{skillMasterName}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Skill By Skill Id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c6e00371-28ff-45c1-b01f-ad0f9ea7472e",
+								"exec": [
+									"// 1. Get the endpoint value from the CSV row\r",
+									"let csvEndpoint = pm.iterationData.get(\"Endpoint\");\r",
+									"\r",
+									"// 2. If the CSV has a value (it's not empty), update the URL dynamically\r",
+									"if (csvEndpoint) {\r",
+									"    // This forces the request to use the CSV value for this specific run\r",
+									"    // We need to make sure we handle the variable resolution manually if needed\r",
+									"    \r",
+									"    // Replace {{skillId}} if it exists in the CSV string\r",
+									"    let currentSkillId = pm.collectionVariables.get(\"skillId\");\r",
+									"    csvEndpoint = csvEndpoint.replace(\"{{skillId}}\", currentSkillId);\r",
+									"    \r",
+									"    // Construct the full URL. Assuming you have a baseURL variable.\r",
+									"    // If your CSV Endpoint starts with \"/\", we append it.\r",
+									"    let newUrl = pm.collectionVariables.get(\"baseURL\") + csvEndpoint;\r",
+									"    \r",
+									"    // Set the request URL for this specific iteration\r",
+									"    pm.request.url.update(newUrl);\r",
+									"    console.log(\"Updated URL to: \" + newUrl); \r",
+									"}\r",
+									"\r",
+									"// 1. Load Payload from CSV\r",
+									"var payload = pm.iterationData.get(\"Payload\");\r",
+									"\r",
+									"// 2. Define Request Schema (The Contract)\r",
+									"var requestSchema = {\r",
+									"    \"type\": \"object\",\r",
+									"    \"required\": [\"skillName\", \"creationTime\", \"lastModTime\"],\r",
+									"    \"properties\": {\r",
+									"        \"skillName\": { \"type\": [\"string\", \"null\"] }, \r",
+									"        \"creationTime\": { \"type\": \"string\" },\r",
+									"        \"lastModTime\": { \"type\": \"string\" }\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"// 3. Validate using built-in AJV library\r",
+									"// Only run this if payload exists and isn't empty\r",
+									"if (payload) {\r",
+									"    var jsonPayload = JSON.parse(payload);\r",
+									"    var Ajv = require('ajv');\r",
+									"    var ajv = new Ajv({allErrors: true});\r",
+									"    var valid = ajv.validate(requestSchema, jsonPayload);\r",
+									"\r",
+									"    if (!valid) {\r",
+									"        console.log(\"Request Schema Mismatch for \" + pm.iterationData.get(\"RequestName\"));\r",
+									"        console.log(ajv.errors);\r",
+									"    } else {\r",
+									"        console.log(\"Request Schema Valid\");\r",
+									"    }\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "f28adc31-bfd0-45ab-ab38-8664aedac60c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "4dbbffe7-cdd7-4ac2-8cac-2d0da0c6cdac",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{Payload}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/updateSkills/{{skillId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Skill By Skill Id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "357d0568-4b50-4fb4-913e-4e94b22a2905",
+								"exec": [
+									"// 1. Get the endpoint value from the CSV row\r",
+									"let csvEndpoint = pm.iterationData.get(\"Endpoint\");\r",
+									"\r",
+									"// 2. If the CSV has a value (it's not empty), update the URL dynamically\r",
+									"if (csvEndpoint) {\r",
+									"    // This forces the request to use the CSV value for this specific run\r",
+									"    // We need to make sure we handle the variable resolution manually if needed\r",
+									"    \r",
+									"    // Replace {{skillId}} if it exists in the CSV string\r",
+									"    let currentSkillId = pm.collectionVariables.get(\"skillId\");\r",
+									"    csvEndpoint = csvEndpoint.replace(\"{{skillId}}\", currentSkillId);\r",
+									"    \r",
+									"    // Construct the full URL. Assuming you have a baseURL variable.\r",
+									"    // If your CSV Endpoint starts with \"/\", we append it.\r",
+									"    let newUrl = pm.collectionVariables.get(\"baseURL\") + csvEndpoint;\r",
+									"    \r",
+									"    // Set the request URL for this specific iteration\r",
+									"    pm.request.url.update(newUrl);\r",
+									"    console.log(\"Updated URL to: \" + newUrl); \r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "65cc4a6f-e2eb-4b68-b581-f5dc92e220e4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "{{baseURL}}/deletebySkillId/{{skillId}}"
 					},
 					"response": []
 				},
@@ -1226,7 +1401,281 @@
 					"response": []
 				}
 			],
-			"id": "ebe394ef-ca6d-433b-bc44-f693fd94ff5a"
+			"id": "bf765cab-23d8-40d7-b305-18d819dc8be0",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "47d2315b-9041-4b70-8f4d-073244810d75",
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							"// 1. TRAFFIC COP\r",
+							"var targetRequest = pm.iterationData.get(\"RequestName\");\r",
+							"var currentRequest = pm.info.requestName;\r",
+							"if (targetRequest && targetRequest !== currentRequest) {\r",
+							"    pm.execution.skipRequest();\r",
+							"    return;\r",
+							"}\r",
+							"\r",
+							"// ==================================================\r",
+							"// 2. METHOD OVERRIDE\r",
+							"// ==================================================\r",
+							"// This checks if the CSV has a \"Request Method\" value for this row.\r",
+							"// If yes, it forces the request to use that method (e.g., forcing GET to be POST).\r",
+							"var methodOverride = pm.iterationData.get(\"Request Method\");\r",
+							"\r",
+							"if (methodOverride) {\r",
+							"    pm.request.method = methodOverride;\r",
+							"    console.log(\"Overriding Method to: \" + methodOverride);\r",
+							"}\r",
+							"\r",
+							"\r",
+							"var csvPayload = pm.iterationData.get(\"Payload\");\r",
+							"if (csvPayload) {\r",
+							"    if (typeof csvPayload === 'object') {\r",
+							"        // It's a JSON object (from JSON file) -> Stringify it for the Body\r",
+							"        pm.collectionVariables.set(\"Payload\", JSON.stringify(csvPayload));\r",
+							"    } else {\r",
+							"        // It's a String (from CSV) -> Try to parse/clean it\r",
+							"        try {\r",
+							"            var obj = JSON.parse(csvPayload);\r",
+							"            pm.collectionVariables.set(\"Payload\", JSON.stringify(obj));\r",
+							"        } catch (e) {\r",
+							"            pm.collectionVariables.set(\"Payload\", csvPayload);\r",
+							"        }\r",
+							"    }\r",
+							"}\r",
+							"\r",
+							"var overrideStatus = pm.iterationData.get(\"Token Override\");\r",
+							"\r",
+							"if (overrideStatus === \"invalid\") {\r",
+							"    // Use 'pm.request.auth.bearer' to directly modify the Auth Helper\r",
+							"    // This is the most direct way to tell the Auth Tab \"Use THIS token, not the variable\"\r",
+							"    pm.request.auth.use(\"bearer\", {\r",
+							"        token: \"INVALID_TOKEN_12345\"\r",
+							"    });\r",
+							"    \r",
+							"    console.log(\"Updated Auth Tab directly with INVALID token\");\r",
+							"}\r",
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "c3690a90-bd03-44bc-84eb-c3becf771c30",
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							"// ==================================================\r",
+							"// 1. SKIP SAFETY (Exit if no response)\r",
+							"// ==================================================\r",
+							"if (!pm.response.code) return;\r",
+							"\r",
+							"// ==================================================\r",
+							"// 2. STATUS CHECK & METHOD NOT ALLOWED\r",
+							"// ==================================================\r",
+							"var expectedStatus = parseInt(pm.iterationData.get(\"Expected Status\"));\r",
+							"\r",
+							"if (expectedStatus) {\r",
+							"    pm.test(\"Status code is \" + expectedStatus, function () {\r",
+							"        pm.response.to.have.status(expectedStatus);\r",
+							"    });\r",
+							"\r",
+							"    // SPECIAL CHECK: Method Not Allowed (405)\r",
+							"    if (expectedStatus === 405) {\r",
+							"        pm.test(\"Verify Method Not Allowed Error\", function () {\r",
+							"            if (pm.response.text()) {\r",
+							"                var jsonData = pm.response.json();\r",
+							"                var msg = jsonData.message || jsonData.error || \"\"; \r",
+							"                pm.expect(msg).to.include(\"not supported\");\r",
+							"            } else {\r",
+							"                console.warn(\"405 returned with empty body\");\r",
+							"            }\r",
+							"        });\r",
+							"    }\r",
+							"}\r",
+							"\r",
+							"// ==================================================\r",
+							"// 3. CONTENT-TYPE CHECK\r",
+							"// ==================================================\r",
+							"pm.test(\"Content-Type is application/json\", function () {\r",
+							"    // If not 204 No Content, we expect JSON header\r",
+							"    if (pm.response.code !== 204) {\r",
+							"        var ct = pm.response.headers.get(\"Content-Type\");\r",
+							"        // This ensures a clean error message if the header is missing completely\r",
+							"        pm.expect(ct, \"Content-Type Header is MISSING\").to.exist; \r",
+							"        pm.expect(ct).to.include(\"application/json\");\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"// ==================================================\r",
+							"// 4. UNIVERSAL CAPTURE (Save IDs for chaining)\r",
+							"// ==================================================\r",
+							"if (pm.response.code >= 200 && pm.response.code < 300) {\r",
+							"    try {\r",
+							"        if (pm.response.text()) {\r",
+							"            var jsonData = pm.response.json();\r",
+							"            \r",
+							"            if (Array.isArray(jsonData) && jsonData.length > 0) {\r",
+							"                if (jsonData[0].skillId) {\r",
+							"                    pm.collectionVariables.set(\"skillId\", jsonData[0].skillId);\r",
+							"                    console.log(\"Saved skillId from List: \" + jsonData[0].skillId);\r",
+							"                }\r",
+							"            } else {\r",
+							"                if (jsonData.skillId) {\r",
+							"                    pm.collectionVariables.set(\"skillId\", jsonData.skillId);\r",
+							"                    console.log(\"Saved skillId: \" + jsonData.skillId);\r",
+							"                }\r",
+							"                if (jsonData.skillName) {\r",
+							"                    pm.collectionVariables.set(\"skillMasterName\", jsonData.skillName);\r",
+							"                }\r",
+							"            }\r",
+							"        }\r",
+							"    } catch (e) { console.warn(\"Failed to parse capture data\"); }\r",
+							"}\r",
+							"\r",
+							"// ==================================================\r",
+							"// 5. RESPONSE MESSAGE VALIDATION\r",
+							"// ==================================================\r",
+							"pm.test(\"Response body message matches contract\", function () {\r",
+							"    var expectedBodyString = pm.iterationData.get(\"Expected Response Body\");\r",
+							"    \r",
+							"    if (expectedBodyString) {\r",
+							"        // 1. FAIL if we expected a body but got EMPTY\r",
+							"        if (!pm.response.text()) {\r",
+							"            pm.expect.fail(\"Expected JSON body '\" + expectedBodyString + \"' but got EMPTY response.\");\r",
+							"            return;\r",
+							"        }\r",
+							"\r",
+							"        try {\r",
+							"            // FIX: Remove newlines/tabs that might break JSON parsing\r",
+							"            var cleanString = expectedBodyString.replace(/(\\r\\n|\\n|\\r)/gm, \" \").trim();\r",
+							"            \r",
+							"            var expectedJson = JSON.parse(cleanString);\r",
+							"            var actualJson = pm.response.json();\r",
+							"            \r",
+							"            if (expectedJson.message) {\r",
+							"                // This assertion will now run correctly\r",
+							"                pm.expect(actualJson.message, \"Error Message Mismatch\").to.eql(expectedJson.message); \r",
+							"            }\r",
+							"        } catch (e) {\r",
+							"            // FIX: If CSV data is invalid, FAIL the test instead of skipping (passing)\r",
+							"            console.log(\"JSON Parse Error: \" + e.message);\r",
+							"            pm.expect.fail(\"Test Failed: CSV 'Expected Response Body' is not valid JSON. Data: \" + expectedBodyString);\r",
+							"        }\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"\r",
+							"// ==================================================\r",
+							"// 6. SCHEMA VALIDATION\r",
+							"// ==================================================\r",
+							"pm.test(\"Validate Response Schema\", function () {\r",
+							"    // 1. Safety Check: If body is empty, FAIL (unless 204/405 explicitly allowed empty)\r",
+							"    if (pm.response.text() === \"\") {\r",
+							"        if (pm.response.code === 204 || pm.response.code === 405) {\r",
+							"             return; // Valid empty\r",
+							"        }\r",
+							"        // Otherwise, fail schema check for empty body\r",
+							"        pm.expect.fail(\"Schema Validation Failed: Response body is empty.\");\r",
+							"        return;\r",
+							"    }\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var requestName = pm.info.requestName; \r",
+							"\r",
+							"    // --- DEFINITIONS ---\r",
+							"    var skillObjectSchema = {\r",
+							"        \"type\": \"object\",\r",
+							"        \"required\": [\"skillId\", \"skillName\"],\r",
+							"        \"properties\": {\r",
+							"            \"skillId\": { \"type\": \"integer\" },\r",
+							"            \"skillName\": { \"type\": [\"string\", \"null\"] },\r",
+							"            \"creationTime\": { \"type\": [\"string\", \"null\"] },\r",
+							"            \"lastModTime\": { \"type\": [\"string\", \"null\"] }\r",
+							"        }\r",
+							"    };\r",
+							"\r",
+							"    var listSchema = {\r",
+							"        \"type\": \"array\",\r",
+							"        \"items\": skillObjectSchema\r",
+							"    };\r",
+							"\r",
+							"    var messageSchema = {\r",
+							"        \"type\": \"object\",\r",
+							"        \"properties\": {\r",
+							"            \"message\": { \"type\": \"string\" },\r",
+							"            \"success\": { \"type\": \"boolean\" }\r",
+							"        }\r",
+							"    };\r",
+							"\r",
+							"    // --- LOGIC ---\r",
+							"    if (requestName === \"Get All Skill Master\" || requestName === \"Get Skill By Skill Name\") {\r",
+							"        if (pm.response.code === 200) {\r",
+							"             pm.response.to.have.jsonSchema(listSchema);\r",
+							"        } else {\r",
+							"             pm.response.to.have.jsonSchema(messageSchema);\r",
+							"        }\r",
+							"    }\r",
+							"    else {\r",
+							"        if ((pm.response.code === 200 || pm.response.code === 201) && jsonData.skillId !== undefined) {\r",
+							"            pm.response.to.have.jsonSchema(skillObjectSchema);\r",
+							"        } \r",
+							"        else {\r",
+							"            pm.response.to.have.jsonSchema(messageSchema);\r",
+							"        }\r",
+							"    }\r",
+							"});\r",
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "c70a5a22-cd31-4196-b7e5-edb165c58962",
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "3c9cea1d-d79a-4b57-a1e8-7feee86f5127",
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "baseURL",
+			"value": ""
+		},
+		{
+			"key": "skillId",
+			"value": ""
 		}
 
 	],
