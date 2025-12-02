@@ -3217,7 +3217,7 @@
 								}
 							}
 						},
-						"url": "{{baseUrl}}/lms/saveprogram"
+						"url": "{{baseUrl}}/saveprogram"
 					},
 					"response": []
 				},
@@ -3342,7 +3342,7 @@
 								}
 							}
 						},
-						"url": "{{baseUrl}}/lms/putprogram/{{programId}}"
+						"url": "{{baseUrl}}/putprogram/{{programId}}"
 					},
 					"response": []
 				},
@@ -3478,7 +3478,7 @@
 								}
 							}
 						},
-						"url": "{{baseUrl}}/lms/program/{{programName}}"
+						"url": "{{baseUrl}}/program/{{programName}}"
 					},
 					"response": []
 				},
@@ -3558,7 +3558,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "{{baseUrl}}/lms/deletebyprogid/{{programId}}"
+						"url": "{{baseUrl}}/deletebyprogid/{{programId}}"
 					},
 					"response": []
 				},
@@ -3634,7 +3634,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{baseUrl}}/lms/programs/{{programId}}"
+						"url": "{{baseUrl}}/programs/{{programId}}"
 					},
 					"response": []
 				},
@@ -3690,7 +3690,7 @@
 								}
 							}
 						},
-						"url": "{{baseUrl}}/lms/putprogram/{{programId}}"
+						"url": "{{baseUrl}}/putprogram/{{programId}}"
 					},
 					"response": []
 				},
@@ -3773,7 +3773,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "{{baseUrl}}/lms/deletebyprogname/{{programName}}"
+						"url": "{{baseUrl}}/deletebyprogname/{{programName}}"
 					},
 					"response": []
 				},
@@ -3847,7 +3847,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{baseUrl}}/lms/programs/{{programId}}"
+						"url": "{{baseUrl}}/programs/{{programId}}"
 					},
 					"response": []
 				},
@@ -3952,7 +3952,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{baseUrl}}/lms/programs/{{programId}}"
+						"url": "{{baseUrl}}/programs/{{programId}}"
 					},
 					"response": []
 				},
@@ -4031,7 +4031,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{baseUrl}}/lms/allPrograms"
+						"url": "{{baseUrl}}/allPrograms"
 					},
 					"response": []
 				},
@@ -4173,7 +4173,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{baseUrl}}/lms/allProgramsWithUsers"
+						"url": "{{baseUrl}}/allProgramsWithUsers"
 					},
 					"response": []
 				}
