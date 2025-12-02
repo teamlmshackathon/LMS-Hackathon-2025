@@ -1,12 +1,12 @@
 Scenario Id,Request Name,Request Method,Endpoint,Payload,Expected Status,Expected Response Body,Token Override
 UC_SC_01,Create User Login with Role,POST,/users/roleStatus,"{
-  ""userFirstName"": ""Mahini"",
+  ""userFirstName"": ""Sahana"",
   ""userLastName"": ""Maruthi"",
-  ""userMiddleName"": ""sab"",
-  ""userPhoneNumber"": ""+91 2895551121"",
+  ""userMiddleName"": ""ba"",
+  ""userPhoneNumber"": ""+91 9032225212"",
   ""userLocation"": ""USA"",
   ""userTimeZone"": ""CST"",
-  ""userLinkedinUrl"": ""www.linkedin.com/Mahini"",
+  ""userLinkedinUrl"": ""www.linkedin.com/Sahana"",
   ""userEduUg"": ""MBA"",
   ""userEduPg"": ""BCA"",
   ""userComments"": ""user created"",
@@ -18,7 +18,7 @@ UC_SC_01,Create User Login with Role,POST,/users/roleStatus,"{
   }
   ],
   ""userLogin"": {
-  ""userLoginEmail"": ""mahini01@gmail.com"",
+  ""userLoginEmail"": ""Sahana01@gmail.com"",
   ""loginStatus"": ""Active"",
   ""status"": ""Active""
   }
@@ -78,7 +78,7 @@ UC_SC_04,User information by Id,GET,/users/{{userId}},,404,"[ {
   ""userVisaStatus"": ""string"", â€œuserLoginEmailâ€:â€stringâ€ 
  } ]",
 UC_SC_05,Update UserLogin status,PUT,/users/userLogin/{{userId}},"{
-  ""userLoginEmail"": ""smahini03@gmail.com"",
+  ""userLoginEmail"": ""Sahana0015@gmail.com"",
   ""loginStatus"": ""Active"",
   ""status"": ""active""
  }",200,UserLoginEmail/Status Updated for User: {userId},
@@ -100,13 +100,13 @@ UC_SC_07,Update User,PUT,/users/{{userId}},"{
   ""userComments"": ""user updated"", 
   ""userEduPg"": ""MCA"", 
   ""userEduUg"": ""MPC"", 
-  ""userFirstName"": ""RosyMaha"", 
+  ""userFirstName"": ""RosySahana"", 
   ""userLastName"": ""johna"", 
   ""userMiddleName"": ""Na"", 
-  ""userLinkedinUrl"": ""www.linkedin.com/MahasrCopy"", 
+  ""userLinkedinUrl"": ""www.linkedin.com/SahanamoCopy"", 
   ""userLocation"": ""CA"", 
-  ""userLoginEmail"": ""sanmaha11@gmail.com"" , 
-  ""userPhoneNumber"": ""+91 2322224156"", 
+  ""userLoginEmail"": ""sanmSahana05@gmail.com"" , 
+  ""userPhoneNumber"": ""+91 2000015248"", 
   ""userTimeZone"": ""IST"", 
   ""userVisaStatus"": ""H4"" 
  }",200,"{ 
