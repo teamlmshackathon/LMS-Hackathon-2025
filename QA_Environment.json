@@ -1,16 +1,16 @@
 {
-	"id": "05a326d2-cfc8-4f89-a39a-c1662128fbfd",
-	"name": "QA",
+	"id": "8fb64e5b-3aa3-4a30-9ed1-a6be853a2584",
+	"name": "QA_Environment",
 	"values": [
 		{
 			"key": "baseUrl",
-			"value": "https://lms-hackathon-nov-2025-8dd40899c026.herokuapp.com/lms",
+			"value": "",
 			"type": "default",
 			"enabled": true
 		}
 	],
 	"color": null,
 	"_postman_variable_scope": "environment",
-	"_postman_exported_at": "2025-12-02T07:16:57.576Z",
-	"_postman_exported_using": "Postman/11.74.1"
+	"_postman_exported_at": "2025-12-02T08:50:32.336Z",
+	"_postman_exported_using": "Postman/11.74.0"
 }
