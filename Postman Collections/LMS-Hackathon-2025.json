@@ -123,7 +123,7 @@
 								}
 							}
 						},
-						"url": "{{baseURL}}/lms/saveprogram"
+						"url": "{{baseUrl}}/saveprogram"
 					},
 					"response": []
 				},
@@ -248,7 +248,7 @@
 								}
 							}
 						},
-						"url": "{{baseURL}}/lms/putprogram/{{programId}}"
+						"url": "{{baseUrl}}/putprogram/{{programId}}"
 					},
 					"response": []
 				},
@@ -384,7 +384,7 @@
 								}
 							}
 						},
-						"url": "{{baseURL}}/lms/program/{{programName}}"
+						"url": "{{baseUrl}}/program/{{programName}}"
 					},
 					"response": []
 				},
@@ -464,7 +464,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "{{baseURL}}/lms/deletebyprogid/{{programId}}"
+						"url": "{{baseUrl}}/deletebyprogid/{{programId}}"
 					},
 					"response": []
 				},
@@ -540,7 +540,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{baseURL}}/lms/programs/{{programId}}"
+						"url": "{{baseUrl}}/programs/{{programId}}"
 					},
 					"response": []
 				},
@@ -596,7 +596,7 @@
 								}
 							}
 						},
-						"url": "{{baseURL}}/lms/putprogram/{{programId}}"
+						"url": "{{baseUrl}}/putprogram/{{programId}}"
 					},
 					"response": []
 				},
@@ -679,7 +679,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "{{baseURL}}/lms/deletebyprogname/{{programName}}"
+						"url": "{{baseUrl}}/deletebyprogname/{{programName}}"
 					},
 					"response": []
 				},
@@ -753,7 +753,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{baseURL}}/lms/programs/{{programId}}"
+						"url": "{{baseUrl}}/programs/{{programId}}"
 					},
 					"response": []
 				},
@@ -858,7 +858,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{baseURL}}/lms/programs/{{programId}}"
+						"url": "{{baseUrl}}/programs/{{programId}}"
 					},
 					"response": []
 				},
@@ -937,7 +937,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{baseURL}}/lms/allPrograms"
+						"url": "{{baseUrl}}/allPrograms"
 					},
 					"response": []
 				},
@@ -1079,7 +1079,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{baseURL}}/lms/allProgramsWithUsers"
+						"url": "{{baseUrl}}/allProgramsWithUsers"
 					},
 					"response": []
 				}
@@ -1090,52 +1090,52 @@
 	"auth": {
 		"type": "bearer",
 		"bearer": {
-			"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZWFtNUBnbWFpbC5jb20iLCJpYXQiOjE3NjQ2MjU3MzIsImV4cCI6MTc2NDY1NDUzMn0.n03dWrYxoQYXCJ_K9qw41xJQQB2dPGJzYMC1VjHr0UZbA90Eea5EcBdkday4z8_S1BfV8ONQYslO4dKB3zZLHA"
+			"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZWFtNUBnbWFpbC5jb20iLCJpYXQiOjE3NjQ2NDI2NzMsImV4cCI6MTc2NDY3MTQ3M30.we_S9zkBmH0teNMYkcyd11mcHk4tBljjpPmCAMqikipA0lCWA5w0LTde_U1hJOvjtzNsVbsG6PMePptOaaRl3w"
 		}
 	},
 	"variable": [
 		{
-			"id": "5976e671-6d4e-474e-a5a6-5bcc12610967",
-			"key": "baseURL",
+			"id": "97dce9ad-ec06-4124-8113-8041fdcec670",
+			"key": "baseUrl",
 			"value": ""
 		},
 		{
-			"id": "e80f0b94-ebcf-47a2-a349-e2396b7e50fa",
+			"id": "2f986c62-ed9f-4bd9-904b-f1b7cb0b673f",
 			"key": "programId",
 			"value": ""
 		},
 		{
-			"id": "abcbf7ca-5847-4857-ab1c-5702e3d42235",
+			"id": "4b7eff79-3df8-41f1-a5c1-8a0a3a916169",
 			"key": "programName",
 			"value": ""
 		},
 		{
-			"id": "33ff8c18-ab1a-4ba1-8126-3b121d2064d2",
+			"id": "fc000645-9c5f-4390-b55c-1e3e72e9b452",
 			"key": "programDescription",
 			"value": ""
 		},
 		{
-			"id": "8b7e3ab1-4346-41d4-9130-87c69fc2bc98",
+			"id": "f5e6dfe1-d485-4a04-85f8-b68cba9420db",
 			"key": "DeleteByPgmIdRespCd",
 			"value": ""
 		},
 		{
-			"id": "aa6e5838-8b69-4da7-9c35-b1971e0a0e73",
+			"id": "86b9bc48-bb1d-460d-b198-447abd7e58f8",
 			"key": "DeleteByPgmIdExecuted",
 			"value": ""
 		},
 		{
-			"id": "fc77083d-0df1-4f30-99c4-88d82f858cb6",
+			"id": "879666b8-74d1-41dc-bf1f-d0e56bed07f1",
 			"key": "GetProgramDlteByIdExecuted",
 			"value": ""
 		},
 		{
-			"id": "d2df1336-749a-4eee-988a-740b2eb936bc",
+			"id": "6ac3d92d-d1ec-4837-b929-94a744df9b5e",
 			"key": "DeleteByPgmNmeRespCd",
 			"value": ""
 		},
 		{
-			"id": "0fb7dbf2-e741-46f2-ad6e-a305a45e3c03",
+			"id": "b19facd4-042e-4217-be23-563c273bf486",
 			"key": "DeleteByPgmNmeExecuted",
 			"value": ""
 		}
