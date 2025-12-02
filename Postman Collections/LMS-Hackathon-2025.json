@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "2cc06986-c447-40ed-8942-809eec6fd736",
+		"_postman_id": "23dadde2-7c9d-4a0d-bdb7-bcb49ffc504b",
 		"name": "LMS-Hackathon-2025",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "27945951"
+		"_exporter_id": "48956982",
+		"_collection_link": "https://tanuja-narravula142327-7320711.postman.co/workspace/Tanuja-Narravula's-Workspace~9a23111a-3fc8-4757-85ea-8994748dc208/collection/48956982-23dadde2-7c9d-4a0d-bdb7-bcb49ffc504b?action=share&source=collection_link&creator=48956982"
 	},
 	"item": [
 		{
@@ -165,6 +166,11 @@
 										"type": "string"
 									},
 									"type": "any"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
 								}
 							]
 						},
@@ -253,6 +259,11 @@
 										"type": "string"
 									},
 									"type": "any"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
 								}
 							]
 						},
@@ -335,6 +346,11 @@
 										"type": "string"
 									},
 									"type": "any"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
 								}
 							]
 						},
@@ -922,7 +938,7 @@
 									"    }\r",
 									"\r",
 									"    // 4. Construct the full URL\r",
-									"    let baseUrl = pm.collectionVariables.get(\"baseUrl\"); // Make sure baseUrl is defined in collection variables\r",
+									"    let baseUrl = pm.environment.get(\"baseUrl\"); // Make sure baseUrl is defined in collection variables\r",
 									"    let newUrl = baseUrl + csvEndpoint;\r",
 									"\r",
 									"    // 5. Apply the update\r",
@@ -1064,7 +1080,7 @@
 									"    }\r",
 									"\r",
 									"    // 4. Construct the full URL\r",
-									"    let baseUrl = pm.collectionVariables.get(\"baseUrl\"); // Make sure baseUrl is defined in collection variables\r",
+									"    let baseUrl = pm.environment.get(\"baseUrl\"); // Make sure baseUrl is defined in collection variables\r",
 									"    let newUrl = baseUrl + csvEndpoint;\r",
 									"\r",
 									"    // 5. Apply the update\r",
@@ -1215,7 +1231,7 @@
 									"    }\r",
 									"\r",
 									"    // 4. Construct the full URL\r",
-									"    let baseUrl = pm.collectionVariables.get(\"baseUrl\"); // Make sure baseUrl is defined in collection variables\r",
+									"    let baseUrl = pm.environment.get(\"baseUrl\"); // Make sure baseUrl is defined in collection variables\r",
 									"    let newUrl = baseUrl + csvEndpoint;\r",
 									"\r",
 									"    // 5. Apply the update\r",
@@ -1362,7 +1378,7 @@
 									"    }\r",
 									"\r",
 									"    // 4. Construct the full URL\r",
-									"    let baseUrl = pm.collectionVariables.get(\"baseUrl\"); // Make sure baseUrl is defined in collection variables\r",
+									"    let baseUrl = pm.environment.get(\"baseUrl\"); // Make sure baseUrl is defined in collection variables\r",
 									"    let newUrl = baseUrl + csvEndpoint;\r",
 									"\r",
 									"    // 5. Apply the update\r",
@@ -1439,7 +1455,7 @@
 									"    }\r",
 									"\r",
 									"    // 4. Construct the full URL\r",
-									"    let baseUrl = pm.collectionVariables.get(\"baseUrl\"); // Make sure baseUrl is defined in collection variables\r",
+									"    let baseUrl = pm.environment.get(\"baseUrl\"); // Make sure baseUrl is defined in collection variables\r",
 									"    let newUrl = baseUrl + csvEndpoint;\r",
 									"\r",
 									"    // 5. Apply the update\r",
@@ -1661,7 +1677,7 @@
 									"    }\r",
 									"\r",
 									"    // 4. Construct the full URL\r",
-									"    let baseUrl = pm.collectionVariables.get(\"baseUrl\"); // Make sure baseUrl is defined in collection variables\r",
+									"    let baseUrl = pm.environment.get(\"baseUrl\"); // Make sure baseUrl is defined in collection variables\r",
 									"    let newUrl = baseUrl + csvEndpoint;\r",
 									"\r",
 									"    // 5. Apply the update\r",
@@ -1809,7 +1825,7 @@
 									"    }\r",
 									"\r",
 									"    // 4. Construct the full URL\r",
-									"    let baseUrl = pm.collectionVariables.get(\"baseUrl\"); // Make sure baseUrl is defined in collection variables\r",
+									"    let baseUrl = pm.environment.get(\"baseUrl\"); // Make sure baseUrl is defined in collection variables\r",
 									"    let newUrl = baseUrl + csvEndpoint;\r",
 									"\r",
 									"    // 5. Apply the update\r",
@@ -1947,7 +1963,7 @@
 									"    }\r",
 									"\r",
 									"    // 4. Construct the full URL\r",
-									"    let baseUrl = pm.collectionVariables.get(\"baseUrl\"); // Make sure baseUrl is defined in collection variables\r",
+									"    let baseUrl = pm.environment.get(\"baseUrl\"); // Make sure baseUrl is defined in collection variables\r",
 									"    let newUrl = baseUrl + csvEndpoint;\r",
 									"\r",
 									"    // 5. Apply the update\r",
@@ -2873,7 +2889,7 @@
 							"script": {
 								"exec": [
 									"// Retrieve the base URL from the collection variables",
-									"var baseUrl = pm.collectionVariables.get(\"baseUrl\");",
+									"var baseUrl = pm.environment.get(\"baseUrl\");",
 									"",
 									"// Retrieve the specific endpoint for this iteration from the data file",
 									"var endPoint = pm.iterationData.get(\"apiEndpoint\");",
@@ -4887,11 +4903,7 @@
 									"            pm.collectionVariables.set(\"BatchName\", responseBody.batchName); \r",
 									"            console.log(\" Saved BatchName: \" + responseBody.batchName);\r",
 									"        }\r",
-									"        \r",
-									"    } catch (e) { \r",
-									"        // If JSON parsing fails, the status code is still tested, but variable capture is skipped.\r",
-									"        console.error(\"JSON Parsing Failed during validation/capture: \" + e.message);\r",
-									"    }\r",
+									"         \r",
 									"if (!isValid) {\r",
 									"            console.error(\"AJV Validation Failed Details:\");\r",
 									"            console.log(validate.errors); // <--- THIS IS THE KEY ARRAY\r",
@@ -5548,11 +5560,11 @@
 							"    // ==========================================================\r",
 							"    \r",
 							"    // **NEW**: Retrieve and validate the baseUrl variable\r",
-							"    let baseUrl = pm.collectionVariables.get(\"baseurl\");\r",
+							"    let baseUrl = pm.environment.get(\"baseUrl\");\r",
 							"    \r",
 							"    if (!baseUrl) {\r",
 							"        // Stop execution and throw an error if baseUrl is undefined\r",
-							"        throw new Error(\"Collection Variable 'baseUrl' is not defined. Please ensure you have set this variable in your Collection or active Environment.\");\r",
+							"        throw new Error(\"Environment variable 'baseUrl' is not defined. Please ensure it is set in your Environment file.\");\r",
 							"    }\r",
 							"    \r",
 							"    // Construct the full URL\r",
@@ -5580,6 +5592,7 @@
 					"listen": "test",
 					"script": {
 						"type": "text/javascript",
+						"requests": {},
 						"exec": [
 							"/* Syntax-only fixes applied to folder-level Tests:",
 							"   1) catch { ... } -> catch (e) { ... }",
@@ -5781,7 +5794,7 @@
 									"\r",
 									"    // 4. Construct the full URL\r",
 									"    // Make sure your collection variable is exactly \"baseUrl\" (case sensitive!)\r",
-									"    let newUrl = pm.collectionVariables.get(\"baseUrl\") + csvEndpoint;\r",
+									"    let newUrl = pm.environment.get(\"baseUrl\") + csvEndpoint;\r",
 									"    \r",
 									"    // 5. Apply the update\r",
 									"    pm.request.url.update(newUrl);\r",
@@ -5851,7 +5864,7 @@
 									"    \r",
 									"    // Construct the full URL. Assuming you have a baseUrl variable.\r",
 									"    // If your CSV Endpoint starts with \"/\", we append it.\r",
-									"    let newUrl = pm.collectionVariables.get(\"baseUrl\") + csvEndpoint;\r",
+									"    let newUrl = pm.environment.get(\"baseUrl\") + csvEndpoint;\r",
 									"    \r",
 									"    // Set the request URL for this specific iteration\r",
 									"    pm.request.url.update(newUrl);\r",
@@ -5971,7 +5984,7 @@
 									"    \r",
 									"    // Construct the full URL. Assuming you have a baseUrl variable.\r",
 									"    // If your CSV Endpoint starts with \"/\", we append it.\r",
-									"    let newUrl = pm.collectionVariables.get(\"baseUrl\") + csvEndpoint;\r",
+									"    let newUrl = pm.environment.get(\"baseUrl\") + csvEndpoint;\r",
 									"    \r",
 									"    // Set the request URL for this specific iteration\r",
 									"    pm.request.url.update(newUrl);\r",
@@ -6287,16 +6300,6 @@
 					""
 				]
 			}
-		}
-	],
-	"variable": [
-		{
-			"key": "Payload",
-			"value": ""
-		},
-		{
-			"key": "token",
-			"value": ""
 		}
 	]
 }
