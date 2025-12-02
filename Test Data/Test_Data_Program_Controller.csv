@@ -1,16 +1,16 @@
 Scenario Id,Request Name,Endpoint,Request Method,Payload,Expected Status,Expected Response Body,InvalidInput
 PC_SC_01,Create Program,/saveprogram,POST,"{
 ""programDescription"": ""Artificial Intelligence"",
-""programName"": ""SapTesting"",
+""programName"": ""salesforce"",
 ""programStatus"": ""Active""
 }",201,"{
-    ""programName"": ""SapTesting"",
+    ""programName"": ""salesforce"",
     ""programDescription"": ""Artificial Intelligence"",
     ""programStatus"": ""Active""
 }",
 PC_SC_02,Create Program,/saveprogram,POST,"{
 ""programDescription"": ""Artificial Intelligence"",
-""programName"": ""SapTesting"",
+""programName"": ""salesforce"",
 ""programStatus"": ""Active""
 }",400,"{
     ""message"": ""cannot create program , since already exists"",
@@ -94,10 +94,10 @@ PC_SC_12,Create Program,/saveprogram,POST,"{
 }",
 PC_SC_13,Update Program By Id,/putprogram/{{programId}},PUT,"{
 ""programDescription"": ""This is First Update"",
-""programName"": ""SapTesting"",
+""programName"": ""salesforce"",
 ""programStatus"": ""Active""
 }",200,"{
-    ""programName"": ""SapTesting"",
+    ""programName"": ""salesforce"",
     ""programDescription"": ""This is First Update"",
     ""programStatus"": ""Active""
 }",
@@ -176,11 +176,11 @@ PC_SC_23,Update Program By Id,/putprogram/{{programId}},PUT,"{
     ""success"": false
 }",
 PC_SC_24,Update Program By Id,/putprogram/{{programId}},PUT,"{
-""programName"": ""SapTesting"",
+""programName"": ""salesforce"",
 ""programStatus"": ""Active""
 }",200,"{
     ""programId"": 242,
-    ""programName"": ""SapTesting"",
+    ""programName"": ""salesforce"",
     ""programDescription"": ""This is a Second Update"",
     ""programStatus"": ""Active"",
     ""creationTime"": ""2025-11-30T02:11:12.571+00:00"",
@@ -189,10 +189,10 @@ PC_SC_24,Update Program By Id,/putprogram/{{programId}},PUT,"{
 PC_SC_25,Update Program By Name,/program/{{programName}},PUT,"{
 ""programDescription"":
 ""This is a Second Update"",
-""programName"": ""SapTesting"",
+""programName"": ""salesforce"",
 ""programStatus"": ""Active""
 }",200,"{
-    ""programName"": ""SapTesting"",
+    ""programName"": ""salesforce"",
     ""programDescription"": ""This is a Second Update"",
     ""programStatus"": ""Active""
 }",
@@ -222,7 +222,7 @@ PC_SC_28,Update Program By Name,/program/{{programName}},PUT,"{
     ""success"": false
 }",
 PC_SC_29,Update Program By Name,/program/{{programName}},PUT,"{
-    ""programName"": ""SapTesting"",
+    ""programName"": ""salesforce"",
     ""programDescription"": ""This is a Second Update"",
     ""programStatus"": ""Active""
 }",404,"{
@@ -272,7 +272,7 @@ PC_SC_35,Update Program By Name,/program/{{programName}},PUT,"{
     ""success"": false
 }",
 PC_SC_36,Get Program By Id,/programs/{{programId}},GET,,200,"{
-    ""programName"": ""SapTesting"",
+    ""programName"": ""salesforce"",
     ""programDescription"": ""This is a Second Update"",
     ""programStatus"": ""Active""
 }",
