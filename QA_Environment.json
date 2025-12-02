@@ -4,7 +4,7 @@
 	"values": [
 		{
 			"key": "baseUrl",
-			"value": "",
+			"value": "https://lms-hackathon-nov-2025-8dd40899c026.herokuapp.com/lms",
 			"type": "default",
 			"enabled": true
 		}
