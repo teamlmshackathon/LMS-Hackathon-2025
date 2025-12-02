@@ -1,0 +1,869 @@
+Scenario Id,Request Name,Request Method,Endpoint,Payload,Expected Status,Expected Response Body,Token Override
+UC_SC_01,Create User Login with Role,POST,/users/roleStatus,"{
+  ""userFirstName"": ""Mahini"",
+  ""userLastName"": ""Maruthi"",
+  ""userMiddleName"": ""sab"",
+  ""userPhoneNumber"": ""+91 2895551121"",
+  ""userLocation"": ""USA"",
+  ""userTimeZone"": ""CST"",
+  ""userLinkedinUrl"": ""www.linkedin.com/Mahini"",
+  ""userEduUg"": ""MBA"",
+  ""userEduPg"": ""BCA"",
+  ""userComments"": ""user created"",
+  ""userVisaStatus"": ""H4"",
+  ""userRoleMaps"": [
+  {
+  ""roleId"": ""R01"",
+  ""userRoleStatus"": ""active""
+  }
+  ],
+  ""userLogin"": {
+  ""userLoginEmail"": ""mahini01@gmail.com"",
+  ""loginStatus"": ""Active"",
+  ""status"": ""Active""
+  }
+ }",201,"{
+  ""user"": {
+  ""userId"": ""String"",
+  ""userFirstName"": ""String"",
+  ""userLastName"": ""String"",
+  ""userMiddleName"": ""String"",
+  ""userPhoneNumber"": ""String"",
+  ""userLocation"": ""String"",
+  ""userTimeZone"": ""String"",
+  ""userLinkedinUrl"": ""String"",
+  ""userEduUg"": ""String"",
+  ""userEduPg"": ""String"",
+  ""userComments"": ""String"",
+  ""userVisaStatus"": ""String"",
+  ""userLoginEmail"": ""String""
+  },
+  ""roles"": [
+  {
+  ""roleId"": ""String"",
+  ""userRoleStatus"": ""String""
+  }
+  ]
+ }",
+UC_SC_02,User information by Id,GET,/users/{{userId}},,200,"[ { 
+  ""userComments"": ""string"", 
+  ""userEduPg"": ""string"", 
+  ""userEduUg"": ""string"", 
+  ""userFirstName"": ""string"", 
+  ""userId"": ""string"", 
+  ""userLastName"": ""string"", 
+  ""userLinkedinUrl"": ""string"", 
+  ""userLocation"": ""string"", 
+  ""userMiddleName"": ""string"", 
+  ""userPhoneNumber"": 0, 
+  ""userTimeZone"": ""string"", 
+  ""userVisaStatus"": ""string"", â€œuserLoginEmailâ€:â€stringâ€ 
+ } ]",
+UC_SC_03,Delete User,DELETE,/users/{{userId}},,200,"{
+  ""message"": ""User deleted successfully"",
+  ""success"": true
+ }",
+UC_SC_04,User information by Id,GET,/users/{{userId}},,404,"[ { 
+  ""userComments"": ""string"", 
+  ""userEduPg"": ""string"", 
+  ""userEduUg"": ""string"", 
+  ""userFirstName"": ""string"", 
+  ""userId"": ""string"", 
+  ""userLastName"": ""string"", 
+  ""userLinkedinUrl"": ""string"", 
+  ""userLocation"": ""string"", 
+  ""userMiddleName"": ""string"", 
+  ""userPhoneNumber"": 0, 
+  ""userTimeZone"": ""string"", 
+  ""userVisaStatus"": ""string"", â€œuserLoginEmailâ€:â€stringâ€ 
+ } ]",
+UC_SC_05,Update UserLogin status,PUT,/users/userLogin/{{userId}},"{
+  ""userLoginEmail"": ""smahini03@gmail.com"",
+  ""loginStatus"": ""Active"",
+  ""status"": ""active""
+ }",200,UserLoginEmail/Status Updated for User: {userId},
+UC_SC_06,User information by Id,GET,/users/{{userId}},,200,"[ { 
+  ""userComments"": ""string"", 
+  ""userEduPg"": ""string"", 
+  ""userEduUg"": ""string"", 
+  ""userFirstName"": ""string"", 
+  ""userId"": ""string"", 
+  ""userLastName"": ""string"", 
+  ""userLinkedinUrl"": ""string"", 
+  ""userLocation"": ""string"", 
+  ""userMiddleName"": ""string"", 
+  ""userPhoneNumber"": 0, 
+  ""userTimeZone"": ""string"", 
+  ""userVisaStatus"": ""string"", â€œuserLoginEmailâ€:â€stringâ€ 
+ } ]",
+UC_SC_07,Update User,PUT,/users/{{userId}},"{ 
+  ""userComments"": ""user updated"", 
+  ""userEduPg"": ""MCA"", 
+  ""userEduUg"": ""MPC"", 
+  ""userFirstName"": ""RosyMaha"", 
+  ""userLastName"": ""johna"", 
+  ""userMiddleName"": ""Na"", 
+  ""userLinkedinUrl"": ""www.linkedin.com/MahasrCopy"", 
+  ""userLocation"": ""CA"", 
+  ""userLoginEmail"": ""sanmaha11@gmail.com"" , 
+  ""userPhoneNumber"": ""+91 2322224156"", 
+  ""userTimeZone"": ""IST"", 
+  ""userVisaStatus"": ""H4"" 
+ }",200,"{ 
+  ""userComments"": 
+ ""string"", 
+  ""userEduPg"": ""string"", 
+  ""userEduUg"": ""string"", 
+  ""userFirstName"": ""string"", 
+  ""userId"": ""string"", 
+  ""userLastName"": ""string"", ""userLinkedinUrl"": 
+ ""string"", 
+  ""userLocation"": ""string"", ""userMiddleName"": 
+ ""string"", 
+  ""userPhoneNumber"": 0, 
+  ""userTimeZone"": ""string"", 
+  ""userVisaStatus"": ""string"" 
+ }",
+UC_SC_08,User information by Id,GET,/users/{{userId}},,200,"[ { 
+  ""userComments"": ""string"", 
+  ""userEduPg"": ""string"", 
+  ""userEduUg"": ""string"", 
+  ""userFirstName"": ""string"", 
+  ""userId"": ""string"", 
+  ""userLastName"": ""string"", 
+  ""userLinkedinUrl"": ""string"", 
+  ""userLocation"": ""string"", 
+  ""userMiddleName"": ""string"", 
+  ""userPhoneNumber"": 0, 
+  ""userTimeZone"": ""string"", 
+  ""userVisaStatus"": ""string"", â€œuserLoginEmailâ€:â€stringâ€ 
+ } ]",
+UC_SC_09,Update User role Id,PUT,/users/roleId/{{userId}},"{ 
+  ""userRoleList"": [ 
+  { 
+  ""roleId"": ""R02"", 
+  ""userRoleStatus"": ""active"" 
+  } 
+  ] 
+ }",200,Role Id Updated for User,
+UC_SC_10,User information by Id,GET,/users/{{userId}},,200,"[ { 
+  ""userComments"": ""string"", 
+  ""userEduPg"": ""string"", 
+  ""userEduUg"": ""string"", 
+  ""userFirstName"": ""string"", 
+  ""userId"": ""string"", 
+  ""userLastName"": ""string"", 
+  ""userLinkedinUrl"": ""string"", 
+  ""userLocation"": ""string"", 
+  ""userMiddleName"": ""string"", 
+  ""userPhoneNumber"": 0, 
+  ""userTimeZone"": ""string"", 
+  ""userVisaStatus"": ""string"", â€œuserLoginEmailâ€:â€stringâ€ 
+ } ]",
+UC_SC_11,update userRole program batch status,PUT,/users/roleProgramBatchStatus/{{userId}},"{ 
+  ""programId"": 356,
+  ""roleId"": ""{{roleId}}"", 
+  ""userRoleProgramBatches"": [ 
+  { 
+  ""batchId"": 308, 
+  
+ ""userRoleProgramBatchStatus"": 
+ ""active"" 
+  } 
+  ] 
+ }",200,"User {userID} has been successfully assigned to 
+ Program/Batch(es)",
+UC_SC_12,User information by Id,GET,/users/{{userId}},,200,"[ { 
+  ""userComments"": ""string"", 
+  ""userEduPg"": ""string"", 
+  ""userEduUg"": ""string"", 
+  ""userFirstName"": ""string"", 
+  ""userId"": ""string"", 
+  ""userLastName"": ""string"", 
+  ""userLinkedinUrl"": ""string"", 
+  ""userLocation"": ""string"", 
+  ""userMiddleName"": ""string"", 
+  ""userPhoneNumber"": 0, 
+  ""userTimeZone"": ""string"", 
+  ""userVisaStatus"": ""string"", â€œuserLoginEmailâ€:â€stringâ€ 
+ } ]",
+UC_SC_13,Get User Details by Id,GET,/users/details/{{userId}},,200,"
+[
+{
+""programName"": ""String"",
+""batchName"": ""String"",
+""userFirstName"": ""String"",
+""userLastName"": ""String"",
+""userLoginEmail"": ""String""
+}
+]",
+UC_SC_14,Get User BatchId by User Id,GET,/users/user/{{userId}},Need User with Batch ID,200,Displays batch ID,
+UC_SC_15,Get User for Program Id,GET,/users/programs/{{programId}},356,200,"[
+{
+""userComments"": ""string"",
+""userEduPg"": ""string"",
+""userEduUg"": ""string"",
+""userFirstName"": ""string"",
+""userId"": ""string"",
+""userLastName"": ""string"",
+""userLinkedinUrl"": ""string"",
+""userLocation"": ""string"",
+""userLoginEmail"": ""string"",
+""userMiddleName"": ""string"",
+""userPhoneNumber"": 0,
+""userTimeZone"": ""string"",
+""userVisaStatus"": ""string""
+}
+]",
+UC_SC_16,Get User by Program Batches,GET,/users/programBatch/{{batchId}},,200,"[
+{
+""userComments"": ""string"",
+""userEduPg"": ""string"",
+""userEduUg"": ""string"",
+""userFirstName"": ""string"",
+""userId"": ""string"",
+""userLastName"": ""string"",
+""userLinkedinUrl"": ""string"",
+""userLocation"": ""string"",
+""userLoginEmail"": ""string"",
+""userMiddleName"": ""string"",
+""userPhoneNumber"": 0,
+""userTimeZone"": ""string"",
+""userVisaStatus"": ""string""
+}
+]",
+UC_SC_17,all users,GET,/users,,200,"[ 
+  { 
+  ""userComments"": ""string"", 
+  ""userEduPg"": ""string"", 
+  ""userEduUg"": ""string"", 
+  ""userFirstName"": ""string"", 
+  ""userId"": ""string"", 
+  ""userLastName"": ""string"", 
+  ""userLinkedinUrl"": ""string"", 
+  ""userLocation"": ""string"", 
+  ""userMiddleName"": ""string"", 
+  ""userPhoneNumber"": 0, 
+  ""userTimeZone"": ""string"", 
+  ""userVisaStatus"": ""string"", 
+ â€œuserLoginEmailâ€ : â€œStringâ€ 
+ } ]",
+UC_SC_18,all users with facets,GET,/v2/users,,200,"{ 
+  ""facets"": { 
+  ""facetedFields"": [ 
+  { 
+  ""displayName"": ""string"", 
+  ""filterValues"": [ 
+  { 
+  ""count"": 0, 
+  ""name"": ""string"" 
+  } 
+  ] 
+  } 
+  ] 
+  }, 
+  ""users"": [ 
+  { 
+  ""userComments"": ""string"", 
+  ""userEduPg"": ""string"", 
+  ""userEduUg"": ""string"", 
+  ""userFirstName"": ""string"", 
+  ""userId"": ""string"", 
+  ""userLastName"": ""string"", 
+  ""userLinkedinUrl"": ""string"", 
+  ""userLocation"": ""string"", 
+  ""userLoginEmail"": ""string"", 
+  ""userMiddleName"": ""string"", 
+  ""userPhoneNumber"": 0, 
+  ""userTimeZone"": ""string"", 
+  ""userVisaStatus"": ""string"" 
+  } 
+  ]",
+UC_SC_19,Get User By RoleID,GET,/users/roles/{{roleId}},,,,
+UC_SC_20,Get All Active User,GET,/users/activeUsers,,,"[
+{
+""userComments"": ""string"",
+""userEduPg"": ""string"",
+""userEduUg"": ""string"",
+""userFirstName"": ""string"",
+""userId"": ""string"",
+""userLastName"": ""string"",
+""userLinkedinUrl"": ""string"",
+""userLocation"": ""string"",
+""userMiddleName"": ""string"",
+""userPhoneNumber"": 0,
+""userTimeZone"": ""string"",
+""userVisaStatus"": ""string"",
+“userLoginEmail”: “String”
+}
+]",
+UC_SC_21,"Get Count Of Active and Inactive Users. Unless role is specified,Get all type of users",GET,/users/byStatus,,,"[
+{
+""status"": ""String"",
+""count"": 0
+},
+{
+""status"": ""String"",
+""count"": 0
+}
+]",
+UC_SC_22,"Get Count Of Active and Inactive Users. Unless role is specified,Get all type of users",GET,/users/byStatus?id=R01,,,"""[
+{
+""""status"""": """"String"""",
+""""count"""": 0
+}
+]""",
+UC_SC_23,Get email of all Users with active status,GET,/fetch-emails,,,"[
+String
+]",
+UC_SC_24,Get User Roles,GET,/users/roles,,,,
+UC_SC_25,Get All Roles,GET,/roles,,,"[
+{
+""creationTime"":timestamp,
+""lastModTime"":timestamp ,
+""roleDesc"": ""string"",
+""roleId"": ""string"",
+""roleName"": ""string""
+}
+]",
+UC_SC_26,"Get Count Of Active and Inactive Users. Unless role is specified,Get all type of users",GET,/users/byStatus?id=R02,,,"""[
+{
+""""status"""": """"String"""",
+""""count"""": 0
+}
+]""",
+UC_SC_27,"Get Count Of Active and Inactive Users. Unless role is specified,Get all type of users",GET,/users/byStatus?id=R03,,,"""[
+{
+""""status"""": """"String"""",
+""""count"""": 0
+}
+]""",
+UC_SC_28,"Get Count Of Active and Inactive Users. Unless role is specified,Get all type of users",GET,/users/byStatus?id=All,,,"[
+{
+""status"": ""String"",
+""count"": 0
+},
+{
+""status"": ""String"",
+""count"": 0
+}
+]",
+UC_SC_29,"Get Count Of Active and Inactive Users. Unless role is specified,Get all type of users",GET,/users/byStatus?id=R04,,,,
+UC_SC_30,,,,,,,
+UC_SC_31,Create User Login with Role,POST,/users/roleStatus,"{
+  ""userFirstName"": ""ramana"",
+  ""userLastName"": ""murthy"",
+  ""userMiddleName"": ""s"",
+  ""userPhoneNumber"": ""+91 9510002077"",
+  ""userLocation"": ""USA"",
+  ""userTimeZone"": ""CST"",
+  ""userLinkedinUrl"": ""www.linkedin.com/santa"",
+  ""userEduUg"": ""MBA"",
+  ""userEduPg"": ""BCA"",
+  ""userComments"": ""user created"",
+  ""userVisaStatus"": ""H4"",
+  ""userRoleMaps"": [
+  {
+  ""roleId"": ""R01"",
+  ""userRoleStatus"": ""nonactive""
+  }
+  ],
+  ""userLogin"": {
+  ""userLoginEmail"": ""ramana89@gmail.com"",
+  ""loginStatus"": ""Active"",
+  ""status"": ""Active""
+  }
+ }",400,Negative - status should be Active or Inactive,
+UC_SC_32,Create User Login with Role,POST,/users/roleStatus,"{
+  ""userFirstName"": ""Bob"",
+  ""userLastName"": ""Brown"",
+  ""userMiddleName"": ""na"",
+  ""userPhoneNumber"": ""+1 1234567890"",
+  ""userLocation"": ""USA"",
+  ""userTimeZone"": ""EST"",
+  ""userLinkedinUrl"": ""www.linkedin.com/bobbrown"",
+  ""userEduUg"": ""BSc"",
+  ""userEduPg"": ""MBA"",
+  ""userComments"": ""Testing invalid role"",
+  ""userVisaStatus"": ""H1B"",
+ 
+  ""userRoleMaps"": [
+  {
+  ""roleId"": ""INVALID_R999"",
+  ""userRoleStatus"": ""Active""
+  }
+  ],
+ 
+  ""userLogin"": {
+  ""userLoginEmail"": ""bob.brown@example.com"",
+  ""loginStatus"": ""Active"",
+  ""status"": ""Active""
+  }
+ }",400,Negative - phone no already exist,
+UC_SC_33,Create User Login with Role,POST,/users/roleStatus,"{
+  ""userFirstName"": """",
+  ""userLastName"": ""Clark"",
+  ""userMiddleName"": """",
+  ""userPhoneNumber"": ""+1 1234567892"",
+  ""userLocation"": ""USA"",
+  ""userTimeZone"": ""MST"",
+  ""userLinkedinUrl"": ""www.linkedin.com/smsi"",
+  ""userEduUg"": ""MA"",
+  ""userEduPg"": ""BA"",
+  ""userComments"": ""dfsf"",
+  ""userVisaStatus"": ""H4"",
+ 
+  ""userRoleMaps"": [
+  {
+  ""roleId"": ""R003"",
+  ""userRoleStatus"": ""Active""
+  }
+  ],
+ 
+  ""userLogin"": {
+  ""userLoginEmail"": ""clark@example.com"",
+  ""loginStatus"": ""Active"",
+  ""status"": ""Active""
+  }
+ }",400,Negative - user firstname is mandatory,
+UC_SC_34,Create User Login with Role,POST,/users/roleStatus,"{
+  ""userFirstName"": ""David"",
+  ""userLastName"": ""Lee"",
+  ""userMiddleName"": ""ka"",
+  ""userPhoneNumber"": ""1234567890"",
+  ""userLocation"": ""CA"",
+  ""userTimeZone"": ""EST"",
+  ""userLinkedinUrl"": ""www.linkedin.com/sar"",
+  ""userEduUg"": ""BCA"",
+  ""userEduPg"": ""MCA"",
+  ""userComments"": ""xvsdfs"",
+  ""userVisaStatus"": ""H4"",
+ 
+  ""userRoleMaps"": [
+  {
+  ""roleId"": ""R004"",
+  ""userRoleStatus"": ""Active""
+  }
+  ],
+ 
+  ""userLogin"": {
+  ""userLoginEmail"": ""david.lee@example.com"",
+  ""loginStatus"": ""Active"",
+  ""status"": ""Active""
+  }
+ }",400,Negative - phone no should contain country code,
+UC_SC_35,Create User Login with Role,POST,/users/roleStatus,"{
+  ""userFirstName"": ""Eva"",
+  ""userLastName"": ""White"",
+  ""userMiddleName"": ""ms"",
+  ""userPhoneNumber"": ""+91 1224567893"",
+  ""userLocation"": ""A"",
+  ""userTimeZone"": ""EST"",
+  ""userLinkedinUrl"": ""www/linkedin.com/ha"",
+  ""userEduUg"": ""MA"",
+  ""userEduPg"": ""BA"",
+  ""userComments"": ""cvnccv"",
+  ""userVisaStatus"": ""H1"",
+ 
+  ""userRoleMaps"": [
+  {
+  ""roleId"": ""R005"",
+  ""userRoleStatus"": ""Active""
+  }
+  ],
+ 
+  ""userLogin"": {
+  ""userLoginEmail"": ""eva.white@example.com"",
+  ""loginStatus"": ""Active"",
+  ""status"": ""Active""
+  }
+ }",400,Negative - location should be 2 or more characters,
+UC_SC_36,Create User Login with Role,POST,/users/roleStatus,"{
+  ""userFirstName"": ""Frank"",
+  ""userLastName"": ""Green"",
+  ""userMiddleName"": ""cvb"",
+  ""userPhoneNumber"": ""+1 1224567894"",
+  ""userLocation"": ""CA"",
+  ""userTimeZone"": ""PST"",
+  ""userLinkedinUrl"": ""www/linkedin.com/ha"",
+  ""userEduUg"": ""MA"",
+  ""userEduPg"": ""BA"",
+  ""userComments"": ""jhdfh"",
+  ""userVisaStatus"": ""H1"",
+ 
+  ""userRoleMaps"": [
+  {
+  ""roleId"": ""INVALID"",
+  ""userRoleStatus"": ""Active""
+  }
+  ],
+ 
+  ""userLogin"": {
+  ""userLoginEmail"": ""frank.green@example.com"",
+  ""loginStatus"": ""Active"",
+  ""status"": ""Active""
+  }
+ }",400,Negative - invalid roleId format,
+UC_SC_37,Create User Login with Role,POST,/users/roleStatus,"{
+  ""userFirstName"": ""Grace"",
+  ""userLastName"": ""Hall"",
+  ""userMiddleName"": ""ma"",
+  ""userPhoneNumber"": ""+1 1232567895"",
+  ""userLocation"": ""CA"",
+  ""userTimeZone"": ""Invalid/Zone"",
+  ""userLinkedinUrl"": ""www.linkedin.com/jhdh"",
+  ""userEduUg"": ""MA"",
+  ""userEduPg"": ""BA"",
+  ""userComments"": ""rter"",
+  ""userVisaStatus"": ""H4"",
+ 
+  ""userRoleMaps"": [
+  {
+  ""roleId"": ""R01"",
+  ""userRoleStatus"": ""Active""
+  }
+  ],
+ 
+  ""userLogin"": {
+  ""userLoginEmail"": ""grace.hall@gmail.com"",
+  ""loginStatus"": ""Active"",
+  ""status"": ""Active""
+  }
+ }",400,Negative - invalid timezone format,
+UC_SC_38,Create User Login with Role,POST,/users/roleStatus,"{
+  ""userFirstName"": ""Grace"",
+  ""userLastName"": ""Hall"",
+  ""userMiddleName"": ""ma"",
+  ""userPhoneNumber"": ""+1 1332267895"",
+  ""userLocation"": ""CA"",
+  ""userTimeZone"": ""PST"",
+  ""userLinkedinUrl"": ""www.linkedin.com/jhdh"",
+  ""userEduUg"": ""MA"",
+  ""userEduPg"": ""BA"",
+  ""userComments"": ""rter"",
+  ""userVisaStatus"": ""H4"",
+ 
+  ""userRoleMaps"": [
+  {
+  ""roleId"": ""R01"",
+  ""userRoleStatus"": ""Active""
+  }
+  ],
+ 
+  ""userLogin"": {
+  ""userLoginEmail"": ""grace.hall@gmail.com"",
+  ""loginStatus"": ""Active"",
+  ""status"": ""Active""
+  }
+ }",400,Negative - userlogin email id should be unique,
+UC_SC_39,Create User Login with Role,POST,/users/roleStatus,"{
+  ""userFirstName"": ""Alice"",
+  ""userLastName"": ""Smith"",
+  ""userMiddleName"": ""na"",
+  ""userPhoneNumber"": ""+91 0124567891"",
+  ""userLocation"": ""USA"",
+  ""userTimeZone"": ""CST"",
+  ""userLinkedinUrl"": ""www.linkedin.com/alice"",
+  ""userEduUg"": ""MA"",
+  ""userEduPg"": ""BA"",
+  ""userComments"": ""dssd"",
+  ""userVisaStatus"": ""INVALID_VISA"",
+  ""userRoleMaps"": [
+  {
+  ""roleId"": ""R02"",
+  ""userRoleStatus"": ""Active""
+  }
+  ],
+  ""userLogin"": {
+  ""userLoginEmail"": ""alice.smith@gmail.com"",
+  ""loginStatus"": ""Active"",
+  ""status"": ""Active""
+  }
+ }",400,Negative - visa status invalid,
+UC_SC_40,Create User Login with Role,POST,/users/roleStatus,"{
+  ""userFirstName"": ""Charlie"",
+  ""userLastName"": ""Davis"",
+  ""userMiddleName"": """",
+  ""userPhoneNumber"": ""+91 1234007893"",
+  ""userLocation"": ""USA"",
+  ""userTimeZone"": ""PST"",
+  ""userLinkedinUrl"": ""www.linkedin.com/hh"",
+  ""userEduUg"": ""MA"",
+  ""userEduPg"": ""BA"",
+  ""userComments"": ""gffg"",
+  ""userVisaStatus"": ""H1B"",
+  ""userRoleMaps"": [
+  {
+  ""roleId"": ""R01"",
+  ""userRoleStatus"": ""INVALID_STATUS""
+  }
+  ],
+  ""userLogin"": {
+  ""userLoginEmail"": ""charliedsf.davis@example.com"",
+  ""loginStatus"": ""Active"",
+  ""status"": ""Active""
+  }
+ }",400,Negative - new user role status should be active,
+UC_SC_41,Create User Login with Role,POST,/users/roleStatus,"{
+  ""userFirstName"": ""Charliecopy"",
+  ""userLastName"": ""Davis"",
+  ""userMiddleName"": """",
+  ""userPhoneNumber"": ""+91 1234007993"",
+  ""userLocation"": ""USA"",
+  ""userTimeZone"": ""PST"",
+  ""userLinkedinUrl"": ""www.linkedin.com/hcha"",
+  ""userEduUg"": ""MA"",
+  ""userEduPg"": ""BA"",
+  ""userComments"": ""gffg"",
+  ""userVisaStatus"": ""H1B"",
+  ""userRoleMaps"": [
+  {
+  ""roleId"": ""R01"",
+  ""userRoleStatus"": ""Active""
+  }
+  ],
+  ""userLogin"": {
+  ""userLoginEmail"": ""charlisdfdsedsf.davis@example.com"",
+  ""loginStatus"": ""Active"",
+  ""status"": ""Active""
+  }
+ }",201,User created successfully,
+UC_SC_42,Create User Login with Role,POST,/users/roleStatus,"{
+  ""userFirstName"": ""Rober"",
+  ""userLastName"": ""Davis"",
+  ""userMiddleName"": ""bs"",
+  ""userPhoneNumber"": ""+91 1210000093"",
+  ""userLocation"": ""USA"",
+  ""userTimeZone"": ""PST"",
+  ""userLinkedinUrl"": ""www.linkedin.com/steph"",
+  ""userEduUg"": ""MA"",
+  ""userEduPg"": ""BA"",
+  ""userComments"": ""gffg"",
+  ""userVisaStatus"": ""H4"",
+  ""userRoleMaps"": [
+  {
+  ""roleId"": ""R01"",
+  ""userRoleStatus"": ""Active""
+  }
+  ],
+  ""userLogin"": {
+  ""userLoginEmail"": ""charliedsf.stephen5@gmail.com"",
+  ""loginStatus"": """",
+  ""status"": ""Active""
+  }
+ }",400,Login status mandatory,
+UC_SC_43,Create User Login with Role,POST,/users/roleStatus,"{
+  ""userFirstName"": ""Stephencopy"",
+  ""userLastName"": ""Davis"",
+  ""userMiddleName"": ""bs"",
+  ""userPhoneNumber"": ""+91 1214110893"",
+  ""userLocation"": ""USA"",
+  ""userTimeZone"": ""PST"",
+  ""userLinkedinUrl"": ""www.linkedin.com/steph"",
+  ""userEduUg"": ""MA"",
+  ""userEduPg"": ""BA"",
+  ""userComments"": ""gffg"",
+  ""userVisaStatus"": ""H1B"",
+  ""userRoleMaps"": [
+  {
+  ""roleId"": ""R01"",
+  ""userRoleStatus"": ""Active""
+  }
+  ],
+  ""userLogin"": {
+  ""userLoginEmail"": ""charliedsf.stephen1@gmail.com"",
+  ""loginStatus"": ""Active"",
+  ""status"": ""Active""
+  }
+ }",201,User created successfully,
+UC_SC_44,Delete User,DELETE,/users/{{userId}},,200,User deleted successfully,
+UC_SC_45,Create User Login with Role,POST,/users/roleStatus,"{
+  ""userFirstName"": ""Stephencopy"",
+  ""userLastName"": ""Davis"",
+  ""userMiddleName"": ""bs"",
+  ""userPhoneNumber"": ""+91 1214110893"",
+  ""userLocation"": ""USA"",
+  ""userTimeZone"": ""PST"",
+  ""userLinkedinUrl"": ""www.linkedin.com/steph"",
+  ""userEduUg"": ""MA"",
+  ""userEduPg"": ""BA"",
+  ""userComments"": ""gffg"",
+  ""userVisaStatus"": ""H1B"",
+  ""userRoleMaps"": [
+  {
+  ""roleId"": ""R01"",
+  ""userRoleStatus"": ""Active""
+  }
+  ],
+  ""userLogin"": {
+  ""userLoginEmail"": ""charliedsf.stephen1@gmail.com"",
+  ""loginStatus"": ""Active"",
+  ""status"": ""Active""
+  }
+ }",400,Bad Request,
+UC_SC_46,Delete User,DELETE,/users/-1,,404,userid should not be negative,
+UC_SC_47,Delete User,DELETE,/users/98,,404,Error: Not Found,
+UC_SC_48,Delete User,DELETE,/users/U1000,,404,User not found with id :U1000,
+UC_SC_49,Delete User,DELETE,/users/34000000000000000000000000000000000,,400,Error: Bad Request,
+UC_SC_50,Delete User,DELETE,/users/abc123,,400,Bad Request,
+UC_SC_51,Delete User,DELETE,/users/U99,,404,User not found with id :U99,
+UC_SC_52,User information by Id,GET,/users/-1,,404,UserID: -1 does not exist,
+UC_SC_53,User information by Id,GET,/users/34000000000000000000000000000000000,,400,Error: Bad Request,
+UC_SC_54,User information by Id,GET,/users/abc123,,400,Bad Request,
+UC_SC_55,Update UserLogin status,PUT,/users/userLogin/98765432199,"{ ""userLoginEmail"": ""test@mail.com"", ""loginStatus"": ""Active"" }",404,"{""message"":""Not Found""}",
+UC_SC_56,Update UserLogin status,PUT,/users/userLogin/{{userId}},"{
+  ""userLoginEmail"": ""sampl@gmail.com"",
+  ""loginStatus"": ""Active"",
+  ""status"": """"
+ }",400,"""Invalid Status: must be Active or Inactive""",
+UC_SC_57,Update UserLogin status,PUT,/users/userLogin/{{userId}},"{
+  ""userLoginEmail"": """",
+  ""loginStatus"": ""Active"",
+  ""status"": ""string""
+ }",400,"email id required""",
+UC_SC_58,Update UserLogin status,PUT,/users/userLogin/{{userId}},"{
+  ""userLoginEmail"": ""sampl@gmail.com"",
+  ""loginStatus"": ""NotvalidActive"",
+  ""status"": ""Active""
+ }",400,Invalid Status: must be Active or Inactive,invalid
+UC_SC_59,Update User,PUT,/users/9999,"{ 
+  ""userComments"": ""user updated"", 
+  ""userEduPg"": ""MCA"", 
+  ""userEduUg"": ""MPC"", 
+  ""userFirstName"": ""Rosy"", 
+  ""userLastName"": ""john"", 
+  ""userMiddleName"": ""N"", 
+  ""userLinkedinUrl"": ""www.linkedin.com/SantaCopy"", 
+  ""userLocation"": ""CA"", 
+  ""userLoginEmail"": ""santass25425jj@gmail.com"" , 
+  ""userPhoneNumber"": ""+91 7475810078"", 
+  ""userTimeZone"": ""IST"", 
+  ""userVisaStatus"": ""H4"" 
+ }",404,User not found,
+UC_SC_60,Update User,PUT,/users/abc123,"{ 
+  ""userComments"": ""user updated"", 
+  ""userEduPg"": ""MCA"", 
+  ""userEduUg"": ""MPC"", 
+  ""userFirstName"": ""Rosy"", 
+  ""userLastName"": ""john"", 
+  ""userMiddleName"": ""N"", 
+  ""userLinkedinUrl"": ""www.linkedin.com/SantaCopy"", 
+  ""userLocation"": ""CA"", 
+  ""userLoginEmail"": ""santass25425jj@gmail.com"" , 
+  ""userPhoneNumber"": ""+91 7475810078"", 
+  ""userTimeZone"": ""IST"", 
+  ""userVisaStatus"": ""H4"" 
+ }",404,Not found,
+UC_SC_61,Update User,PUT,/users/,"{ 
+  ""userComments"": ""user updated"", 
+  ""userEduPg"": ""MCA"", 
+  ""userEduUg"": ""MPC"", 
+  ""userFirstName"": ""Rosy"", 
+  ""userLastName"": ""john"", 
+  ""userMiddleName"": ""N"", 
+  ""userLinkedinUrl"": ""www.linkedin.com/SantaCopy"", 
+  ""userLocation"": ""CA"", 
+  ""userLoginEmail"": ""santass25425jj@gmail.com"" , 
+  ""userPhoneNumber"": ""+91 7475810078"", 
+  ""userTimeZone"": ""IST"", 
+  ""userVisaStatus"": ""H4"" 
+ }",404,Invalid endpoint,
+UC_SC_62,Update User,PUT,/users/{{userId}},"{ 
+  ""userComments"": ""user updated"", 
+  ""userEduPg"": ""MCA"", 
+  ""userEduUg"": ""MPC"", 
+  ""userFirstName"": ""R@sy!"", 
+  ""userLastName"": ""J#hn"", 
+  ""userMiddleName"": ""N"", 
+  ""userLinkedinUrl"": ""www.linkedin.com/SantaCopy"", 
+  ""userLocation"": ""CA"", 
+  ""userLoginEmail"": ""santass25425jj@gmail.com"" , 
+  ""userPhoneNumber"": ""+91 7475810078"", 
+  ""userTimeZone"": ""IST"", 
+  ""userVisaStatus"": ""H4"" 
+ }",400,Invalid name format,
+UC_SC_63,Update User,PUT,/users/{{userId}},"{ 
+  ""userComments"": ""user updated"", 
+  ""userEduPg"": ""MCA"", 
+  ""userEduUg"": ""MPC"", 
+  ""userFirstName"": ""Rosy"", 
+  ""userLastName"": ""john"", 
+  ""userMiddleName"": ""N"", 
+  ""userLinkedinUrl"": ""www.linkedin.com/SantaCopy"", 
+  ""userLocation"": ""CA"", 
+  ""userLoginEmail"": ""santass25425jj@gmail.com"" , 
+  ""userPhoneNumber"": ""+91 7475810078"", 
+  ""userTimeZone"": ""IST"", 
+  ""userVisaStatus"": ""H4"" 
+ }",401,Unauthorized,invalid
+UC_SC_64,all users,GET,/usersff,,404,Invalid endpoint,
+UC_SC_65,all users,GET,/users,,401,Unauthorized,invalid
+UC_SC_66,Update User role Id,PUT,/users/roleId/{{userId}},"{
+  ""userRoleList"": [
+  {
+  ""roleId"": """",
+  ""userRoleStatus"": ""Active""
+  }
+  ]
+ }",400,"{
+  ""message"": ""Role Id is mandatory"",
+  ""success"": false
+ }",
+UC_SC_67,Update User role Id,PUT,/users/roleId/{{userId}},"{
+  ""userRoleList"": [
+  {
+  ""roleId"": ""5"",
+  ""userRoleStatus"": """"
+  }
+  ]
+ }",400,Role status is mandatory,
+UC_SC_68,Update User role Id,PUT,/users/roleId/{{userId}},"{
+  ""userRoleList"": [
+  {
+  ""roleId"": ""5"",
+  ""userRoleStatus"": ""invalidStatus""
+  }
+  ]
+ }",400,Role status should be active or inactive,
+UC_SC_69,update userRole program batch status,PUT,/users/roleProgramBatchStatus/{{userId}},"{
+  ""programId"": 3,
+  ""roleId"": """",
+  ""userRoleProgramBatches"": [
+  {
+  ""batchId"": 74,
+  ""userRoleProgramBatchStatus"": ""active""
+  }
+  ]
+ }",400,Role id mandatory,
+UC_SC_70,update userRole program batch status,PUT,/users/roleProgramBatchStatus/{{userId}},"{
+  ""programId"": 3,
+  ""roleId"": ""{{roleId}}"",
+  ""userRoleProgramBatches"": [
+  {
+  ""batchId"": 74,
+  ""userRoleProgramBatchStatus"": """"
+  }
+  ]
+ }",400,Role status is mandatory,
+UC_SC_71,update userRole program batch status,PUT,/users/roleProgramBatchStatus/{{userId}},"{
+  ""programId"": 3,
+  ""roleId"": ""{{roleId}}"",
+  ""userRoleProgramBatches"": [
+  {
+  ""batchId"": 74,
+  ""userRoleProgramBatchStatus"": ""invalid""
+  }
+  ]
+ }",400,Role status should be active or inactive,
+UC_SC_72,update userRole program batch status,PUT,/users/roleProgramBatchStatus/{{userId}},"{
+  ""programId"": 3,
+  ""roleId"": ""{{roleId}}"",
+  ""userRoleProgramBatches"": [
+  {
+  ""batchId"": ,
+  ""userRoleProgramBatchStatus"": """"
+  }
+  ]
+ }",400,Batch Id is mandatory,
+UC_SC_73,all users with facets,GET,/v2/usershgjh,,400,Invalid endpoint,
+UC_SC_74,all users with facets,GET,/v2/users,,401,Unauthorized,invalid
