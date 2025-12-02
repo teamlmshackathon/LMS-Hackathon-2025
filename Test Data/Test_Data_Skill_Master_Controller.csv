@@ -1,4 +1,4 @@
-﻿Scenario Id,Request Name,Endpoint,Request Method,Payload,Expected Status,Expected Response Body ,Token Override
+Scenario Id,Request Name,Endpoint,Request Method,Payload,Expected Status,Expected Response Body ,Token Override
 SM_SC_32,Get All Skill Master,/allSkillMaster,GET,,200 OK,,
 SM_SC_01,Create New Skill,/SaveSkillMaster,POST,"{
     ""skillName"": ""PHP"",
