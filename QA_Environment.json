@@ -1,0 +1,22 @@
+{
+	"id": "05a326d2-cfc8-4f89-a39a-c1662128fbfd",
+	"name": "QA",
+	"values": [
+		{
+			"key": "baseUrl",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		}
+	],
+	"color": null,
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2025-12-02T07:16:57.576Z",
+	"_postman_exported_using": "Postman/11.74.1"
+}

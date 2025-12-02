@@ -54,14 +54,12 @@
 									"if (pm.response.code === 200) {\r",
 									"    try {\r",
 									"        var jsonData = pm.response.json();\r",
-									"        \r",
 									"        // CAPTURE TOKEN (Critical for other requests)\r",
 									"        if (jsonData.token) {\r",
-									"            pm.collectionVariables.set(\"token\", jsonData.token);\r",
-									"            console.log(\"Refreshed Bearer Token from Login\");\r",
+									"            // CHANGED: Now saving to Environment instead of Collection\r",
+									"            pm.environment.set(\"token\", jsonData.token);\r",
+									"            console.log(\"Refreshed Bearer Token from Login into Environment\");\r",
 									"        }\r",
-									"\r",
-									"\r",
 									"    } catch (e) { console.warn(\"Failed to parse capture data\"); }\r",
 									"}"
 								],
@@ -6293,8 +6291,12 @@
 	],
 	"variable": [
 		{
-			"key": "baseUrl",
-			"value": "https://lms-hackathon-nov-2025-8dd40899c026.herokuapp.com/lms"
+			"key": "Payload",
+			"value": ""
+		},
+		{
+			"key": "token",
+			"value": ""
 		}
 	]
 }
