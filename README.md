@@ -16,8 +16,7 @@ Ensure your files are organized in the following directory structure to match th
 │   ├── Test_Data_Program_Batch_controller.csv
 │   ├── Test_Data_User_Controller.csv
 │   └── Test_Data_Skill_Master_Controller.csv
-├── QA_Environment.json                       # Base Environment (contains baseUrl)
-└── package.json
+└── QA_Environment.json                       # Base Environment (contains baseUrl)
 ```
 
 ## 🛠️ Prerequisites
