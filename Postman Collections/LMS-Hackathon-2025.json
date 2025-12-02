@@ -1,16 +1,908 @@
 {
 	"info": {
-		"_postman_id": "cb4823d5-bf37-4d11-bb4e-1899d6eccb9f",
+		"_postman_id": "bda5396c-789e-40d4-9a86-0398101dc496",
 		"name": "LMS-Hackathon-2025",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "SkillMaster",
+			"name": "UserLogin",
 			"item": [
 				{
-					"name": "Get All Skill Master",
-					"id": "38403150-3cb7-4bb2-9fc2-70b826a31f74",
+					"name": "User Sign In",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validate Login Schema\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    // Schema for Success (200)\r",
+									"    var successSchema = {\r",
+									"        \"type\": \"object\",\r",
+									"        \"required\": [\"token\", \"userId\", \"email\", \"roles\"],\r",
+									"        \"properties\": {\r",
+									"            \"token\": { \"type\": \"string\" },\r",
+									"            \"type\": { \"type\": \"string\" },\r",
+									"            \"userId\": { \"type\": \"string\" },\r",
+									"            \"email\": { \"type\": \"string\" },\r",
+									"            \"roles\": { \"type\": \"array\" },\r",
+									"            \"status\": { \"type\": [\"string\", \"null\"] },\r",
+									"            \"passwordExpired\": { \"type\": \"boolean\" }\r",
+									"        }\r",
+									"    };\r",
+									"\r",
+									"    // Schema for Error (400, 401, 404, 429)\r",
+									"    var errorSchema = {\r",
+									"        \"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"message\": { \"type\": \"string\" },\r",
+									"            \"success\": { \"type\": \"boolean\" }\r",
+									"        }\r",
+									"    };\r",
+									"\r",
+									"    if (pm.response.code === 200) {\r",
+									"        pm.response.to.have.jsonSchema(successSchema);\r",
+									"    } else {\r",
+									"        pm.response.to.have.jsonSchema(errorSchema);\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{Payload}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password Confirm Email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validate Confirm Email Schema\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    var successSchema = {\r",
+									"        \"type\": \"object\",\r",
+									"        \"required\": [\"token\", \"userId\", \"email\"], // Adjusted based on your snippet\r",
+									"        \"properties\": {\r",
+									"            \"token\": { \"type\": \"string\" },\r",
+									"            \"type\": { \"type\": \"string\" },\r",
+									"            \"userId\": { \"type\": \"string\" },\r",
+									"            \"email\": { \"type\": \"string\" },\r",
+									"            \"roles\": { \"type\": \"array\" },\r",
+									"            \"status\": { \"type\": [\"string\", \"null\"] },\r",
+									"            \"passwordExpired\": { \"type\": \"boolean\" }\r",
+									"        }\r",
+									"    };\r",
+									"\r",
+									"    var errorSchema = {\r",
+									"        \"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"message\": { \"type\": \"string\" },\r",
+									"            \"success\": { \"type\": \"boolean\" }\r",
+									"        }\r",
+									"    };\r",
+									"\r",
+									"    if (pm.response.code === 200) {\r",
+									"        pm.response.to.have.jsonSchema(successSchema);\r",
+									"    } else {\r",
+									"        pm.response.to.have.jsonSchema(errorSchema);\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{Payload}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login/forgotpassword/confirmEmail",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login",
+								"forgotpassword",
+								"confirmEmail"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validate Reset Password Schema\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    // We enforce the 'Success Schema' (Token/User Object)\r",
+									"    // If the API returns {\"message\": \"saved\"}, this schema check will FAIL.\r",
+									"    var successSchema = {\r",
+									"        \"type\": \"object\",\r",
+									"        \"required\": [\"token\", \"userId\", \"email\"], \r",
+									"        \"properties\": {\r",
+									"            \"token\": { \"type\": \"string\" },\r",
+									"            \"type\": { \"type\": \"string\" },\r",
+									"            \"userId\": { \"type\": \"string\" },\r",
+									"            \"email\": { \"type\": \"string\" },\r",
+									"            \"roles\": { \"type\": \"array\" },\r",
+									"            \"status\": { \"type\": [\"string\", \"null\"] },\r",
+									"            \"passwordExpired\": { \"type\": \"boolean\" }\r",
+									"        }\r",
+									"    };\r",
+									"\r",
+									"    var errorSchema = {\r",
+									"        \"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"message\": { \"type\": \"string\" },\r",
+									"            \"success\": { \"type\": \"boolean\" }\r",
+									"        }\r",
+									"    };\r",
+									"\r",
+									"    if (pm.response.code === 200) {\r",
+									"        pm.response.to.have.jsonSchema(successSchema);\r",
+									"    } else {\r",
+									"        pm.response.to.have.jsonSchema(errorSchema);\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{Payload}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/resetPassword",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"resetPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validate Content-Type\", function () {\r",
+									"    var ct = pm.response.headers.get(\"Content-Type\");\r",
+									"    \r",
+									"    if (pm.response.code === 200) {\r",
+									"        // Success Case: Expect Plain Text\r",
+									"        pm.expect(ct).to.include(\"text\"); \r",
+									"    } else {\r",
+									"        // Failure Case: Expect JSON\r",
+									"        pm.expect(ct).to.include(\"application/json\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate Logout Schema\", function () {\r",
+									"    // 1. Success Case (Plain Text)\r",
+									"    if (pm.response.code === 200) {\r",
+									"         pm.expect(pm.response.text()).to.include(\"Logout successful\");\r",
+									"    } \r",
+									"    // 2. Failure Case (JSON Error)\r",
+									"    else {\r",
+									"         var errorSchema = {\r",
+									"            \"type\": \"object\",\r",
+									"            \"properties\": {\r",
+									"                \"message\": { \"type\": \"string\" },\r",
+									"                \"success\": { \"type\": \"boolean\" }\r",
+									"            }\r",
+									"        };\r",
+									"        pm.response.to.have.jsonSchema(errorSchema);\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/logoutlms",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"logoutlms"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							"// 1. TRAFFIC COP\r",
+							"var targetRequest = pm.iterationData.get(\"Request Name\");\r",
+							"var currentRequest = pm.info.requestName;\r",
+							"if (targetRequest && targetRequest !== currentRequest) {\r",
+							"    pm.execution.skipRequest();\r",
+							"    return;\r",
+							"}\r",
+							"\r",
+							"// ==================================================\r",
+							"// 2. METHOD OVERRIDE\r",
+							"// ==================================================\r",
+							"// This checks if the CSV has a \"Request Method\" value for this row.\r",
+							"// If yes, it forces the request to use that method (e.g., forcing GET to be POST).\r",
+							"var methodOverride = pm.iterationData.get(\"Request Method\");\r",
+							"\r",
+							"if (methodOverride) {\r",
+							"    pm.request.method = methodOverride;\r",
+							"    console.log(\"Overriding Method to: \" + methodOverride);\r",
+							"}\r",
+							"\r",
+							"\r",
+							"var csvPayload = pm.iterationData.get(\"Payload\");\r",
+							"if (csvPayload) {\r",
+							"    if (typeof csvPayload === 'object') {\r",
+							"        // It's a JSON object (from JSON file) -> Stringify it for the Body\r",
+							"        pm.collectionVariables.set(\"Payload\", JSON.stringify(csvPayload));\r",
+							"    } else {\r",
+							"        // It's a String (from CSV) -> Try to parse/clean it\r",
+							"        try {\r",
+							"            var obj = JSON.parse(csvPayload);\r",
+							"            pm.collectionVariables.set(\"Payload\", JSON.stringify(obj));\r",
+							"        } catch (e) {\r",
+							"            pm.collectionVariables.set(\"Payload\", csvPayload);\r",
+							"        }\r",
+							"    }\r",
+							"}\r",
+							"\r",
+							"// ==================================================\r",
+							"// TOKEN OVERRIDE LOGIC\r",
+							"// ==================================================\r",
+							"var tokenAction = pm.iterationData.get(\"TokenOverride\");\r",
+							"\r",
+							"if (tokenAction === \"remove\") {\r",
+							"    pm.request.auth.type = \"noauth\"; \r",
+							"    \r",
+							"    // 2. Double check to remove any manual headers if they exist\r",
+							"    pm.request.headers.remove(\"Authorization\");\r",
+							"    \r",
+							"    console.log(\"Token REMOVED for this request (Scenario: \" + pm.iterationData.get(\"Scenario Id\") + \")\");\r",
+							"} \r",
+							"else if (tokenAction === \"invalid\") {\r",
+							"    pm.request.auth.use(\"bearer\", {\r",
+							"        token: \"INVALID_GARBAGE_TOKEN_123\"\r",
+							"    });\r",
+							"    console.log(\"Injected INVALID Token\");\r",
+							"}\r",
+							"else if (tokenAction === \"expired_token\") {\r",
+							"     pm.request.auth.use(\"bearer\", {\r",
+							"        token: \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZWFtNUBnbWFpbC5jb20iLCJpYXQiOjE3NjQ1NTI4NDcsImV4cCI6MTc2NDU4MTY0N30.W7Hywl19--Vce0vfuqvpgoEVQCQRUnexmyAejUM04unnWZNyJ8ucz1RzOtSKJ6WZ1AV1BogIPnKGzLuPa4VrsQ\"\r",
+							"    });\r",
+							"}\r",
+							"\r",
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							"// ==================================================\r",
+							"// 1. SKIP SAFETY (Exit if no response)\r",
+							"// ==================================================\r",
+							"if (!pm.response.code) return;\r",
+							"\r",
+							"\r",
+							"\r",
+							"// ==================================================\r",
+							"// 2. STATUS CHECK & METHOD NOT ALLOWED\r",
+							"// ==================================================\r",
+							"var expectedStatus = parseInt(pm.iterationData.get(\"Expected Status\"));\r",
+							"\r",
+							"\r",
+							"if (expectedStatus) {\r",
+							"    pm.test(\"Status code is \" + expectedStatus, function () {\r",
+							"        pm.response.to.have.status(expectedStatus);\r",
+							"    });\r",
+							"\r",
+							"\r",
+							"    // SPECIAL CHECK: Method Not Allowed (405)\r",
+							"    if (expectedStatus === 405) {\r",
+							"        pm.test(\"Verify Method Not Allowed Error\", function () {\r",
+							"            if (pm.response.text()) {\r",
+							"                var jsonData = pm.response.json();\r",
+							"                var msg = jsonData.message || jsonData.error || \"\"; \r",
+							"                pm.expect(msg).to.include(\"not supported\");\r",
+							"            } else {\r",
+							"                console.warn(\"405 returned with empty body\");\r",
+							"            }\r",
+							"        });\r",
+							"    }\r",
+							"}\r",
+							"\r",
+							"\r",
+							"\r",
+							"// ==================================================\r",
+							"// 3. CONTENT-TYPE CHECK\r",
+							"// ==================================================\r",
+							"// Only run this if it is NOT the Logout request\r",
+							"if (!pm.info.requestName.includes(\"User Logout\")) {\r",
+							"    pm.test(\"Content-Type is application/json\", function () {\r",
+							"        if (pm.response.code !== 204) {\r",
+							"            var ct = pm.response.headers.get(\"Content-Type\");\r",
+							"            pm.expect(ct, \"Content-Type Header is MISSING\").to.exist; \r",
+							"            pm.expect(ct).to.include(\"application/json\");\r",
+							"        }\r",
+							"    });\r",
+							"}\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"// ==================================================\r",
+							"// 4. UNIVERSAL CAPTURE (Save Token Only)\r",
+							"// ==================================================\r",
+							"if (pm.response.code === 200) {\r",
+							"    try {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        \r",
+							"        // CAPTURE TOKEN (Critical for other requests)\r",
+							"        if (jsonData.token) {\r",
+							"            pm.collectionVariables.set(\"token\", jsonData.token);\r",
+							"            console.log(\"Refreshed Bearer Token from Login\");\r",
+							"        }\r",
+							"\r",
+							"\r",
+							"    } catch (e) { console.warn(\"Failed to parse capture data\"); }\r",
+							"}\r",
+							"\r",
+							"\r",
+							"\r",
+							"// ==================================================\r",
+							"// 5. RESPONSE MESSAGE VALIDATION\r",
+							"// ==================================================\r",
+							"pm.test(\"Response body message matches contract\", function () {\r",
+							"    var expectedBodyString = pm.iterationData.get(\"Expected Response Body\");\r",
+							"    \r",
+							"    if (expectedBodyString) {\r",
+							"        // 1. FAIL if we expected a body but got EMPTY\r",
+							"        if (!pm.response.text()) {\r",
+							"            pm.expect.fail(\"Expected JSON body '\" + expectedBodyString + \"' but got EMPTY response.\");\r",
+							"            return;\r",
+							"        }\r",
+							"\r",
+							"\r",
+							"        try {\r",
+							"            // FIX: Remove newlines/tabs that might break JSON parsing\r",
+							"            var cleanString = expectedBodyString.replace(/(\\r\\n|\\n|\\r)/gm, \" \").trim();\r",
+							"            \r",
+							"            var expectedJson = JSON.parse(cleanString);\r",
+							"            var actualJson = pm.response.json();\r",
+							"            \r",
+							"            // If the expected data has a 'message', verify it matches the actual response\r",
+							"            if (expectedJson.message) {\r",
+							"                pm.expect(actualJson.message, \"Error Message Mismatch\").to.eql(expectedJson.message); \r",
+							"            }\r",
+							"        } catch (e) {\r",
+							"            console.log(\"JSON Parse Error: \" + e.message);\r",
+							"            pm.expect.fail(\"Test Failed: CSV 'Expected Response Body' is not valid JSON. Data: \" + expectedBodyString);\r",
+							"        }\r",
+							"    }\r",
+							"});"
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "UserController",
+			"item": [
+				{
+					"name": "Create User Login with Role",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f854d671-a716-4003-b6ec-59ed04a2ec18",
+								"exec": [
+									" //parse json\r",
+									" const res = pm.response.json();\r",
+									"\r",
+									"//Dynamic status code validation\r",
+									"const expectedStatus = parseInt(pm.iterationData.get(\"Expected Status\"));\r",
+									"if (expectedStatus) {\r",
+									"    pm.test(\"Status code is \" + expectedStatus, function () {\r",
+									"        pm.response.to.have.status(expectedStatus);\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"// validates response message only  when run status = 201\r",
+									"if (pm.response.code === 201) {\r",
+									"\r",
+									"   console.log(\"User Created Successfully\");\r",
+									"   console.log(res);\r",
+									"\r",
+									"    pm.test(\"Status code name has string\", function () {\r",
+									"    pm.response.to.have.status(\"Created\");\r",
+									"    });\r",
+									"   \r",
+									"\r",
+									"    //Validate mandatory fields and its types in user object\r",
+									"    pm.test(\"User mandatory fields exist\", function () {\r",
+									"        pm.expect(res.user).to.have.property(\"userFirstName\").that.is.a(\"string\");\r",
+									"        pm.expect(res.user).to.have.property(\"userLastName\").that.is.a(\"string\");\r",
+									"        pm.expect(res.user).to.have.property(\"userLocation\").that.is.a(\"string\");\r",
+									"        pm.expect(res.user).to.have.property(\"userTimeZone\").that.is.a(\"string\");\r",
+									"        pm.expect(res.user).to.have.property(\"userVisaStatus\").that.is.a(\"string\");\r",
+									"        pm.expect(res.user).to.have.property(\"userLoginEmail\").that.is.a(\"string\");\r",
+									"    });\r",
+									"\r",
+									"    //Validate mandatory fields and its types in roles array\r",
+									"    pm.test(\"Role mandatory fields exist\", function () {\r",
+									"        pm.expect(res.roles).to.be.an(\"array\").that.is.not.empty;\r",
+									"        pm.expect(res.roles[0]).to.have.property(\"roleId\").that.is.a(\"string\");\r",
+									"        pm.expect(res.roles[0]).to.have.property(\"userRoleStatus\").that.is.a(\"string\");\r",
+									"    });\r",
+									"\r",
+									"    // ----- Save userId  for chaining-----\r",
+									"    if (res.user && res.user.userId) {\r",
+									"        pm.collectionVariables.set(\"userId\", res.user.userId);\r",
+									"        console.log(\"Saved userId:\", res.user.userId);\r",
+									"    } else {\r",
+									"        console.log(\"userId not found in response\");\r",
+									"    }\r",
+									"\r",
+									"    // ----- Save roleId (roles is an array) -----\r",
+									"    if (res.roles && Array.isArray(res.roles) && res.roles.length > 0) {\r",
+									"        pm.collectionVariables.set(\"roleId\", res.roles[0].roleId);\r",
+									"        console.log(\"Saved roleId:\", res.roles[0].roleId);\r",
+									"    } else {\r",
+									"        console.log(\"roleId not found in response\");\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"\r",
+									"\r",
+									"//schema validation \r",
+									"const schema = {\r",
+									"    \"type\": \"object\",\r",
+									"    \"properties\": {\r",
+									"        \"user\": {\r",
+									"            \"type\": \"object\",\r",
+									"            \"properties\": {\r",
+									"                \"userId\": { \"type\": \"string\" },\r",
+									"                \"userFirstName\": { \"type\": \"string\" },\r",
+									"                \"userLastName\": { \"type\": \"string\" },\r",
+									"                \"userMiddleName\": { \"type\": \"string\" },\r",
+									"                \"userPhoneNumber\": { \"type\": \"string\" },\r",
+									"                \"userLocation\": { \"type\": \"string\" },\r",
+									"                \"userTimeZone\": { \"type\": \"string\" },\r",
+									"                \"userLinkedinUrl\": { \"type\": \"string\" },\r",
+									"                \"userEduUg\": { \"type\": \"string\" },\r",
+									"                \"userEduPg\": { \"type\": \"string\" },\r",
+									"                \"userComments\": { \"type\": \"string\" },\r",
+									"                \"userVisaStatus\": { \"type\": \"string\" },\r",
+									"                \"userLoginEmail\": { \"type\": \"string\" }\r",
+									"            },\r",
+									"            \"required\": [\"userFirstName\", \"userLastName\", \"userPhoneNumber\", \"userLoginEmail\",\r",
+									"            \"userLocation\",\"userTimeZone\",\"userVisaStatus\"]\r",
+									"        },\r",
+									"        \"roles\": {\r",
+									"            \"type\": \"array\",\r",
+									"            \"items\": {\r",
+									"                \"type\": \"object\",\r",
+									"                \"properties\": {\r",
+									"                    \"roleId\": { \"type\": \"string\" },\r",
+									"                    \"userRoleStatus\": { \"type\": \"string\" }\r",
+									"                },\r",
+									"                \"required\": [\"roleId\", \"userRoleStatus\"]\r",
+									"            }\r",
+									"        },\r",
+									"        \"programBatches\": { \"type\": \"array\" },\r",
+									"        \"skills\": { \"type\": \"array\" },\r",
+									"        \"documents\": { \"type\": \"array\" }\r",
+									"    },\r",
+									"    \"required\": [\"user\", \"roles\"]\r",
+									"};\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9cfb4b0e-5ac8-45a1-93be-b9460201032e",
+								"exec": [
+									"\r",
+									"//1. Get the nested objects from the Data File\r",
+									"var loginData = pm.iterationData.get(\"userLogin\");\r",
+									"var roleMaps = pm.iterationData.get(\"userRoleMaps\");\r",
+									"\r",
+									"\r",
+									"// 2. Map 'userLogin' fields to variables\r",
+									"if (loginData) {\r",
+									"    // pm.variables.set(\"userLoginEmail\", loginData.userLoginEmail);\r",
+									"    pm.variables.set(\"loginStatus\", loginData.loginStatus);\r",
+									"    pm.variables.set(\"status\", loginData.status);\r",
+									"}\r",
+									"\r",
+									"// 3. Map 'userRoleMaps' fields (taking the first item in the array)\r",
+									"if (roleMaps && roleMaps.length > 0) {\r",
+									"    pm.variables.set(\"roleId\", roleMaps[0].roleId);\r",
+									"    pm.variables.set(\"userRoleStatus\", roleMaps[0].userRoleStatus);\r",
+									"}\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "2e7e7ec1-d451-49eb-b4fb-1dba6ebd2097",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{Payload}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users/roleStatus"
+					},
+					"response": []
+				},
+				{
+					"name": "User information by Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2d276953-309c-463c-8775-d3437b4d92c7",
+								"exec": [
+									"//Dynamic status code validation\r",
+									"const expectedStatus = parseInt(pm.iterationData.get(\"Expected Status\"));\r",
+									"if (expectedStatus) {\r",
+									"    pm.test(\"Status code is \" + expectedStatus, function () {\r",
+									"        pm.response.to.have.status(expectedStatus);\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"\r",
+									"//Dynamic status response\r",
+									"let expectedMessage = pm.iterationData.get(\"Expected Response Body\");\r",
+									"if (expectedMessage) {\r",
+									"    pm.test(\"Response message matches expected\", function() {\r",
+									"        let res = pm.response.json();\r",
+									"        pm.expect(res.message || res.status).to.include(expectedMessage);\r",
+									"    });\r",
+									"}\r",
+									"// Parse response\r",
+									"//let res = pm.response.json();\r",
+									"\r",
+									"// Parse Response\r",
+									"// ---------------------------\r",
+									"let res;\r",
+									"try {\r",
+									"    res = pm.response.json();\r",
+									"} catch (e) {\r",
+									"    // No JSON body\r",
+									"    res = {};\r",
+									"}\r",
+									"\r",
+									"// -----------------------------------------\r",
+									"// 1. Validate USER object\r",
+									"// -----------------------------------------\r",
+									"//let user = res.user;\r",
+									"\r",
+									"// 3. Run positive validations ONLY when status = 200\r",
+									"// ---------------------------\r",
+									"if (pm.response.code === 200) {\r",
+									"\r",
+									"pm.test(\"Validate all required user fields\", function () {\r",
+									"    const expectedUserFields = [\r",
+									"        \"userId\",\r",
+									"        \"userFirstName\",\r",
+									"        \"userLastName\",\r",
+									"        \"userMiddleName\",\r",
+									"        \"userPhoneNumber\",\r",
+									"        \"userLocation\",\r",
+									"        \"userTimeZone\",\r",
+									"        \"userLinkedinUrl\",\r",
+									"        \"userEduUg\",\r",
+									"        \"userEduPg\",\r",
+									"        \"userComments\",\r",
+									"        \"userVisaStatus\",\r",
+									"        \"userLoginEmail\"\r",
+									"    ];\r",
+									"\r",
+									"    expectedUserFields.forEach(field => {\r",
+									"        pm.expect(user, `Missing field: ${field}`).to.have.property(field);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"// -----------------------------------------\r",
+									"// 2. Validate ROLES array\r",
+									"// -----------------------------------------\r",
+									"let roles = res.roles;\r",
+									"\r",
+									"pm.test(\"Roles should be an array\", function () {\r",
+									"    pm.expect(roles).to.be.an(\"array\");\r",
+									"    pm.expect(roles.length).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"// -----------------------------------------\r",
+									"// 3. Validate each ROLE object\r",
+									"// -----------------------------------------\r",
+									"pm.test(\"Validate required role fields for each role\", function () {\r",
+									"    roles.forEach(role => {\r",
+									"        pm.expect(role).to.have.property(\"roleId\");\r",
+									"        pm.expect(role).to.have.property(\"userRoleStatus\");\r",
+									"\r",
+									"        pm.expect(role.roleId).to.be.a(\"string\");\r",
+									"        pm.expect(role.userRoleStatus).to.be.a(\"string\");\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"}\r",
+									"\r",
+									"// ==================================================\r",
+									"// 5. SCHEMA VALIDATION (Complete & Safe)\r",
+									"// ==================================================\r",
+									"pm.test(\"Validate Response Schema\", function () {\r",
+									"    // 1. Safety Check: If body is empty, skip schema validation\r",
+									"    if (pm.response.text() === \"\") {\r",
+									"        console.log(\"Skipping Schema Validation: Response body is empty.\");\r",
+									"        return; // Stop the test here\r",
+									"    }\r",
+									"\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var requestName = pm.info.requestName; \r",
+									"\r",
+									"    // --- DEFINITIONS ---\r",
+									"    var userObjectSchema = {\r",
+									"        \"type\": \"object\",\r",
+									"        \"required\": [\"userId\",\"userFirstName\",\"userLastName\",\r",
+									"        \"userMiddleName\",\r",
+									"        \"userPhoneNumber\",\r",
+									"        \"userLocation\",\r",
+									"        \"userTimeZone\",\r",
+									"        \"userLinkedinUrl\",\r",
+									"        \"userEduUg\",\r",
+									"        \"userEduPg\",\r",
+									"        \"userComments\",\r",
+									"        \"userVisaStatus\",\r",
+									"        \"userLoginEmail\"\r",
+									"        ],\r",
+									"        \"properties\": {\r",
+									"            \"userId\": { \"type\": \"integer\" },\r",
+									"            \"userFirstName\": { \"type\": [\"string\", \"null\"] },\r",
+									"            \"userLocation\": { \"type\": [\"string\", \"null\"] },\r",
+									"            \"userTimeZone\": { \"type\": [\"string\", \"null\"] },\r",
+									"            \"userLinkedinUrl\": { \"type\": [\"string\", \"null\"] },\r",
+									"            \"userEduUg\": { \"type\": [\"string\", \"null\"] },\r",
+									"            \"userEduPg\": { \"type\": [\"string\", \"null\"] },\r",
+									"            \"userComments\": { \"type\": [\"string\", \"null\"] },\r",
+									"            \"userVisaStatus\": { \"type\": [\"string\", \"null\"] },\r",
+									"            \"userLoginEmail\": { \"type\": [\"string\", \"null\"] }\r",
+									"        }\r",
+									"        \r",
+									"    };\r",
+									"\r",
+									"    var listSchema = {\r",
+									"        \"type\": \"array\",\r",
+									"        \"items\": userObjectSchema\r",
+									"    };\r",
+									"\r",
+									"    var messageSchema = {\r",
+									"        \"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"message\": { \"type\": \"string\" },\r",
+									"            \"success\": { \"type\": \"boolean\" }\r",
+									"           }\r",
+									"    };\r",
+									"\r",
+									"    // --- LOGIC ---\r",
+									"\r",
+									"    // CASE A: Endpoints that return ARRAYS\r",
+									"    if (requestName === \"User information by Id\") {\r",
+									"        if (pm.response.code === 200) {\r",
+									"             pm.response.to.have.jsonSchema(listSchema);\r",
+									"        } else {\r",
+									"             pm.response.to.have.jsonSchema(messageSchema);\r",
+									"        }\r",
+									"    }\r",
+									"        \r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "4897b500-be54-46c1-abf9-09b52c05f7de",
+								"exec": [
+									"// 1. Get the endpoint value from the CSV row\r",
+									"let csvEndpoint = pm.iterationData.get(\"Endpoint\"); // e.g., \"/users/roleStatus/{{roleId}}\"\r",
+									"\r",
+									"// 2. If the CSV has a value, override the URL\r",
+									"if (csvEndpoint) {\r",
+									"\r",
+									"    // 3. Handle dynamic variable replacement\r",
+									"    // Example: replace {{roleId}} if present in CSV endpoint\r",
+									"    let currentRoleId = pm.collectionVariables.get(\"roleId\");\r",
+									"    if (currentRoleId) {\r",
+									"        csvEndpoint = csvEndpoint.replace(\"{{roleId}}\", currentRoleId);\r",
+									"    }\r",
+									"\r",
+									"    // Optional: if you want to replace other placeholders\r",
+									"    let currentUserId = pm.collectionVariables.get(\"userId\");\r",
+									"    if (currentUserId) {\r",
+									"        csvEndpoint = csvEndpoint.replace(\"{{userId}}\", currentUserId);\r",
+									"    }\r",
+									"\r",
+									"    // 4. Construct the full URL\r",
+									"    let baseUrl = pm.collectionVariables.get(\"baseUrl\"); // Make sure baseURL is defined in collection variables\r",
+									"    let newUrl = baseUrl + csvEndpoint;\r",
+									"\r",
+									"    // 5. Apply the update\r",
+									"    pm.request.url.update(newUrl);\r",
+									"    console.log(\"GET Request URL updated to: \" + newUrl);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "99bef5eb-8828-4787-b8c2-0781ae958f4c",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -23,28 +915,992 @@
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{baseURL}}/allSkillMaster"
+						"url": "{{baseUrl}}/users/{{userId}}"
 					},
 					"response": []
 				},
 				{
-					"name": "New Request",
-					"id": "88188b0e-1a90-43a9-b70a-6ecb822c54e0",
+					"name": "Delete User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "95a6a4f9-a7f1-4eef-83fe-7a5d924eb9ed",
+								"exec": [
+									"\r",
+									"\r",
+									"//Dynamic status code validation\r",
+									"let expectedStatus = parseInt(pm.iterationData.get(\"Expected Status\"));\r",
+									"pm.test(\"Status code matches expected\", function() {\r",
+									"    pm.expect(pm.response.code).to.eql(expectedStatus);\r",
+									"});\r",
+									"\r",
+									"//Dynamic status response\r",
+									"let expectedMessage = pm.iterationData.get(\"Expected Response Body\");\r",
+									"if (expectedMessage) {\r",
+									"    pm.test(\"Response message matches expected\", function() {\r",
+									"        let res = pm.response.json();\r",
+									"        pm.expect(res.message || res.status).to.include(expectedMessage);\r",
+									"    });\r",
+									"}\r",
+									"//schema validation \r",
+									"const schema = {\r",
+									"    \"type\": \"object\",\r",
+									"    \"properties\": {\r",
+									"        \"user\": {\r",
+									"            \"type\": \"object\",\r",
+									"            \"properties\": {\r",
+									"                \"userId\": { \"type\": \"string\" },\r",
+									"                \"userFirstName\": { \"type\": \"string\" },\r",
+									"                \"userLastName\": { \"type\": \"string\" },\r",
+									"                \"userMiddleName\": { \"type\": \"string\" },\r",
+									"                \"userPhoneNumber\": { \"type\": \"string\" },\r",
+									"                \"userLocation\": { \"type\": \"string\" },\r",
+									"                \"userTimeZone\": { \"type\": \"string\" },\r",
+									"                \"userLinkedinUrl\": { \"type\": \"string\" },\r",
+									"                \"userEduUg\": { \"type\": \"string\" },\r",
+									"                \"userEduPg\": { \"type\": \"string\" },\r",
+									"                \"userComments\": { \"type\": \"string\" },\r",
+									"                \"userVisaStatus\": { \"type\": \"string\" },\r",
+									"                \"userLoginEmail\": { \"type\": \"string\" }\r",
+									"            },\r",
+									"            \"required\": [\"userFirstName\", \"userLastName\", \"userPhoneNumber\", \"userLoginEmail\",\r",
+									"            \"userLocation\",\"userTimeZone\",\"userVisaStatus\"]\r",
+									"        },\r",
+									"        \"roles\": {\r",
+									"            \"type\": \"array\",\r",
+									"            \"items\": {\r",
+									"                \"type\": \"object\",\r",
+									"                \"properties\": {\r",
+									"                    \"roleId\": { \"type\": \"string\" },\r",
+									"                    \"userRoleStatus\": { \"type\": \"string\" }\r",
+									"                },\r",
+									"                \"required\": [\"roleId\", \"userRoleStatus\"]\r",
+									"            }\r",
+									"        },\r",
+									"        \"programBatches\": { \"type\": \"array\" },\r",
+									"        \"skills\": { \"type\": \"array\" },\r",
+									"        \"documents\": { \"type\": \"array\" }\r",
+									"    },\r",
+									"    \"required\": [\"user\", \"roles\"]\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Content-Type is application/json\", function () {\r",
+									"    if (pm.response.headers.has(\"Content-Type\")) {\r",
+									"        pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/plain\");\r",
+									"    } else {\r",
+									"        console.warn(\"Content-Type header missing. Skipping check.\");\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c10c2c09-b2dd-4a39-911b-b4f02e85fe22",
+								"exec": [
+									"// 1. Get the endpoint value from the CSV row\r",
+									"let csvEndpoint = pm.iterationData.get(\"Endpoint\"); // e.g., \"/users/roleStatus/{{roleId}}\"\r",
+									"\r",
+									"// 2. If the CSV has a value, override the URL\r",
+									"if (csvEndpoint) {\r",
+									"\r",
+									"    // 3. Handle dynamic variable replacement\r",
+									"    // Example: replace {{roleId}} if present in CSV endpoint\r",
+									"    let currentRoleId = pm.collectionVariables.get(\"roleId\");\r",
+									"    if (currentRoleId) {\r",
+									"        csvEndpoint = csvEndpoint.replace(\"{{roleId}}\", currentRoleId);\r",
+									"    }\r",
+									"\r",
+									"    // Optional: if you want to replace other placeholders\r",
+									"    let currentUserId = pm.collectionVariables.get(\"userId\");\r",
+									"    if (currentUserId) {\r",
+									"        csvEndpoint = csvEndpoint.replace(\"{{userId}}\", currentUserId);\r",
+									"    }\r",
+									"\r",
+									"    // 4. Construct the full URL\r",
+									"    let baseUrl = pm.collectionVariables.get(\"baseUrl\"); // Make sure baseURL is defined in collection variables\r",
+									"    let newUrl = baseUrl + csvEndpoint;\r",
+									"\r",
+									"    // 5. Apply the update\r",
+									"    pm.request.url.update(newUrl);\r",
+									"    console.log(\"GET Request URL updated to: \" + newUrl);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "f2e14d2c-2b59-44ef-8b9c-74bec8cf78d2",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
-						"method": "POST",
-						"header": []
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users/{{userId}}"
 					},
 					"response": []
-				}
-			],
-			"id": "895291ac-645f-4600-9e6d-5b76ccdcb9e7"
-		},
-		{
-			"name": "UserController",
-			"item": [
+				},
+				{
+					"name": "Update UserLogin status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cf12a508-3816-44dd-b2e7-d6109a08d998",
+								"exec": [
+									"//Dynamic status code validation\r",
+									"let expectedStatus = parseInt(pm.iterationData.get(\"Expected Status\"));\r",
+									"pm.test(\"Status code matches expected\", function() {\r",
+									"    pm.expect(pm.response.code).to.eql(expectedStatus);\r",
+									"});\r",
+									"\r",
+									"//Dynamic status response\r",
+									"let expectedMessage = pm.iterationData.get(\"Expected Response Body\");\r",
+									"if (expectedMessage) {\r",
+									"    pm.test(\"Response message matches expected\", function() {\r",
+									"        let res = pm.response.json();\r",
+									"        pm.expect(res.message || res.status).to.include(expectedMessage);\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"// 5. SCHEMA VALIDATION (Complete & Safe)\r",
+									"// ==================================================\r",
+									"pm.test(\"Validate Response Schema\", function () {\r",
+									"    // 1. Safety Check: If body is empty, skip schema validation\r",
+									"    if (pm.response.text() === \"\") {\r",
+									"        console.log(\"Skipping Schema Validation: Response body is empty.\");\r",
+									"        return; // Stop the test here\r",
+									"    }\r",
+									"\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var requestName = pm.info.requestName; \r",
+									"\r",
+									"    // --- DEFINITIONS ---\r",
+									"    var loginStatusSchema = {\r",
+									"        \"type\": \"string\",\r",
+									"         \"properties\": {\r",
+									"            \"message\": { \"type\": \"string\" }\r",
+									"         }\r",
+									"        };\r",
+									"      \r",
+									"    var messageSchema = {\r",
+									"        \"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"message\": { \"type\": \"string\" },\r",
+									"            \"success\": { \"type\": \"boolean\" }\r",
+									"             }\r",
+									"    };\r",
+									"\r",
+									"    // --- LOGIC ---\r",
+									"\r",
+									"    // CASE A: Endpoints that return ARRAYS\r",
+									"    if (requestName === \"Update UserLogin status\") {\r",
+									"         if ((pm.response.code === 200) && jsonData.userId !== undefined) {\r",
+									"            pm.response.to.have.jsonSchema(loginStatusSchema);\r",
+									"        } \r",
+									"        // Otherwise -> Message Object (covers Errors and DELETE success messages)\r",
+									"        else {\r",
+									"            pm.response.to.have.jsonSchema(messageSchema);\r",
+									"        }\r",
+									"    }\r",
+									"        \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is application/json\", function () {\r",
+									"    if (pm.response.headers.has(\"Content-Type\")) {\r",
+									"        pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/plain\");\r",
+									"    } else {\r",
+									"        console.warn(\"Content-Type header missing. Skipping check.\");\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "493821f7-73b1-4f74-92f4-5628586fa18b",
+								"exec": [
+									"// 1. Get the endpoint value from the CSV row\r",
+									"let csvEndpoint = pm.iterationData.get(\"Endpoint\"); // e.g., \"/users/roleStatus/{{roleId}}\"\r",
+									"\r",
+									"// 2. If the CSV has a value, override the URL\r",
+									"if (csvEndpoint) {\r",
+									"\r",
+									"    // 3. Handle dynamic variable replacement\r",
+									"    // Example: replace {{roleId}} if present in CSV endpoint\r",
+									"    let currentRoleId = pm.collectionVariables.get(\"roleId\");\r",
+									"    if (currentRoleId) {\r",
+									"        csvEndpoint = csvEndpoint.replace(\"{{roleId}}\", currentRoleId);\r",
+									"    }\r",
+									"\r",
+									"    // Optional: if you want to replace other placeholders\r",
+									"    let currentUserId = pm.collectionVariables.get(\"userId\");\r",
+									"    if (currentUserId) {\r",
+									"        csvEndpoint = csvEndpoint.replace(\"{{userId}}\", currentUserId);\r",
+									"    }\r",
+									"\r",
+									"    // 4. Construct the full URL\r",
+									"    let baseUrl = pm.collectionVariables.get(\"baseUrl\"); // Make sure baseURL is defined in collection variables\r",
+									"    let newUrl = baseUrl + csvEndpoint;\r",
+									"\r",
+									"    // 5. Apply the update\r",
+									"    pm.request.url.update(newUrl);\r",
+									"    console.log(\"GET Request URL updated to: \" + newUrl);\r",
+									"}\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "592b43aa-c503-4516-88c1-f161f1c6ce0c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{Payload}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users/userLogin/{{userId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a0b184da-8cc1-4964-99ac-c9ded7973bc3",
+								"exec": [
+									"//Dynamic status code validation\r",
+									"let expectedStatus = parseInt(pm.iterationData.get(\"Expected Status\"));\r",
+									"pm.test(\"Status code matches expected\", function() {\r",
+									"    pm.expect(pm.response.code).to.eql(expectedStatus);\r",
+									"});\r",
+									"\r",
+									"//Dynamic status response\r",
+									"let expectedMessage = pm.iterationData.get(\"Expected Response Body\");\r",
+									"if (expectedMessage) {\r",
+									"    pm.test(\"Response message matches expected\", function() {\r",
+									"        let res = pm.response.json();\r",
+									"        pm.expect(res.message || res.status).to.include(expectedMessage);\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"// 5. SCHEMA VALIDATION (Complete & Safe)\r",
+									"// ==================================================\r",
+									"pm.test(\"Validate Response Schema\", function () {\r",
+									"    // 1. Safety Check: If body is empty, skip schema validation\r",
+									"    if (pm.response.text() === \"\") {\r",
+									"        console.log(\"Skipping Schema Validation: Response body is empty.\");\r",
+									"        return; // Stop the test here\r",
+									"    }\r",
+									"\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var requestName = pm.info.requestName; \r",
+									"\r",
+									"    // --- DEFINITIONS ---\r",
+									"    var updateUserSchema = {\r",
+									"        \"type\": \"string\",\r",
+									"         \"properties\": {\r",
+									"            \"message\": { \"type\": \"string\" }\r",
+									"         }\r",
+									"        };\r",
+									"      \r",
+									"    var messageSchema = {\r",
+									"        \"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"message\": { \"type\": \"string\" },\r",
+									"            \"success\": { \"type\": \"boolean\" }\r",
+									"             }\r",
+									"    };\r",
+									"\r",
+									"    // --- LOGIC ---\r",
+									"\r",
+									"    // CASE A: Endpoints that return ARRAYS\r",
+									"    if (requestName === \"Update User\") {\r",
+									"         if ((pm.response.code === 200) && jsonData.userId !== undefined) {\r",
+									"            pm.response.to.have.jsonSchema(updateUserSchema);\r",
+									"        } \r",
+									"        // Otherwise -> Message Object (covers Errors and DELETE success messages)\r",
+									"        else {\r",
+									"            pm.response.to.have.jsonSchema(messageSchema);\r",
+									"        }\r",
+									"    }\r",
+									"        \r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "4bc213c9-ddaa-4834-a413-5f6488ebb219",
+								"exec": [
+									"// 1. Get the endpoint value from the CSV row\r",
+									"let csvEndpoint = pm.iterationData.get(\"Endpoint\"); // e.g., \"/users/roleStatus/{{roleId}}\"\r",
+									"\r",
+									"// 2. If the CSV has a value, override the URL\r",
+									"if (csvEndpoint) {\r",
+									"\r",
+									"    // 3. Handle dynamic variable replacement\r",
+									"    // Example: replace {{roleId}} if present in CSV endpoint\r",
+									"    let currentRoleId = pm.collectionVariables.get(\"roleId\");\r",
+									"    if (currentRoleId) {\r",
+									"        csvEndpoint = csvEndpoint.replace(\"{{roleId}}\", currentRoleId);\r",
+									"    }\r",
+									"\r",
+									"    // Optional: if you want to replace other placeholders\r",
+									"    let currentUserId = pm.collectionVariables.get(\"userId\");\r",
+									"    if (currentUserId) {\r",
+									"        csvEndpoint = csvEndpoint.replace(\"{{userId}}\", currentUserId);\r",
+									"    }\r",
+									"\r",
+									"    // 4. Construct the full URL\r",
+									"    let baseUrl = pm.collectionVariables.get(\"baseUrl\"); // Make sure baseURL is defined in collection variables\r",
+									"    let newUrl = baseUrl + csvEndpoint;\r",
+									"\r",
+									"    // 5. Apply the update\r",
+									"    pm.request.url.update(newUrl);\r",
+									"    console.log(\"GET Request URL updated to: \" + newUrl);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "e818299c-22c8-467f-b744-55af07ce3ec3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{Payload}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users/{{userId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "all users",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "49ee3aad-bde7-4152-8a37-593fc9b57cfb",
+								"exec": [
+									"// 1. Get the endpoint value from the CSV row\r",
+									"let csvEndpoint = pm.iterationData.get(\"Endpoint\"); // e.g., \"/users/roleStatus/{{roleId}}\"\r",
+									"\r",
+									"// 2. If the CSV has a value, override the URL\r",
+									"if (csvEndpoint) {\r",
+									"\r",
+									"    // 3. Handle dynamic variable replacement\r",
+									"    // Example: replace {{roleId}} if present in CSV endpoint\r",
+									"    let currentRoleId = pm.collectionVariables.get(\"roleId\");\r",
+									"    if (currentRoleId) {\r",
+									"        csvEndpoint = csvEndpoint.replace(\"{{roleId}}\", currentRoleId);\r",
+									"    }\r",
+									"\r",
+									"    // Optional: if you want to replace other placeholders\r",
+									"    let currentUserId = pm.collectionVariables.get(\"userId\");\r",
+									"    if (currentUserId) {\r",
+									"        csvEndpoint = csvEndpoint.replace(\"{{userId}}\", currentUserId);\r",
+									"    }\r",
+									"\r",
+									"    // 4. Construct the full URL\r",
+									"    let baseUrl = pm.collectionVariables.get(\"baseUrl\"); // Make sure baseURL is defined in collection variables\r",
+									"    let newUrl = baseUrl + csvEndpoint;\r",
+									"\r",
+									"    // 5. Apply the update\r",
+									"    pm.request.url.update(newUrl);\r",
+									"    console.log(\"GET Request URL updated to: \" + newUrl);\r",
+									"}\r",
+									"\r",
+									"// var overrideStatus = pm.iterationData.get(\"Token Override\");\r",
+									"\r",
+									"// if (overrideStatus === \"invalid\") {\r",
+									"//     // Use 'pm.request.auth.bearer' to directly modify the Auth Helper\r",
+									"//     // This is the most direct way to tell the Auth Tab \"Use THIS token, not the variable\"\r",
+									"//     pm.request.auth.use(\"bearer\", {\r",
+									"//         token: \"INVALID_TOKEN_12345\"\r",
+									"//     });\r",
+									"    \r",
+									"//     console.log(\"Updated Auth Tab directly with INVALID token\");\r",
+									"// }"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "84d2429c-606c-4155-9cb5-4475b7920338",
+								"exec": [
+									"\r",
+									"//Dynamic status code validation\r",
+									"const expectedStatus = parseInt(pm.iterationData.get(\"Expected Status\"));\r",
+									"if (expectedStatus) {\r",
+									"    pm.test(\"Status code is \" + expectedStatus, function () {\r",
+									"        pm.response.to.have.status(expectedStatus);\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"\r",
+									"//Dynamic status response\r",
+									"let expectedMessage = pm.iterationData.get(\"Expected Response Body\");\r",
+									"if (expectedMessage) {\r",
+									"    pm.test(\"Response message matches expected\", function() {\r",
+									"        let res = pm.response.json();\r",
+									"        pm.expect(res.message || res.status).to.include(expectedMessage);\r",
+									"    });\r",
+									"}\r",
+									"// Parse response\r",
+									"//let res = pm.response.json();\r",
+									"\r",
+									"// Parse Response\r",
+									"// ---------------------------\r",
+									"let res;\r",
+									"try {\r",
+									"    res = pm.response.json();\r",
+									"} catch (e) {\r",
+									"    // No JSON body\r",
+									"    res = {};\r",
+									"}\r",
+									"\r",
+									"\r",
+									"// ==================================================\r",
+									"// 5. SCHEMA VALIDATION (Complete & Safe)\r",
+									"// ==================================================\r",
+									"pm.test(\"Validate Response Schema\", function () {\r",
+									"    // 1. Safety Check: If body is empty, skip schema validation\r",
+									"    if (pm.response.text() === \"\") {\r",
+									"        console.log(\"Skipping Schema Validation: Response body is empty.\");\r",
+									"        return; // Stop the test here\r",
+									"    }\r",
+									"\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var requestName = pm.info.requestName; \r",
+									"\r",
+									"    // --- DEFINITIONS ---\r",
+									"    var alluserObjectSchema = {\r",
+									"        \"type\": \"object\",\r",
+									"        \"required\": [\"userId\",\"userFirstName\",\"userLastName\",\r",
+									"        \"userPhoneNumber\",\r",
+									"        \"userLocation\",\r",
+									"        \"userTimeZone\",\r",
+									"        \"userLinkedinUrl\",\r",
+									"        \"userEduUg\",\r",
+									"        \"userEduPg\",\r",
+									"        \"userVisaStatus\",\r",
+									"        \"userLoginEmail\"\r",
+									"        ],\r",
+									"        \"properties\": {\r",
+									"            \"userId\": { \"type\": \"string\" },\r",
+									"            \"userFirstName\": { \"type\": [\"string\", \"null\"] },\r",
+									"            \"userLastName\": { \"type\": [\"string\", \"null\"] },\r",
+									"            \"userMiddleName\": { \"type\": [\"string\", \"null\"] },\r",
+									"            \"userPhoneNumber\": { \"type\": [\"string\", \"null\"] },\r",
+									"            \"userLocation\": { \"type\": [\"string\", \"null\"] },\r",
+									"            \"userTimeZone\": { \"type\": [\"string\", \"null\"] },\r",
+									"            \"userLinkedinUrl\": { \"type\": [\"string\", \"null\"] },\r",
+									"            \"userEduUg\": { \"type\": [\"string\", \"null\"] },\r",
+									"            \"userEduPg\": { \"type\": [\"string\", \"null\"] },\r",
+									"            \"userComments\": { \"type\": [\"string\", \"null\"] },\r",
+									"            \"userVisaStatus\": { \"type\": [\"string\", \"null\"] },\r",
+									"            \"userLoginEmail\": { \"type\": [\"string\", \"null\"] }\r",
+									"        }\r",
+									"        \r",
+									"    };\r",
+									"\r",
+									"    var listSchema = {\r",
+									"        \"type\": \"array\",\r",
+									"        \"items\": alluserObjectSchema\r",
+									"    };\r",
+									"\r",
+									"    var messageSchema = {\r",
+									"        \"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"message\": { \"type\": \"string\" },\r",
+									"            \"success\": { \"type\": \"boolean\" }\r",
+									"           }\r",
+									"    };\r",
+									"\r",
+									"    // --- LOGIC ---\r",
+									"\r",
+									"    // CASE A: Endpoints that return ARRAYS\r",
+									"    //if (requestName === \"all users\") {\r",
+									"        if (pm.response.code === 200) {\r",
+									"             pm.response.to.have.jsonSchema(listSchema);\r",
+									"        } else {\r",
+									"             pm.response.to.have.jsonSchema(messageSchema);\r",
+									"        }\r",
+									"    \r",
+									"        \r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "901b3833-2c01-4310-a86a-ebcf9a2ed2b5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}/users"
+					},
+					"response": []
+				},
+				{
+					"name": "all users with facets",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "95c4576b-f2e4-4aa4-9053-480d6f2c6e25",
+								"exec": [
+									"//Dynamic status code validation\r",
+									"const expectedStatus = parseInt(pm.iterationData.get(\"Expected Status\"));\r",
+									"if (expectedStatus) {\r",
+									"    pm.test(\"Status code is \" + expectedStatus, function () {\r",
+									"        pm.response.to.have.status(expectedStatus);\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"//Dynamic status response\r",
+									"let expectedMessage = pm.iterationData.get(\"Expected Response Body\");\r",
+									"if (expectedMessage) {\r",
+									"    pm.test(\"Response message matches expected\", function() {\r",
+									"        let res = pm.response.json();\r",
+									"        pm.expect(res.message || res.status).to.include(expectedMessage);\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "6b655970-237c-4373-94d9-6ebe351516b8",
+								"exec": [
+									"// 1. Get the endpoint value from the CSV row\r",
+									"let csvEndpoint = pm.iterationData.get(\"Endpoint\"); // e.g., \"/users/roleStatus/{{roleId}}\"\r",
+									"\r",
+									"// 2. If the CSV has a value, override the URL\r",
+									"if (csvEndpoint) {\r",
+									"\r",
+									"    // 3. Handle dynamic variable replacement\r",
+									"    // Example: replace {{roleId}} if present in CSV endpoint\r",
+									"    let currentRoleId = pm.collectionVariables.get(\"roleId\");\r",
+									"    if (currentRoleId) {\r",
+									"        csvEndpoint = csvEndpoint.replace(\"{{roleId}}\", currentRoleId);\r",
+									"    }\r",
+									"\r",
+									"    // Optional: if you want to replace other placeholders\r",
+									"    let currentUserId = pm.collectionVariables.get(\"userId\");\r",
+									"    if (currentUserId) {\r",
+									"        csvEndpoint = csvEndpoint.replace(\"{{userId}}\", currentUserId);\r",
+									"    }\r",
+									"\r",
+									"    // 4. Construct the full URL\r",
+									"    let baseUrl = pm.collectionVariables.get(\"baseUrl\"); // Make sure baseURL is defined in collection variables\r",
+									"    let newUrl = baseUrl + csvEndpoint;\r",
+									"\r",
+									"    // 5. Apply the update\r",
+									"    pm.request.url.update(newUrl);\r",
+									"    console.log(\"GET Request URL updated to: \" + newUrl);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "12c3ecc1-9791-4688-a3ef-59af54d1c061",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/v2/users"
+					},
+					"response": []
+				},
+				{
+					"name": "update userRole program batch status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dcc398b6-1060-4c24-b551-6a475e7411c6",
+								"exec": [
+									"//Dynamic status code validation\r",
+									"let expectedStatus = parseInt(pm.iterationData.get(\"Expected Status\"));\r",
+									"pm.test(\"Status code matches expected\", function() {\r",
+									"    pm.expect(pm.response.code).to.eql(expectedStatus);\r",
+									"});\r",
+									"\r",
+									"//Dynamic status response\r",
+									"let expectedMessage = pm.iterationData.get(\"Expected Response Body\");\r",
+									"if (expectedMessage) {\r",
+									"    pm.test(\"Response message matches expected\", function() {\r",
+									"        let res = pm.response.json();\r",
+									"        pm.expect(res.message || res.status).to.include(expectedMessage);\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"// 5. SCHEMA VALIDATION (Complete & Safe)\r",
+									"// ==================================================\r",
+									"pm.test(\"Validate Response Schema\", function () {\r",
+									"    // 1. Safety Check: If body is empty, skip schema validation\r",
+									"    if (pm.response.text() === \"\") {\r",
+									"        console.log(\"Skipping Schema Validation: Response body is empty.\");\r",
+									"        return; // Stop the test here\r",
+									"    }\r",
+									"\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var requestName = pm.info.requestName; \r",
+									"\r",
+									"    // --- DEFINITIONS ---\r",
+									"    var updateroleIdSchema = {\r",
+									"        \"type\": \"string\",\r",
+									"         \"properties\": {\r",
+									"            \"message\": { \"type\": \"string\" }\r",
+									"         }\r",
+									"        };\r",
+									"      \r",
+									"    var messageSchema = {\r",
+									"        \"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"message\": { \"type\": \"string\" },\r",
+									"            \"success\": { \"type\": \"boolean\" }\r",
+									"             }\r",
+									"    };\r",
+									"\r",
+									"    // --- LOGIC ---\r",
+									"\r",
+									"    // CASE A: Endpoints that return ARRAYS\r",
+									"    if (requestName === \"Update User role Id\") {\r",
+									"         if ((pm.response.code === 200) && jsonData.userId !== undefined) {\r",
+									"            pm.response.to.have.jsonSchema(updateroleIdSchema);\r",
+									"        } \r",
+									"        // Otherwise -> Message Object (covers Errors and DELETE success messages)\r",
+									"        else {\r",
+									"            pm.response.to.have.jsonSchema(messageSchema);\r",
+									"        }\r",
+									"    }\r",
+									"        \r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "da1eb592-cee3-4cb5-92ee-96054c6622b6",
+								"exec": [
+									"// 1. Get the endpoint value from the CSV row\r",
+									"let csvEndpoint = pm.iterationData.get(\"Endpoint\"); // e.g., \"/users/roleStatus/{{roleId}}\"\r",
+									"\r",
+									"// 2. If the CSV has a value, override the URL\r",
+									"if (csvEndpoint) {\r",
+									"\r",
+									"    // 3. Handle dynamic variable replacement\r",
+									"    // Example: replace {{roleId}} if present in CSV endpoint\r",
+									"    let currentRoleId = pm.collectionVariables.get(\"roleId\");\r",
+									"    if (currentRoleId) {\r",
+									"        csvEndpoint = csvEndpoint.replace(\"{{roleId}}\", currentRoleId);\r",
+									"    }\r",
+									"\r",
+									"    // Optional: if you want to replace other placeholders\r",
+									"    let currentUserId = pm.collectionVariables.get(\"userId\");\r",
+									"    if (currentUserId) {\r",
+									"        csvEndpoint = csvEndpoint.replace(\"{{userId}}\", currentUserId);\r",
+									"    }\r",
+									"\r",
+									"    // 4. Construct the full URL\r",
+									"    let baseUrl = pm.collectionVariables.get(\"baseUrl\"); // Make sure baseURL is defined in collection variables\r",
+									"    let newUrl = baseUrl + csvEndpoint;\r",
+									"\r",
+									"    // 5. Apply the update\r",
+									"    pm.request.url.update(newUrl);\r",
+									"    console.log(\"GET Request URL updated to: \" + newUrl);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "3508c5ab-a64e-44da-b513-08e732959615",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{Payload}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users/roleProgramBatchStatus/{{userId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User role Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "71eb1de8-9331-4a22-b087-0a6d6ad26d8b",
+								"exec": [
+									"//Dynamic status code validation\r",
+									"let expectedStatus = parseInt(pm.iterationData.get(\"Expected Status\"));\r",
+									"pm.test(\"Status code matches expected\", function() {\r",
+									"    pm.expect(pm.response.code).to.eql(expectedStatus);\r",
+									"});\r",
+									"\r",
+									"//Dynamic status response\r",
+									"let expectedMessage = pm.iterationData.get(\"Expected Response Body\");\r",
+									"if (expectedMessage) {\r",
+									"    pm.test(\"Response message matches expected\", function() {\r",
+									"        let res = pm.response.json();\r",
+									"        pm.expect(res.message || res.status).to.include(expectedMessage);\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"// 5. SCHEMA VALIDATION (Complete & Safe)\r",
+									"// ==================================================\r",
+									"pm.test(\"Validate Response Schema\", function () {\r",
+									"    var requestName = pm.info.requestName;\r",
+									"    // --- DEFINITIONS ---\r",
+									"    var messageSchema = {\r",
+									"        \"type\": \"object\",\r",
+									"        \"required\": [\"message\", \"success\"],\r",
+									"        \"properties\": {\r",
+									"            \"message\": { \"type\": \"string\" },\r",
+									"            \"success\": { \"type\": \"boolean\" }\r",
+									"        }\r",
+									"    };\r",
+									"    if (requestName === \"Update User role Id\") {\r",
+									"        // CASE 1: Positive Scenario (200 OK + String Body)\r",
+									"        if (pm.response.code === 200) {\r",
+									"            // Since it's a plain string, we validate the TEXT, not JSON\r",
+									"            pm.expect(pm.response.text()).to.be.a('string');\r",
+									"        }\r",
+									"        // CASE 2: Negative Scenario (400/404/500 + JSON Object)\r",
+									"        else {\r",
+									"            // We only parse JSON here, because we know it's an object\r",
+									"            var jsonData = pm.response.json();\r",
+									"            pm.expect(jsonData).to.have.jsonSchema(messageSchema);\r",
+									"        }\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is application/json\", function () {\r",
+									"    if (pm.response.headers.has(\"Content-Type\")) {\r",
+									"        pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/plain\");\r",
+									"    } else {\r",
+									"        console.warn(\"Content-Type header missing. Skipping check.\");\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f702efb5-ed05-45ef-92bb-5c4d6ad5504e",
+								"exec": [
+									"// 1. Get the endpoint value from the CSV row\r",
+									"let csvEndpoint = pm.iterationData.get(\"Endpoint\"); // e.g., \"/users/roleStatus/{{roleId}}\"\r",
+									"\r",
+									"// 2. If the CSV has a value, override the URL\r",
+									"if (csvEndpoint) {\r",
+									"\r",
+									"    // 3. Handle dynamic variable replacement\r",
+									"    // Example: replace {{roleId}} if present in CSV endpoint\r",
+									"    let currentRoleId = pm.collectionVariables.get(\"roleId\");\r",
+									"    if (currentRoleId) {\r",
+									"        csvEndpoint = csvEndpoint.replace(\"{{roleId}}\", currentRoleId);\r",
+									"    }\r",
+									"\r",
+									"    // Optional: if you want to replace other placeholders\r",
+									"    let currentUserId = pm.collectionVariables.get(\"userId\");\r",
+									"    if (currentUserId) {\r",
+									"        csvEndpoint = csvEndpoint.replace(\"{{userId}}\", currentUserId);\r",
+									"    }\r",
+									"\r",
+									"    // 4. Construct the full URL\r",
+									"    let baseUrl = pm.collectionVariables.get(\"baseUrl\"); // Make sure baseURL is defined in collection variables\r",
+									"    let newUrl = baseUrl + csvEndpoint;\r",
+									"\r",
+									"    // 5. Apply the update\r",
+									"    pm.request.url.update(newUrl);\r",
+									"    console.log(\"GET Request URL updated to: \" + newUrl);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "9ff01ad7-0db8-4e27-84b4-44a8d39832fc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{Payload}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users/roleId/{{userId}}"
+					},
+					"response": []
+				},
 				{
 					"name": "Get User BatchId by User Id",
 					"event": [
@@ -1166,18 +3022,257 @@
 					"response": []
 				}
 			],
-			"id": "2d7594e4-41b6-4f1a-b135-fe488be297fa"
+			"id": "7267c003-ea5b-4364-acf0-e45a52c14079",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0b756eec-f2c0-4fc9-9b68-1f53d68d80f6",
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							"// ----------------------------------------------------------------\r",
+							"// 1. SKIP LOGIC (Traffic Cop)\r",
+							"// ----------------------------------------------------------------\r",
+							"var targetRequest = pm.iterationData.get(\"Request Name\");\r",
+							"var currentRequest = pm.info.requestName;\r",
+							"// If RequestName is defined in CSV, only run that specific request\r",
+							"if (targetRequest && targetRequest !== currentRequest) {\r",
+							"    pm.execution.skipRequest();\r",
+							"    return; // Stop executing the rest of the script\r",
+							"}\r",
+							"\r",
+							"var csvPayload = pm.iterationData.get(\"Payload\");\r",
+							"if (csvPayload) {\r",
+							"    if (typeof csvPayload === 'object') {\r",
+							"        // It's a JSON object (from JSON file) -> Stringify it for the Body\r",
+							"        pm.collectionVariables.set(\"Payload\", JSON.stringify(csvPayload));\r",
+							"    } else {\r",
+							"        // It's a String (from CSV) -> Try to parse/clean it\r",
+							"        try {\r",
+							"            var obj = JSON.parse(csvPayload);\r",
+							"            pm.collectionVariables.set(\"Payload\", JSON.stringify(obj));\r",
+							"        } catch (e) {\r",
+							"            pm.collectionVariables.set(\"Payload\", csvPayload);\r",
+							"        }\r",
+							"    }\r",
+							"}\r",
+							"\r",
+							"var overrideStatus = pm.iterationData.get(\"Token Override\");\r",
+							"\r",
+							"if (overrideStatus === \"invalid\") {\r",
+							"    // Use 'pm.request.auth.bearer' to directly modify the Auth Helper\r",
+							"    // This is the most direct way to tell the Auth Tab \"Use THIS token, not the variable\"\r",
+							"    pm.request.auth.use(\"bearer\", {\r",
+							"        token: \"INVALID_TOKEN_12345\"\r",
+							"    });\r",
+							"    \r",
+							"    console.log(\"Updated Auth Tab directly with INVALID token\");\r",
+							"}"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "9125ea7b-3e60-4f95-927f-86175ecf938d",
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							"// Content-Type Check (Safe Version)\r",
+							"pm.test(\"Content-Type is application/json\", function () {\r",
+							"    if (pm.response.headers.has(\"Content-Type\")) {\r",
+							"        pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+							"    } else {\r",
+							"        console.warn(\"Content-Type header missing. Skipping check.\");\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						]
+					}
+				}
+			]
 		},
 		{
 			"name": "ProgramController",
 			"item": [
+				{
+					"name": "New Request",
+					"id": "8edf9bfe-8ce5-417a-bb47-5986818a06fd",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			],
+			"id": "2a5308c4-0fd6-4047-b3ad-a7ab5e383e38"
+		},
+		{
+			"name": "Program Batch",
+			"item": [
+				{
+					"name": "New Request",
+					"id": "b777583b-94b7-4f98-aa0a-9e9eff02a9c7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			],
+			"id": "e2f63e33-c89b-4a26-b6fd-525455ece6bf"
+		},
+		{
+			"name": "SkillMaster",
+			"item": [
+				{
+					"name": "Get All Skill Master",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/allSkillMaster",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"allSkillMaster"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Skill",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// 1. Load Payload from CSV\r",
+									"var payload = pm.iterationData.get(\"Payload\");\r",
+									"\r",
+									"// 2. Define Request Schema (The Contract)\r",
+									"var requestSchema = {\r",
+									"    \"type\": \"object\",\r",
+									"    \"required\": [\"skillName\", \"creationTime\", \"lastModTime\"],\r",
+									"    \"properties\": {\r",
+									"        \"skillName\": { \"type\": [\"string\", \"null\"] }, \r",
+									"        \"creationTime\": { \"type\": \"string\" },\r",
+									"        \"lastModTime\": { \"type\": \"string\" }\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"// 3. Validate using built-in AJV library\r",
+									"// Only run this if payload exists and isn't empty\r",
+									"if (payload) {\r",
+									"    var jsonPayload = JSON.parse(payload);\r",
+									"    var Ajv = require('ajv');\r",
+									"    var ajv = new Ajv({allErrors: true});\r",
+									"    var valid = ajv.validate(requestSchema, jsonPayload);\r",
+									"\r",
+									"    if (!valid) {\r",
+									"        console.log(\"Request Schema Mismatch for \" + pm.iterationData.get(\"RequestName\"));\r",
+									"        console.log(ajv.errors);\r",
+									"    } else {\r",
+									"        console.log(\"Request Schema Valid\");\r",
+									"    }\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{Payload}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/SaveSkillMaster",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"SaveSkillMaster"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "Get Skill By Skill Name",
 					"event": [
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "36421b3d-7ec9-40d0-a106-f604433716e8",
 								"exec": [
 									"// Wait for 2 seconds before sending the request\r",
 									"setTimeout(function(){}, 2000);\r",
@@ -1214,20 +3309,29 @@
 							}
 						}
 					],
-					"id": "9b7e7efb-5b03-425d-ba66-aa26c86775e5",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{baseURL}}/skills/{{skillMasterName}}"
+						"url": {
+							"raw": "{{baseUrl}}/skills/{{skillMasterName}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"skills",
+								"{{skillMasterName}}"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1237,7 +3341,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "c6e00371-28ff-45c1-b01f-ad0f9ea7472e",
 								"exec": [
 									"// 1. Get the endpoint value from the CSV row\r",
 									"let csvEndpoint = pm.iterationData.get(\"Endpoint\");\r",
@@ -1299,7 +3402,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f28adc31-bfd0-45ab-ab38-8664aedac60c",
 								"exec": [
 									""
 								],
@@ -1309,16 +3411,16 @@
 							}
 						}
 					],
-					"id": "4dbbffe7-cdd7-4ac2-8cac-2d0da0c6cdac",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [],
@@ -1331,7 +3433,16 @@
 								}
 							}
 						},
-						"url": "{{baseURL}}/updateSkills/{{skillId}}"
+						"url": {
+							"raw": "{{baseUrl}}/updateSkills/{{skillId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"updateSkills",
+								"{{skillId}}"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1341,7 +3452,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "357d0568-4b50-4fb4-913e-4e94b22a2905",
 								"exec": [
 									"// 1. Get the endpoint value from the CSV row\r",
 									"let csvEndpoint = pm.iterationData.get(\"Endpoint\");\r",
@@ -1371,48 +3481,43 @@
 							}
 						}
 					],
-					"id": "65cc4a6f-e2eb-4b68-b581-f5dc92e220e4",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "DELETE",
 						"header": [],
-						"url": "{{baseURL}}/deletebySkillId/{{skillId}}"
-					},
-					"response": []
-				},
-				{
-					"name": "New Request",
-					"id": "2fb16fd7-5dca-4e31-8cea-e6edc8f2501b",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "PATCH",
-						"header": []
+						"url": {
+							"raw": "{{baseUrl}}/deletebySkillId/{{skillId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"deletebySkillId",
+								"{{skillId}}"
+							]
+						}
 					},
 					"response": []
 				}
 			],
-			"id": "bf765cab-23d8-40d7-b305-18d819dc8be0",
 			"event": [
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "47d2315b-9041-4b70-8f4d-073244810d75",
 						"type": "text/javascript",
 						"packages": {},
 						"requests": {},
 						"exec": [
 							"// 1. TRAFFIC COP\r",
-							"var targetRequest = pm.iterationData.get(\"RequestName\");\r",
+							"var targetRequest = pm.iterationData.get(\"Request Name\");\r",
 							"var currentRequest = pm.info.requestName;\r",
 							"if (targetRequest && targetRequest !== currentRequest) {\r",
 							"    pm.execution.skipRequest();\r",
@@ -1466,7 +3571,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "c3690a90-bd03-44bc-84eb-c3becf771c30",
 						"type": "text/javascript",
 						"packages": {},
 						"requests": {},
@@ -1638,47 +3742,6 @@
 			]
 		}
 	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"id": "c70a5a22-cd31-4196-b7e5-edb165c58962",
-				"type": "text/javascript",
-				"packages": {},
-				"requests": {},
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"id": "3c9cea1d-d79a-4b57-a1e8-7feee86f5127",
-				"type": "text/javascript",
-				"packages": {},
-				"requests": {},
-				"exec": [
-					""
-				]
-			}
-		}
-	],
-	"variable": [
-		{
-			"key": "token",
-			"value": ""
-		},
-		{
-			"key": "baseURL",
-			"value": ""
-		},
-		{
-			"key": "skillId",
-			"value": ""
-		}
-
-	],
 	"auth": {
 		"type": "bearer",
 		"bearer": {
@@ -1715,6 +3778,16 @@
 			"id": "302e3232-1a84-40dd-aaca-50e9aaf4334d",
 			"key": "baseUrl",
 			"value": "https://lms-hackathon-nov-2025-8dd40899c026.herokuapp.com/lms"
+		},
+		{
+			"id": "302e3232-1a84-40dd-aaca-50e9aaf40000",
+			"key": "skillMasterName",
+			"value": "SIEM"
+		},
+		{
+			"id": "302e3232-1a84-40dd-aaca-50e9aaf41111",
+			"key": "skillId",
+			"value": "1020"
 		}
 	]
 }
